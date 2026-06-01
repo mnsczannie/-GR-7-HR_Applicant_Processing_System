@@ -1,0 +1,7 @@
+Database/db_config.ini
+
+bin/
+obj/
+.vs/
+*.user
+*.suo
