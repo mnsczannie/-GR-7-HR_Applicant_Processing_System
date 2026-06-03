@@ -1,6 +1,6 @@
 ﻿namespace HRApplicantSystem.Forms.HR
 {
-    partial class frmHRLogin
+    partial class HRApplicantForms
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // frmHRLogin
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "frmHRLogin";
-            this.Text = "frmHRLogin";
-            this.ResumeLayout(false);
-
+            this.Text = "HRApplicantForms";
         }
 
         #endregion

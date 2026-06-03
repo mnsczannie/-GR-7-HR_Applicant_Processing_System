@@ -158,6 +158,12 @@
     <Compile Include="Forms\HR\frmHRLogin.Designer.cs">
       <DependentUpon>frmHRLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\HR\HRApplicantForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\HRApplicantForms.Designer.cs">
+      <DependentUpon>HRApplicantForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="Models\ApplicantModel.cs" />
     <Compile Include="Models\EvaluationModels.cs" />
@@ -165,6 +171,9 @@
     <Compile Include="Models\SystemModels.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\HR\frmHRLogin.resx">
+      <DependentUpon>frmHRLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
