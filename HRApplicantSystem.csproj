@@ -152,6 +152,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Applicant\frmApplicantDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmApplicantDashboard.Designer.cs">
+      <DependentUpon>frmApplicantDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmApplicantLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmApplicantLogin.Designer.cs">
+      <DependentUpon>frmApplicantLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmMyProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmMyProfile.Designer.cs">
+      <DependentUpon>frmMyProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="Models\ApplicantModel.cs" />
     <Compile Include="Models\EvaluationModels.cs" />
@@ -159,6 +177,15 @@
     <Compile Include="Models\SystemModels.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Applicant\frmApplicantDashboard.resx">
+      <DependentUpon>frmApplicantDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmApplicantLogin.resx">
+      <DependentUpon>frmApplicantLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmMyProfile.resx">
+      <DependentUpon>frmMyProfile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -184,7 +211,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\Applicant\" />
     <Folder Include="Forms\HR\" />
     <Folder Include="Forms\Maintenance\" />
   </ItemGroup>
