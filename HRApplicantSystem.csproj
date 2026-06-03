@@ -152,11 +152,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Maintenance\frmAssessmentTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmAssessmentTypes.Designer.cs">
+      <DependentUpon>frmAssessmentTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmDepartments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmDepartments.Designer.cs">
+      <DependentUpon>frmDepartments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmEmploymentTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmEmploymentTypes.Designer.cs">
+      <DependentUpon>frmEmploymentTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmInterviewTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmInterviewTypes.Designer.cs">
+      <DependentUpon>frmInterviewTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmJobVacancyManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmJobVacancyManagement.Designer.cs">
+      <DependentUpon>frmJobVacancyManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Maintenance\frmMaintenance.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Maintenance\frmMaintenance.Designer.cs">
       <DependentUpon>frmMaintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmPositions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmPositions.Designer.cs">
+      <DependentUpon>frmPositions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmRequirementTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmRequirementTypes.Designer.cs">
+      <DependentUpon>frmRequirementTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="Models\ApplicantModel.cs" />
@@ -177,7 +219,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Database\db_config.ini" />
+    <Content Include="Database\db_config.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
