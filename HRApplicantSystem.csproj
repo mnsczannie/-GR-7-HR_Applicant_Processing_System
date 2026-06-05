@@ -105,6 +105,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Diagnostics.DiagnosticSource.10.0.3\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=8.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\System.IdentityModel.Tokens.Jwt.8.16.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
@@ -166,6 +167,30 @@
     <Compile Include="Forms\Applicant\frmApplicantLogin.Designer.cs">
       <DependentUpon>frmApplicantLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Applicant\frmApplicantRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmApplicantRegister.Designer.cs">
+      <DependentUpon>frmApplicantRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmJobVacancies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmJobVacancies.Designer.cs">
+      <DependentUpon>frmJobVacancies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmMyApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmMyApplication.Designer.cs">
+      <DependentUpon>frmMyApplication.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Applicant\frmMyProfile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +209,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Applicant\frmApplicantLogin.resx">
       <DependentUpon>frmApplicantLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmApplicantRegister.resx">
+      <DependentUpon>frmApplicantRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmJobVacancies.resx">
+      <DependentUpon>frmJobVacancies.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Applicant\frmMyProfile.resx">
       <DependentUpon>frmMyProfile.cs</DependentUpon>

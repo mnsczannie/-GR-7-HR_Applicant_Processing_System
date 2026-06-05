@@ -48,9 +48,7 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnOpenProfile = new System.Windows.Forms.Button();
-            this.btnTestDatabase = new System.Windows.Forms.Button();
-            this.btnLoadData = new System.Windows.Forms.Button();
+            this.btnRegister = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.SuspendLayout();
@@ -59,7 +57,7 @@
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(254, 33);
+            this.lblTitle.Location = new System.Drawing.Point(250, 50);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(257, 45);
             this.lblTitle.TabIndex = 0;
@@ -69,7 +67,8 @@
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(277, 88);
+            this.lblEmail.Location = new System.Drawing.Point(254, 132);
+            this.lblEmail.MaximumSize = new System.Drawing.Size(200, 200);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(48, 20);
             this.lblEmail.TabIndex = 1;
@@ -78,7 +77,7 @@
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(277, 123);
+            this.lblPassword.Location = new System.Drawing.Point(254, 195);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(78, 20);
             this.lblPassword.TabIndex = 2;
@@ -86,24 +85,26 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(411, 82);
+            this.txtEmail.Location = new System.Drawing.Point(376, 121);
+            this.txtEmail.Multiline = true;
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(100, 26);
+            this.txtEmail.Size = new System.Drawing.Size(131, 39);
             this.txtEmail.TabIndex = 3;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(411, 117);
+            this.txtPassword.Location = new System.Drawing.Point(376, 179);
+            this.txtPassword.Multiline = true;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(100, 26);
+            this.txtPassword.Size = new System.Drawing.Size(131, 36);
             this.txtPassword.TabIndex = 4;
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(411, 161);
+            this.btnLogin.Location = new System.Drawing.Point(376, 237);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(100, 29);
+            this.btnLogin.Size = new System.Drawing.Size(131, 40);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -134,7 +135,7 @@
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(800, 33);
+            this.bindingNavigator1.Size = new System.Drawing.Size(800, 38);
             this.bindingNavigator1.TabIndex = 6;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -144,7 +145,7 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(34, 28);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(34, 33);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
             // bindingNavigatorCountItem
@@ -224,44 +225,22 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 33);
             // 
-            // btnOpenProfile
+            // btnRegister
             // 
-            this.btnOpenProfile.Location = new System.Drawing.Point(281, 216);
-            this.btnOpenProfile.Name = "btnOpenProfile";
-            this.btnOpenProfile.Size = new System.Drawing.Size(112, 31);
-            this.btnOpenProfile.TabIndex = 7;
-            this.btnOpenProfile.Text = "Open Profile";
-            this.btnOpenProfile.UseVisualStyleBackColor = true;
-            this.btnOpenProfile.Click += new System.EventHandler(this.btnOpenProfile_Click);
-            // 
-            // btnTestDatabase
-            // 
-            this.btnTestDatabase.Location = new System.Drawing.Point(281, 253);
-            this.btnTestDatabase.Name = "btnTestDatabase";
-            this.btnTestDatabase.Size = new System.Drawing.Size(138, 31);
-            this.btnTestDatabase.TabIndex = 8;
-            this.btnTestDatabase.Text = "Test Database";
-            this.btnTestDatabase.UseVisualStyleBackColor = true;
-            this.btnTestDatabase.Click += new System.EventHandler(this.btnTestDatabase_Click);
-            // 
-            // btnLoadData
-            // 
-            this.btnLoadData.Location = new System.Drawing.Point(281, 290);
-            this.btnLoadData.Name = "btnLoadData";
-            this.btnLoadData.Size = new System.Drawing.Size(138, 30);
-            this.btnLoadData.TabIndex = 9;
-            this.btnLoadData.Text = "Load Data";
-            this.btnLoadData.UseVisualStyleBackColor = true;
-            this.btnLoadData.Click += new System.EventHandler(this.btnLoadData_Click);
+            this.btnRegister.Location = new System.Drawing.Point(376, 300);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(131, 41);
+            this.btnRegister.TabIndex = 11;
+            this.btnRegister.Text = "Register";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // frmApplicantLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnLoadData);
-            this.Controls.Add(this.btnTestDatabase);
-            this.Controls.Add(this.btnOpenProfile);
+            this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
@@ -299,8 +278,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.Button btnOpenProfile;
-        private System.Windows.Forms.Button btnTestDatabase;
-        private System.Windows.Forms.Button btnLoadData;
+        private System.Windows.Forms.Button btnRegister;
     }
 }
