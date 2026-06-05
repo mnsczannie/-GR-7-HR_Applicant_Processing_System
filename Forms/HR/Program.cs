@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using HRApplicantSystem.Helpers;
 using HRApplicantSystem.Forms.HR;
