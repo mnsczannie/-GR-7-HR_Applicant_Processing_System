@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HRApplicantSystem.Forms.Applicant;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,11 @@ namespace HRApplicantSystem
     {
         private string _email;
 
+        public frmApplicantDashboard()
+        {
+            InitializeComponent();
+        }
+
         public frmApplicantDashboard(string email)
         {
             InitializeComponent();
@@ -24,7 +30,22 @@ namespace HRApplicantSystem
 
         private void frmApplicantDashboard_Load(object sender, EventArgs e)
         {
-            lblEmailDisplay.Text = _email;
+            // lblEmailDisplay.Text = _email;
+        }
+
+        private void btnOpenProfile_Click(object sender, EventArgs e)
+        {
+            frmMyProfile profile =
+     new frmMyProfile(_email);
+
+            profile.ShowDialog();
+
+        }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
         }
     }
+
 }

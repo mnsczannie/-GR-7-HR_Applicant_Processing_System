@@ -17,6 +17,7 @@ namespace HRApplicantSystem.Forms.Applicant
         public frmMyProfile(string email)
         {
             InitializeComponent();
+
             _email = email;
 
             lblEmailDisplay.Text = _email;

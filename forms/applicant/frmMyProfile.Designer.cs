@@ -28,18 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.lblEmailDisplay = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // lblEmailDisplay
+            // 
+            this.lblEmailDisplay.AutoSize = true;
+            this.lblEmailDisplay.Location = new System.Drawing.Point(61, 13);
+            this.lblEmailDisplay.Name = "lblEmailDisplay";
+            this.lblEmailDisplay.Size = new System.Drawing.Size(87, 20);
+            this.lblEmailDisplay.TabIndex = 0;
+            this.lblEmailDisplay.Text = "Email Here";
             // 
             // frmMyProfile
             // 
             this.ClientSize = new System.Drawing.Size(608, 455);
+            this.Controls.Add(this.lblEmailDisplay);
             this.Name = "frmMyProfile";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
+     
         private System.Windows.Forms.Label lblEmailDisplay;
     }
 }
