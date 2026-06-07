@@ -13,6 +13,9 @@ namespace HRApplicantSystem.Forms.HR
             InitializeComponent();
         }
 
+        // ─────────────────────────────────────────────
+        // LOAD
+        // ─────────────────────────────────────────────
         private void frmApplicantReview_Load(object sender, EventArgs e)
         {
             LoadDepartmentFilter();
@@ -76,9 +79,11 @@ namespace HRApplicantSystem.Forms.HR
 
             dgvApplications.DataSource = dt;
 
+            // Hide raw ID column but keep it accessible via SelectedRows
             if (dgvApplications.Columns["application_id"] != null)
                 dgvApplications.Columns["application_id"].Visible = false;
 
+            // Set user-friendly column headers
             SetColumnHeader("applicant_name", "Applicant");
             SetColumnHeader("position", "Position");
             SetColumnHeader("department", "Department");
@@ -92,10 +97,16 @@ namespace HRApplicantSystem.Forms.HR
                 dgvApplications.Columns[colName].HeaderText = header;
         }
 
+        // ─────────────────────────────────────────────
+        // SEARCH / FILTER — re-query on change
+        // ─────────────────────────────────────────────
         private void txtSearch_TextChanged(object sender, EventArgs e) => LoadApplications();
         private void cboStatus_SelectedIndexChanged(object sender, EventArgs e) => LoadApplications();
         private void cboDepartment_SelectedIndexChanged(object sender, EventArgs e) => LoadApplications();
 
+        // ─────────────────────────────────────────────
+        // HELPER — get selected application_id
+        // ─────────────────────────────────────────────
         private int? GetSelectedApplicationId()
         {
             if (dgvApplications.SelectedRows.Count == 0)
@@ -108,11 +119,15 @@ namespace HRApplicantSystem.Forms.HR
             return Convert.ToInt32(dgvApplications.SelectedRows[0].Cells["application_id"].Value);
         }
 
+        // ─────────────────────────────────────────────
+        // VIEW PROFILE
+        // ─────────────────────────────────────────────
         private void btnViewProfile_Click(object sender, EventArgs e)
         {
             int? id = GetSelectedApplicationId();
             if (id == null) return;
 
+            // Load applicant details into a simple message for now
             string query = @"
                 SELECT a.first_name, a.last_name, a.email, a.phone,
                        jv.title AS position, ap.status, ap.submitted_at
@@ -143,6 +158,9 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
+        // ─────────────────────────────────────────────
+        // VIEW DOCUMENTS
+        // ─────────────────────────────────────────────
         private void btnViewDocuments_Click(object sender, EventArgs e)
         {
             int? id = GetSelectedApplicationId();
@@ -166,6 +184,7 @@ namespace HRApplicantSystem.Forms.HR
                     adapter.Fill(dt);
             }
 
+            // Show in a simpler viewer form
             var viewer = new Form
             {
                 Text = "Submitted Documents",
@@ -186,6 +205,9 @@ namespace HRApplicantSystem.Forms.HR
             viewer.ShowDialog(this);
         }
 
+        // ─────────────────────────────────────────────
+        // LOCK FOR REVIEW
+        // ─────────────────────────────────────────────
         private void btnLockForReview_Click(object sender, EventArgs e)
         {
             int? id = GetSelectedApplicationId();
@@ -242,11 +264,15 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
+        // ─────────────────────────────────────────────
+        // OPEN SCREENING
+        // ─────────────────────────────────────────────
         private void btnOpenScreening_Click(object sender, EventArgs e)
         {
             int? id = GetSelectedApplicationId();
             if (id == null) return;
 
+            // Verify it's under_review before opening screening
             string statusCheck = "SELECT status FROM applications WHERE application_id = @AppId";
             string currentStatus = "";
 
