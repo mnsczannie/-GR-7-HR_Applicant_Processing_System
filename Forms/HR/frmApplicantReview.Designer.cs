@@ -44,26 +44,34 @@
             this.lblStatus.Location = new System.Drawing.Point(258, 15);
             this.lblStatus.Text = "Status:";
 
-            // cboStatus
+            // cboStatus — updated to match PDF required status flow
             this.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboStatus.Location = new System.Drawing.Point(305, 12);
-            this.cboStatus.Size = new System.Drawing.Size(130, 21);
+            this.cboStatus.Size = new System.Drawing.Size(150, 21);
             this.cboStatus.Items.AddRange(new object[] {
-                "submitted", "under_review", "screened",
-                "interview_scheduled", "interviewed", "accepted", "rejected" });
+                "submitted",
+                "under_review",
+                "shortlisted",
+                "for_interview",
+                "for_assessment",
+                "for_final_review",
+                "accepted",
+                "rejected",
+                "withdrawn"
+            });
             this.cboStatus.SelectedIndex = 0;
             this.cboStatus.SelectedIndexChanged += new System.EventHandler(this.cboStatus_SelectedIndexChanged);
 
             // lblDepartment
             this.lblDepartment.AutoSize = true;
             this.lblDepartment.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblDepartment.Location = new System.Drawing.Point(448, 15);
+            this.lblDepartment.Location = new System.Drawing.Point(465, 15);
             this.lblDepartment.Text = "Department:";
 
             // cboDepartment
             this.cboDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboDepartment.Location = new System.Drawing.Point(525, 12);
-            this.cboDepartment.Size = new System.Drawing.Size(160, 21);
+            this.cboDepartment.Location = new System.Drawing.Point(543, 12);
+            this.cboDepartment.Size = new System.Drawing.Size(145, 21);
             this.cboDepartment.SelectedIndexChanged += new System.EventHandler(this.cboDepartment_SelectedIndexChanged);
 
             // dgvApplications
