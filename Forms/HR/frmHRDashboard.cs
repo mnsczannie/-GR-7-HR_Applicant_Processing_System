@@ -13,9 +13,7 @@ namespace HRApplicantSystem.Forms.HR
             InitializeComponent();
         }
 
-        // ─────────────────────────────────────────────
-        // LOAD
-        // ─────────────────────────────────────────────
+        // LOAD 
         private void frmHRDashboard_Load(object sender, EventArgs e)
         {
             lblWelcome.Text = $"Welcome, {SessionManager.CurrentUser.FullName}  ({SessionManager.CurrentUser.Role})";
@@ -27,11 +25,11 @@ namespace HRApplicantSystem.Forms.HR
         {
             string query = @"
                 SELECT
-                    COUNT(*)                                              AS total,
-                    SUM(CASE WHEN status = 'submitted'           THEN 1 ELSE 0 END) AS pending,
-                    SUM(CASE WHEN status = 'interview_scheduled' THEN 1 ELSE 0 END) AS interviews,
-                    SUM(CASE WHEN status = 'accepted'            THEN 1 ELSE 0 END) AS accepted,
-                    SUM(CASE WHEN status = 'rejected'            THEN 1 ELSE 0 END) AS rejected
+                    COUNT(*)                                                        AS total,
+                    SUM(CASE WHEN status = 'submitted'       THEN 1 ELSE 0 END)   AS pending,
+                    SUM(CASE WHEN status = 'for_interview'   THEN 1 ELSE 0 END)   AS interviews,
+                    SUM(CASE WHEN status = 'accepted'        THEN 1 ELSE 0 END)   AS accepted,
+                    SUM(CASE WHEN status = 'rejected'        THEN 1 ELSE 0 END)   AS rejected
                 FROM applications";
 
             using (var conn = DatabaseHelper.GetConnection())
@@ -52,15 +50,21 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
+        // Admin-only buttons visibility
         private void ApplyRoleVisibility()
         {
             string role = SessionManager.CurrentUser?.Role ?? string.Empty;
             btnMaintenance.Visible = (role == "admin");
         }
 
-        // ─────────────────────────────────────────────
-        // BUTTON HANDLERS
-        // ─────────────────────────────────────────────
+        // BUTTONS
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadSummaryCards();
+            MessageBox.Show("Dashboard refreshed successfully.",
+                            "Refreshed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void btnApplicantReview_Click(object sender, EventArgs e)
         {
             var form = new frmApplicantReview();

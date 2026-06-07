@@ -29,6 +29,7 @@
             this.btnReports = new System.Windows.Forms.Button();
             this.btnVacancyManagement = new System.Windows.Forms.Button();
             this.btnMaintenance = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.pnlCards.SuspendLayout();
             this.SuspendLayout();
@@ -39,7 +40,7 @@
             this.lblWelcome.Location = new System.Drawing.Point(15, 18);
             this.lblWelcome.Text = "Welcome";
 
-            // pnlCards — summary cards container
+            // pnlCards
             this.pnlCards.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnlCards.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlCards.Location = new System.Drawing.Point(15, 55);
@@ -55,60 +56,55 @@
             this.pnlCards.Controls.Add(this.lblRejCaption);
             this.pnlCards.Controls.Add(this.lblRejected);
 
-            // --- Card: Total ---
+            // Total
             this.lblTotalCaption.AutoSize = true;
             this.lblTotalCaption.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.lblTotalCaption.Location = new System.Drawing.Point(10, 12);
             this.lblTotalCaption.Text = "Total";
-
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.lblTotal.ForeColor = System.Drawing.Color.SteelBlue;
             this.lblTotal.Location = new System.Drawing.Point(10, 30);
             this.lblTotal.Text = "0";
 
-            // --- Card: Pending ---
+            // Pending
             this.lblPendingCaption.AutoSize = true;
             this.lblPendingCaption.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.lblPendingCaption.Location = new System.Drawing.Point(110, 12);
             this.lblPendingCaption.Text = "Pending";
-
             this.lblPending.AutoSize = true;
             this.lblPending.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.lblPending.ForeColor = System.Drawing.Color.DarkOrange;
             this.lblPending.Location = new System.Drawing.Point(110, 30);
             this.lblPending.Text = "0";
 
-            // --- Card: Interviews ---
+            // Interviews
             this.lblIntCaption.AutoSize = true;
             this.lblIntCaption.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.lblIntCaption.Location = new System.Drawing.Point(210, 12);
             this.lblIntCaption.Text = "Interviews";
-
             this.lblInterviews.AutoSize = true;
             this.lblInterviews.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.lblInterviews.ForeColor = System.Drawing.Color.MediumPurple;
             this.lblInterviews.Location = new System.Drawing.Point(210, 30);
             this.lblInterviews.Text = "0";
 
-            // --- Card: Accepted ---
+            // Accepted
             this.lblAccCaption.AutoSize = true;
             this.lblAccCaption.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.lblAccCaption.Location = new System.Drawing.Point(340, 12);
             this.lblAccCaption.Text = "Accepted";
-
             this.lblAccepted.AutoSize = true;
             this.lblAccepted.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.lblAccepted.ForeColor = System.Drawing.Color.SeaGreen;
             this.lblAccepted.Location = new System.Drawing.Point(340, 30);
             this.lblAccepted.Text = "0";
 
-            // --- Card: Rejected ---
+            // Rejected
             this.lblRejCaption.AutoSize = true;
             this.lblRejCaption.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.lblRejCaption.Location = new System.Drawing.Point(460, 12);
             this.lblRejCaption.Text = "Rejected";
-
             this.lblRejected.AutoSize = true;
             this.lblRejected.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.lblRejected.ForeColor = System.Drawing.Color.Crimson;
@@ -117,32 +113,39 @@
 
             // btnApplicantReview
             this.btnApplicantReview.Location = new System.Drawing.Point(15, 175);
-            this.btnApplicantReview.Size = new System.Drawing.Size(130, 40);
+            this.btnApplicantReview.Size = new System.Drawing.Size(120, 40);
             this.btnApplicantReview.Text = "Applicant Review";
             this.btnApplicantReview.Click += new System.EventHandler(this.btnApplicantReview_Click);
 
             // btnReports
-            this.btnReports.Location = new System.Drawing.Point(155, 175);
-            this.btnReports.Size = new System.Drawing.Size(100, 40);
+            this.btnReports.Location = new System.Drawing.Point(145, 175);
+            this.btnReports.Size = new System.Drawing.Size(90, 40);
             this.btnReports.Text = "Reports";
             this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
 
             // btnVacancyManagement
-            this.btnVacancyManagement.Location = new System.Drawing.Point(265, 175);
+            this.btnVacancyManagement.Location = new System.Drawing.Point(245, 175);
             this.btnVacancyManagement.Size = new System.Drawing.Size(130, 40);
             this.btnVacancyManagement.Text = "Vacancy Management";
             this.btnVacancyManagement.Click += new System.EventHandler(this.btnVacancyManagement_Click);
 
             // btnMaintenance
-            this.btnMaintenance.Location = new System.Drawing.Point(405, 175);
+            this.btnMaintenance.Location = new System.Drawing.Point(385, 175);
             this.btnMaintenance.Size = new System.Drawing.Size(90, 40);
             this.btnMaintenance.Text = "Maintenance";
             this.btnMaintenance.Visible = false;
             this.btnMaintenance.Click += new System.EventHandler(this.btnMaintenance_Click);
 
+            // btnRefresh
+            this.btnRefresh.Location = new System.Drawing.Point(485, 175);
+            this.btnRefresh.Size = new System.Drawing.Size(90, 40);
+            this.btnRefresh.Text = "↺ Refresh";
+            this.btnRefresh.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+
             // btnLogout
-            this.btnLogout.Location = new System.Drawing.Point(505, 175);
-            this.btnLogout.Size = new System.Drawing.Size(80, 40);
+            this.btnLogout.Location = new System.Drawing.Point(15, 225);
+            this.btnLogout.Size = new System.Drawing.Size(80, 30);
             this.btnLogout.Text = "Logout";
             this.btnLogout.BackColor = System.Drawing.Color.Salmon;
             this.btnLogout.ForeColor = System.Drawing.Color.White;
@@ -151,13 +154,14 @@
             // frmHRDashboard
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 240);
+            this.ClientSize = new System.Drawing.Size(600, 275);
             this.Controls.Add(this.lblWelcome);
             this.Controls.Add(this.pnlCards);
             this.Controls.Add(this.btnApplicantReview);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnVacancyManagement);
             this.Controls.Add(this.btnMaintenance);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnLogout);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -187,6 +191,7 @@
         private System.Windows.Forms.Button btnReports;
         private System.Windows.Forms.Button btnVacancyManagement;
         private System.Windows.Forms.Button btnMaintenance;
+        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnLogout;
     }
 }
