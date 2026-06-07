@@ -196,6 +196,11 @@
     </Compile>
     <Compile Include="Forms\Applicant\frmMyProfile.Designer.cs">
       <DependentUpon>frmMyProfile.cs</DependentUpon>
+    <Compile Include="Forms\HR\frmHRLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmHRLogin.Designer.cs">
+      <DependentUpon>frmHRLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="Models\ApplicantModel.cs" />
@@ -248,6 +253,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\HR\" />
+    <Folder Include="Forms\Applicant\" />
     <Folder Include="Forms\Maintenance\" />
   </ItemGroup>
   <ItemGroup>
