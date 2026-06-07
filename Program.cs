@@ -1,6 +1,7 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using HRApplicantSystem.Forms.Applicant;
 using HRApplicantSystem.Helpers;
+using System;
+using System.Windows.Forms;
 
 namespace HRApplicantSystem
 {
@@ -17,7 +18,7 @@ namespace HRApplicantSystem
 
             // Temporarily open a blank form until
             // frmApplicantLogin is created
-            Application.Run(new Form());
+            Application.Run(new frmApplicantLogin());
         }
     }
 }
