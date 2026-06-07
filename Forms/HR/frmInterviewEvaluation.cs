@@ -17,9 +17,6 @@ namespace HRApplicantSystem.Forms.HR
             _applicationId = applicationId;
         }
 
-        // ─────────────────────────────────────────────
-        // LOAD
-        // ─────────────────────────────────────────────
         private void frmInterviewEvaluation_Load(object sender, EventArgs e)
         {
             LoadScheduleInfo();
@@ -30,11 +27,11 @@ namespace HRApplicantSystem.Forms.HR
         {
             string query = @"
                 SELECT isc.schedule_id,
-                       a.first_name + ' ' + a.last_name                       AS full_name,
-                       jv.title                                                AS position,
-                       CONVERT(varchar, isc.scheduled_at, 120)                AS schedule_info,
-                       u.first_name + ' ' + u.last_name                       AS interviewer,
-                       it.type_name                                            AS interview_type
+                       a.first_name + ' ' + a.last_name                AS full_name,
+                       jv.title                                         AS position,
+                       CONVERT(varchar, isc.scheduled_at, 120)         AS schedule_info,
+                       u.first_name + ' ' + u.last_name                AS interviewer,
+                       it.type_name                                     AS interview_type
                 FROM   interview_schedules isc
                 JOIN   applications ap ON isc.application_id = ap.application_id
                 JOIN   applicants   a  ON ap.applicant_id    = a.applicant_id
@@ -56,16 +53,13 @@ namespace HRApplicantSystem.Forms.HR
                         _scheduleId = Convert.ToInt32(reader["schedule_id"]);
                         lblApplicantName.Text = reader["full_name"].ToString();
                         lblScheduleInfo.Text = $"{reader["interview_type"]}  |  " +
-                                                   $"{reader["schedule_info"]}  |  " +
-                                                   $"Interviewer: {reader["interviewer"]}";
+                                                $"{reader["schedule_info"]}  |  " +
+                                                $"Interviewer: {reader["interviewer"]}";
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// Show/hide Hiring Decision button based on role.
-        /// </summary>
         private void ApplyRoleVisibility()
         {
             string role = SessionManager.CurrentUser?.Role ?? string.Empty;
@@ -73,9 +67,6 @@ namespace HRApplicantSystem.Forms.HR
             btnHiringDecision.Visible = canDecide;
         }
 
-        // ─────────────────────────────────────────────
-        // SAVE
-        // ─────────────────────────────────────────────
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (!rdoPass.Checked && !rdoFail.Checked)
@@ -113,9 +104,10 @@ namespace HRApplicantSystem.Forms.HR
                             cmd.ExecuteNonQuery();
                         }
 
+                        // Updated status
                         string updateSql = @"
                             UPDATE applications
-                            SET    status     = 'interviewed',
+                            SET    status     = 'for_final_review',
                                    updated_at = GETDATE()
                             WHERE  application_id = @AppId";
 
@@ -126,7 +118,7 @@ namespace HRApplicantSystem.Forms.HR
                         }
 
                         SystemHelper.StatusHistoryLogger.Log(
-                            conn, tx, _applicationId, "interviewed",
+                            conn, tx, _applicationId, "for_final_review",
                             SessionManager.CurrentUser.UserId);
 
                         tx.Commit();
@@ -134,7 +126,6 @@ namespace HRApplicantSystem.Forms.HR
                         MessageBox.Show("Evaluation saved successfully.",
                                         "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // Re-check visibility in case state changed
                         ApplyRoleVisibility();
                     }
                     catch (Exception ex)
@@ -147,12 +138,8 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
-        // ─────────────────────────────────────────────
-        // HIRING DECISION → role-gated
-        // ─────────────────────────────────────────────
         private void btnHiringDecision_Click(object sender, EventArgs e)
         {
-            // Double-check role before opening
             string role = SessionManager.CurrentUser?.Role ?? string.Empty;
             if (role != "admin" && role != "hr_manager")
             {
