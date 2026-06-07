@@ -16,9 +16,7 @@ namespace HRApplicantSystem.Forms.HR
             _applicationId = applicationId;
         }
 
-        // ─────────────────────────────────────────────
-        // LOAD
-        // ─────────────────────────────────────────────
+        // Load event handler to initialize form data
         private void frmScreening_Load(object sender, EventArgs e)
         {
             LoadApplicantInfo();
@@ -26,6 +24,7 @@ namespace HRApplicantSystem.Forms.HR
             btnProceed.Enabled = false;
         }
 
+        // Load applicant's full name and applied position
         private void LoadApplicantInfo()
         {
             string query = @"
@@ -52,6 +51,7 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
+        // Load the checklist of required documents and their submission status
         private void LoadDocumentsChecklist()
         {
             string query = @"
@@ -75,24 +75,18 @@ namespace HRApplicantSystem.Forms.HR
 
             dgvDocuments.DataSource = dt;
 
-            // Friendly column headers
             if (dgvDocuments.Columns["requirement_name"] != null)
                 dgvDocuments.Columns["requirement_name"].HeaderText = "Requirement";
             if (dgvDocuments.Columns["status"] != null)
                 dgvDocuments.Columns["status"].HeaderText = "Status";
         }
 
-        // ─────────────────────────────────────────────
-        // QUALIFIED / NOT QUALIFIED toggle
-        // ─────────────────────────────────────────────
+        // Enable the Proceed button only if "Qualified" is selected
         private void rdoQualified_CheckedChanged(object sender, EventArgs e)
         {
             btnProceed.Enabled = rdoQualified.Checked;
         }
 
-        // ─────────────────────────────────────────────
-        // SAVE
-        // ─────────────────────────────────────────────
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (!rdoQualified.Checked && !rdoNotQualified.Checked)
@@ -103,7 +97,7 @@ namespace HRApplicantSystem.Forms.HR
             }
 
             string result = rdoQualified.Checked ? "qualified" : "not_qualified";
-            // Updated status 
+            // Updated status
             string newStatus = rdoQualified.Checked ? "shortlisted" : "rejected";
 
             using (var conn = DatabaseHelper.GetConnection())
@@ -113,7 +107,6 @@ namespace HRApplicantSystem.Forms.HR
                 {
                     try
                     {
-                        // Insert screening result
                         string insertSql = @"
                             INSERT INTO screening_results
                                    (application_id, result, remarks, screened_by, screened_at)
@@ -128,7 +121,6 @@ namespace HRApplicantSystem.Forms.HR
                             cmd.ExecuteNonQuery();
                         }
 
-                        // Update application status
                         string updateSql = @"
                             UPDATE applications
                             SET    status     = @Status,
@@ -142,7 +134,6 @@ namespace HRApplicantSystem.Forms.HR
                             cmd.ExecuteNonQuery();
                         }
 
-                        // Log status change
                         SystemHelper.StatusHistoryLogger.Log(
                             conn, tx, _applicationId, newStatus,
                             SessionManager.CurrentUser.UserId);
@@ -164,9 +155,6 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
-        // ─────────────────────────────────────────────
-        // PROCEED → open frmInterviewSchedule
-        // ─────────────────────────────────────────────
         private void btnProceed_Click(object sender, EventArgs e)
         {
             var schedForm = new frmInterviewSchedule(_applicationId);
