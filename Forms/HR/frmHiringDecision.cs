@@ -93,6 +93,7 @@ namespace HRApplicantSystem.Forms.HR
             string decision;
             string newAppStatus;
 
+            // Accepted or Rejected or For Final Review (if on hold)
             if (rdoAccepted.Checked)
             {
                 decision = "accepted";
