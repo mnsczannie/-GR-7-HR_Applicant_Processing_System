@@ -46,10 +46,9 @@ namespace HRApplicantSystem.Helpers
     // ─────────────────────────────────────────
     public static class SessionManager
     {
-        public static User CurrentUser { get; private set; }
-        public static string CurrentRole { get; private set; }
-        public static Applicant CurrentApplicant
-        { get; private set; }
+        public static User CurrentUser { get; set; }
+        public static string CurrentRole { get; set; }
+        public static HRApplicantSystem.Models.Applicant CurrentApplicant { get; set; }
 
         public static void Login(User user)
         {
