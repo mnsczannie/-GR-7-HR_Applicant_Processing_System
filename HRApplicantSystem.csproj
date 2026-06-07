@@ -155,6 +155,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\HR\frmApplicantReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmApplicantReview.Designer.cs">
+      <DependentUpon>frmApplicantReview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmHiringDecision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmHiringDecision.Designer.cs">
+      <DependentUpon>frmHiringDecision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmHRDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmHRDashboard.Designer.cs">
+      <DependentUpon>frmHRDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Applicant\frmApplicantDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +220,36 @@
     <Compile Include="Forms\HR\frmHRLogin.Designer.cs">
       <DependentUpon>frmHRLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\HR\frmInterviewEvaluation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmInterviewEvaluation.Designer.cs">
+      <DependentUpon>frmInterviewEvaluation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmInterviewSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmInterviewSchedule.Designer.cs">
+      <DependentUpon>frmInterviewSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmReports.Designer.cs">
+      <DependentUpon>frmReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmScreening.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmScreening.Designer.cs">
+      <DependentUpon>frmScreening.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\HRApplicantForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\HRApplicantForms.Designer.cs">
+      <DependentUpon>HRApplicantForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="Models\ApplicantModel.cs" />
     <Compile Include="Models\EvaluationModels.cs" />
@@ -209,6 +257,8 @@
     <Compile Include="Models\SystemModels.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\HR\frmHRLogin.resx">
+      <DependentUpon>frmHRLogin.cs</DependentUpon>
     <EmbeddedResource Include="Forms\Applicant\frmApplicantDashboard.resx">
       <DependentUpon>frmApplicantDashboard.cs</DependentUpon>
     </EmbeddedResource>
