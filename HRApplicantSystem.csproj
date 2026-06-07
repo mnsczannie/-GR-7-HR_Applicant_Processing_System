@@ -155,6 +155,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Maintenance\frmAssessmentTypes.cs">
     <Compile Include="Forms\HR\frmApplicantReview.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,8 +218,50 @@
     <Compile Include="Forms\HR\frmHRLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\HR\frmHRLogin.Designer.cs">
-      <DependentUpon>frmHRLogin.cs</DependentUpon>
+    <Compile Include="Forms\Maintenance\frmAssessmentTypes.Designer.cs">
+      <DependentUpon>frmAssessmentTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmDepartments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmDepartments.Designer.cs">
+      <DependentUpon>frmDepartments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmEmploymentTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmEmploymentTypes.Designer.cs">
+      <DependentUpon>frmEmploymentTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmInterviewTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmInterviewTypes.Designer.cs">
+      <DependentUpon>frmInterviewTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmJobVacancyManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmJobVacancyManagement.Designer.cs">
+      <DependentUpon>frmJobVacancyManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmMaintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmMaintenance.Designer.cs">
+      <DependentUpon>frmMaintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmPositions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmPositions.Designer.cs">
+      <DependentUpon>frmPositions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmRequirementTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmRequirementTypes.Designer.cs">
+      <DependentUpon>frmRequirementTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\HR\frmInterviewEvaluation.cs">
       <SubType>Form</SubType>
@@ -257,6 +300,8 @@
     <Compile Include="Models\SystemModels.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Maintenance\frmMaintenance.resx">
+      <DependentUpon>frmMaintenance.cs</DependentUpon>
     <EmbeddedResource Include="Forms\HR\frmHRLogin.resx">
       <DependentUpon>frmHRLogin.cs</DependentUpon>
     <EmbeddedResource Include="Forms\Applicant\frmApplicantDashboard.resx">
@@ -286,7 +331,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Database\db_config.ini" />
+    <Content Include="Database\db_config.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -304,7 +351,7 @@
   <ItemGroup>
     <Folder Include="Forms\HR\" />
     <Folder Include="Forms\Applicant\" />
-    <Folder Include="Forms\Maintenance\" />
+    <Folder Include="Forms\HR\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\schema.sql" />
