@@ -13,9 +13,7 @@ namespace HRApplicantSystem.Forms.HR
             InitializeComponent();
         }
 
-        // ─────────────────────────────────────────────
         // LOAD
-        // ─────────────────────────────────────────────
         private void frmApplicantReview_Load(object sender, EventArgs e)
         {
             LoadDepartmentFilter();
@@ -25,21 +23,16 @@ namespace HRApplicantSystem.Forms.HR
         private void LoadDepartmentFilter()
         {
             string query = "SELECT DISTINCT department FROM job_vacancies WHERE department IS NOT NULL ORDER BY department";
-
             cboDepartment.Items.Clear();
             cboDepartment.Items.Add("All Departments");
-
             using (var conn = DatabaseHelper.GetConnection())
             using (var cmd = new SqlCommand(query, conn))
             {
                 conn.Open();
                 using (var reader = cmd.ExecuteReader())
-                {
                     while (reader.Read())
                         cboDepartment.Items.Add(reader["department"].ToString());
-                }
             }
-
             cboDepartment.SelectedIndex = 0;
         }
 
@@ -51,8 +44,8 @@ namespace HRApplicantSystem.Forms.HR
 
             string query = @"
                 SELECT ap.application_id,
-                       a.first_name + ' ' + a.last_name  AS applicant_name,
-                       jv.title                          AS position,
+                       a.first_name + ' ' + a.last_name       AS applicant_name,
+                       jv.title                               AS position,
                        jv.department,
                        ap.status,
                        CONVERT(varchar, ap.submitted_at, 101) AS date_submitted
@@ -83,7 +76,7 @@ namespace HRApplicantSystem.Forms.HR
             if (dgvApplications.Columns["application_id"] != null)
                 dgvApplications.Columns["application_id"].Visible = false;
 
-            // Set user-friendly column headers
+            // Friendly column headers
             SetColumnHeader("applicant_name", "Applicant");
             SetColumnHeader("position", "Position");
             SetColumnHeader("department", "Department");
@@ -115,7 +108,6 @@ namespace HRApplicantSystem.Forms.HR
                                 "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
             }
-
             return Convert.ToInt32(dgvApplications.SelectedRows[0].Cells["application_id"].Value);
         }
 
@@ -184,7 +176,7 @@ namespace HRApplicantSystem.Forms.HR
                     adapter.Fill(dt);
             }
 
-            // Show in a simpler viewer form
+            // Show in a simple viewer form
             var viewer = new Form
             {
                 Text = "Submitted Documents",
@@ -213,9 +205,10 @@ namespace HRApplicantSystem.Forms.HR
             int? id = GetSelectedApplicationId();
             if (id == null) return;
 
-            DialogResult confirm = MessageBox.Show("Lock this application for review?",
-                                                   "Confirm", MessageBoxButtons.YesNo,
-                                                   MessageBoxIcon.Question);
+            DialogResult confirm = MessageBox.Show(
+                "Lock this application for review?\n\nNote: The applicant will no longer be able to edit their application once locked.",
+                "Confirm Lock", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
             if (confirm != DialogResult.Yes) return;
 
             using (var conn = DatabaseHelper.GetConnection())
@@ -250,8 +243,8 @@ namespace HRApplicantSystem.Forms.HR
                             SessionManager.CurrentUser.UserId);
 
                         tx.Commit();
-                        MessageBox.Show("Application locked for review.",
-                                        "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Application locked for review. The applicant can no longer edit their submission.",
+                                        "Locked", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadApplications();
                     }
                     catch (Exception ex)
@@ -273,16 +266,13 @@ namespace HRApplicantSystem.Forms.HR
             if (id == null) return;
 
             // Verify it's under_review before opening screening
-            string statusCheck = "SELECT status FROM applications WHERE application_id = @AppId";
             string currentStatus = "";
-
             using (var conn = DatabaseHelper.GetConnection())
-            using (var cmd = new SqlCommand(statusCheck, conn))
+            using (var cmd = new SqlCommand("SELECT status FROM applications WHERE application_id = @AppId", conn))
             {
                 cmd.Parameters.AddWithValue("@AppId", id.Value);
                 conn.Open();
-                var result = cmd.ExecuteScalar();
-                currentStatus = result?.ToString() ?? "";
+                currentStatus = cmd.ExecuteScalar()?.ToString() ?? "";
             }
 
             if (currentStatus != "under_review")
@@ -294,6 +284,56 @@ namespace HRApplicantSystem.Forms.HR
 
             var screeningForm = new frmScreening(id.Value);
             screeningForm.Show();
+        }
+
+        // WITHDRAW APPLICATION
+        private void btnWithdraw_Click(object sender, EventArgs e)
+        {
+            int? id = GetSelectedApplicationId();
+            if (id == null) return;
+
+            DialogResult confirm = MessageBox.Show(
+                "Are you sure you want to mark this application as Withdrawn?\nThis action cannot be undone.",
+                "Confirm Withdrawal", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (confirm != DialogResult.Yes) return;
+
+            using (var conn = DatabaseHelper.GetConnection())
+            {
+                conn.Open();
+                using (var tx = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        string updateSql = @"
+                            UPDATE applications
+                            SET    status     = 'withdrawn',
+                                   updated_at = GETDATE()
+                            WHERE  application_id = @AppId";
+
+                        using (var cmd = new SqlCommand(updateSql, conn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@AppId", id.Value);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        SystemHelper.StatusHistoryLogger.Log(
+                            conn, tx, id.Value, "withdrawn",
+                            SessionManager.CurrentUser.UserId);
+
+                        tx.Commit();
+                        MessageBox.Show("Application has been marked as Withdrawn.",
+                                        "Withdrawn", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadApplications();
+                    }
+                    catch (Exception ex)
+                    {
+                        tx.Rollback();
+                        MessageBox.Show("Error withdrawing application:\n" + ex.Message,
+                                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }
