@@ -44,7 +44,7 @@
             this.lblStatus.Location = new System.Drawing.Point(258, 15);
             this.lblStatus.Text = "Status:";
 
-            // cboStatus — updated to match PDF required status flow
+            // cboStatus
             this.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboStatus.Location = new System.Drawing.Point(305, 12);
             this.cboStatus.Size = new System.Drawing.Size(150, 21);
