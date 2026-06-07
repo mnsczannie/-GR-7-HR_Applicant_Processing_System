@@ -89,7 +89,9 @@
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=8.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.IdentityModel.Tokens.8.16.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
     </Reference>
@@ -103,6 +105,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Diagnostics.DiagnosticSource.10.0.3\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=8.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\System.IdentityModel.Tokens.Jwt.8.16.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
@@ -153,6 +156,66 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\Maintenance\frmAssessmentTypes.cs">
+    <Compile Include="Forms\HR\frmApplicantReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmApplicantReview.Designer.cs">
+      <DependentUpon>frmApplicantReview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmHiringDecision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmHiringDecision.Designer.cs">
+      <DependentUpon>frmHiringDecision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmHRDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmHRDashboard.Designer.cs">
+      <DependentUpon>frmHRDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmApplicantDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmApplicantDashboard.Designer.cs">
+      <DependentUpon>frmApplicantDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmApplicantLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmApplicantLogin.Designer.cs">
+      <DependentUpon>frmApplicantLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmApplicantRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmApplicantRegister.Designer.cs">
+      <DependentUpon>frmApplicantRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmJobVacancies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmJobVacancies.Designer.cs">
+      <DependentUpon>frmJobVacancies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmMyApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmMyApplication.Designer.cs">
+      <DependentUpon>frmMyApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmMyProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Applicant\frmMyProfile.Designer.cs">
+      <DependentUpon>frmMyProfile.cs</DependentUpon>
+    <Compile Include="Forms\HR\frmHRLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Maintenance\frmAssessmentTypes.Designer.cs">
@@ -200,6 +263,36 @@
     <Compile Include="Forms\Maintenance\frmRequirementTypes.Designer.cs">
       <DependentUpon>frmRequirementTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\HR\frmInterviewEvaluation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmInterviewEvaluation.Designer.cs">
+      <DependentUpon>frmInterviewEvaluation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmInterviewSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmInterviewSchedule.Designer.cs">
+      <DependentUpon>frmInterviewSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmReports.Designer.cs">
+      <DependentUpon>frmReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmScreening.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmScreening.Designer.cs">
+      <DependentUpon>frmScreening.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\HRApplicantForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\HRApplicantForms.Designer.cs">
+      <DependentUpon>HRApplicantForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="Models\ApplicantModel.cs" />
     <Compile Include="Models\EvaluationModels.cs" />
@@ -209,6 +302,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Maintenance\frmMaintenance.resx">
       <DependentUpon>frmMaintenance.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\HR\frmHRLogin.resx">
+      <DependentUpon>frmHRLogin.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Applicant\frmApplicantDashboard.resx">
+      <DependentUpon>frmApplicantDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmApplicantLogin.resx">
+      <DependentUpon>frmApplicantLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmApplicantRegister.resx">
+      <DependentUpon>frmApplicantRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmJobVacancies.resx">
+      <DependentUpon>frmJobVacancies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmMyProfile.resx">
+      <DependentUpon>frmMyProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -237,6 +349,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Forms\HR\" />
     <Folder Include="Forms\Applicant\" />
     <Folder Include="Forms\HR\" />
   </ItemGroup>
