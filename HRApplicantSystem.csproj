@@ -295,6 +295,7 @@
       <DependentUpon>HRApplicantForms.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\SystemHelper.cs" />
+    <Compile Include="Helpers\UITheme.cs" />
     <Compile Include="Models\ApplicantModel.cs" />
     <Compile Include="Models\EvaluationModels.cs" />
     <Compile Include="Models\JobModels.cs" />
@@ -351,10 +352,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\HR\" />
-    <Folder Include="Forms\Applicant\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Database\schema.sql" />
     <Content Include="Database\seed.sql" />
