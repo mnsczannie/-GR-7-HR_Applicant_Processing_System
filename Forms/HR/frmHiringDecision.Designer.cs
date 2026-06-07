@@ -19,6 +19,7 @@
             this.lblEvalSummary = new System.Windows.Forms.Label();
             this.rdoAccepted = new System.Windows.Forms.RadioButton();
             this.rdoRejected = new System.Windows.Forms.RadioButton();
+            this.rdoOnHold = new System.Windows.Forms.RadioButton();
             this.lblFinalRemarks = new System.Windows.Forms.Label();
             this.txtFinalRemarks = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
@@ -60,6 +61,11 @@
             this.rdoRejected.Location = new System.Drawing.Point(110, 118);
             this.rdoRejected.Text = "Rejected";
 
+            // rdoOnHold
+            this.rdoOnHold.AutoSize = true;
+            this.rdoOnHold.Location = new System.Drawing.Point(205, 118);
+            this.rdoOnHold.Text = "On Hold";
+
             // lblFinalRemarks
             this.lblFinalRemarks.AutoSize = true;
             this.lblFinalRemarks.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -93,6 +99,7 @@
             this.Controls.Add(this.lblEvalSummary);
             this.Controls.Add(this.rdoAccepted);
             this.Controls.Add(this.rdoRejected);
+            this.Controls.Add(this.rdoOnHold);
             this.Controls.Add(this.lblFinalRemarks);
             this.Controls.Add(this.txtFinalRemarks);
             this.Controls.Add(this.btnSave);
@@ -113,6 +120,7 @@
         private System.Windows.Forms.Label lblEvalSummary;
         private System.Windows.Forms.RadioButton rdoAccepted;
         private System.Windows.Forms.RadioButton rdoRejected;
+        private System.Windows.Forms.RadioButton rdoOnHold;
         private System.Windows.Forms.Label lblFinalRemarks;
         private System.Windows.Forms.TextBox txtFinalRemarks;
         private System.Windows.Forms.Button btnSave;

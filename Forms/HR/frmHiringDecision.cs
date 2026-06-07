@@ -83,15 +83,31 @@ namespace HRApplicantSystem.Forms.HR
                 return;
             }
 
-            if (!rdoAccepted.Checked && !rdoRejected.Checked)
+            if (!rdoAccepted.Checked && !rdoRejected.Checked && !rdoOnHold.Checked)
             {
-                MessageBox.Show("Please select Accepted or Rejected.",
+                MessageBox.Show("Please select Accepted, Rejected, or On Hold.",
                                 "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string decision = rdoAccepted.Checked ? "accepted" : "rejected";
-            string newAppStatus = decision; // 'accepted' or 'rejected'
+            string decision;
+            string newAppStatus;
+
+            if (rdoAccepted.Checked)
+            {
+                decision = "accepted";
+                newAppStatus = "accepted";
+            }
+            else if (rdoRejected.Checked)
+            {
+                decision = "rejected";
+                newAppStatus = "rejected";
+            }
+            else
+            {
+                decision = "on_hold";
+                newAppStatus = "for_final_review";
+            }
 
             DialogResult confirm = MessageBox.Show(
                 $"Are you sure you want to mark this applicant as '{decision.ToUpper()}'?",
