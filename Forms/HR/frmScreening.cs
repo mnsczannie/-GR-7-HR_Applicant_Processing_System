@@ -103,6 +103,8 @@ namespace HRApplicantSystem.Forms.HR
             }
 
             string result = rdoQualified.Checked ? "qualified" : "not_qualified";
+            // Updated status to match PDF requirements
+            string newStatus = rdoQualified.Checked ? "shortlisted" : "rejected";
 
             using (var conn = DatabaseHelper.GetConnection())
             {
@@ -129,19 +131,20 @@ namespace HRApplicantSystem.Forms.HR
                         // Update application status
                         string updateSql = @"
                             UPDATE applications
-                            SET    status     = 'screened',
+                            SET    status     = @Status,
                                    updated_at = GETDATE()
                             WHERE  application_id = @AppId";
 
                         using (var cmd = new SqlCommand(updateSql, conn, tx))
                         {
+                            cmd.Parameters.AddWithValue("@Status", newStatus);
                             cmd.Parameters.AddWithValue("@AppId", _applicationId);
                             cmd.ExecuteNonQuery();
                         }
 
                         // Log status change
                         SystemHelper.StatusHistoryLogger.Log(
-                            conn, tx, _applicationId, "screened",
+                            conn, tx, _applicationId, newStatus,
                             SessionManager.CurrentUser.UserId);
 
                         tx.Commit();
