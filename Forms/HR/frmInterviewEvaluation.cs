@@ -17,6 +17,9 @@ namespace HRApplicantSystem.Forms.HR
             _applicationId = applicationId;
         }
 
+        // ─────────────────────────────────────────────
+        // LOAD
+        // ─────────────────────────────────────────────
         private void frmInterviewEvaluation_Load(object sender, EventArgs e)
         {
             LoadScheduleInfo();
@@ -60,6 +63,8 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
+        /// Summary
+        /// Show/Hide Hiring Decision button based on role.
         private void ApplyRoleVisibility()
         {
             string role = SessionManager.CurrentUser?.Role ?? string.Empty;
@@ -67,6 +72,9 @@ namespace HRApplicantSystem.Forms.HR
             btnHiringDecision.Visible = canDecide;
         }
 
+        // ─────────────────────────────────────────────
+        // SAVE
+        // ─────────────────────────────────────────────
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (!rdoPass.Checked && !rdoFail.Checked)
@@ -126,6 +134,7 @@ namespace HRApplicantSystem.Forms.HR
                         MessageBox.Show("Evaluation saved successfully.",
                                         "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                        // Re-check visibility in case state changed
                         ApplyRoleVisibility();
                     }
                     catch (Exception ex)
@@ -138,8 +147,12 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
+        // ─────────────────────────────────────────────
+        // HIRING DECISION → role-gated
+        // ─────────────────────────────────────────────
         private void btnHiringDecision_Click(object sender, EventArgs e)
         {
+            // Double check role before opening for security
             string role = SessionManager.CurrentUser?.Role ?? string.Empty;
             if (role != "admin" && role != "hr_manager")
             {
