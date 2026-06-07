@@ -125,7 +125,14 @@ namespace HRApplicantSystem.Forms.HR
                 return;
             }
 
+            // Validate that scheduled date is not in the past
             DateTime scheduledDateTime = dtpDate.Value.Date + dtpTime.Value.TimeOfDay;
+            if (scheduledDateTime < DateTime.Now)
+            {
+                MessageBox.Show("Interview date and time cannot be in the past.",
+                                "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             using (var conn = DatabaseHelper.GetConnection())
             {
@@ -153,10 +160,10 @@ namespace HRApplicantSystem.Forms.HR
                             cmd.ExecuteNonQuery();
                         }
 
-                        // Update application status
+                        // Updated application status
                         string updateSql = @"
                             UPDATE applications
-                            SET    status     = 'interview_scheduled',
+                            SET    status     = 'for_interview',
                                    updated_at = GETDATE()
                             WHERE  application_id = @AppId";
 
@@ -167,7 +174,7 @@ namespace HRApplicantSystem.Forms.HR
                         }
 
                         SystemHelper.StatusHistoryLogger.Log(
-                            conn, tx, _applicationId, "interview_scheduled",
+                            conn, tx, _applicationId, "for_interview",
                             SessionManager.CurrentUser.UserId);
 
                         tx.Commit();
