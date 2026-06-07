@@ -103,7 +103,7 @@ namespace HRApplicantSystem.Forms.HR
             }
 
             string result = rdoQualified.Checked ? "qualified" : "not_qualified";
-            // Updated status to match PDF requirements
+            // Updated status 
             string newStatus = rdoQualified.Checked ? "shortlisted" : "rejected";
 
             using (var conn = DatabaseHelper.GetConnection())
