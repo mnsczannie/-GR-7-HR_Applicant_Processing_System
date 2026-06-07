@@ -27,6 +27,7 @@
             this.tabMissing = new System.Windows.Forms.TabPage();
             this.dgvMissing = new System.Windows.Forms.DataGridView();
             this.btnExport = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.tabReports.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPending)).BeginInit();
@@ -36,7 +37,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvMissing)).BeginInit();
             this.SuspendLayout();
 
-            // Helper local method
             void ConfigGrid(System.Windows.Forms.DataGridView g)
             {
                 g.AllowUserToAddRows = false;
@@ -55,27 +55,21 @@
             ConfigGrid(this.dgvRejected);
             ConfigGrid(this.dgvMissing);
 
-            // tabAll
             this.tabAll.Controls.Add(this.dgvAll);
             this.tabAll.Text = "All Applicants";
 
-            // tabPending
             this.tabPending.Controls.Add(this.dgvPending);
             this.tabPending.Text = "Pending";
 
-            // tabInterviews
             this.tabInterviews.Controls.Add(this.dgvInterviews);
             this.tabInterviews.Text = "Interviews";
 
-            // tabAccepted
             this.tabAccepted.Controls.Add(this.dgvAccepted);
             this.tabAccepted.Text = "Accepted";
 
-            // tabRejected
             this.tabRejected.Controls.Add(this.dgvRejected);
             this.tabRejected.Text = "Rejected";
 
-            // tabMissing
             this.tabMissing.Controls.Add(this.dgvMissing);
             this.tabMissing.Text = "Missing Requirements";
 
@@ -96,12 +90,20 @@
             this.btnExport.Text = "Export to CSV";
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
 
+            // btnPrint
+            this.btnPrint.Location = new System.Drawing.Point(140, 405);
+            this.btnPrint.Size = new System.Drawing.Size(100, 30);
+            this.btnPrint.Text = "🖨 Print";
+            this.btnPrint.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+
             // frmReports
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 451);
             this.Controls.Add(this.tabReports);
             this.Controls.Add(this.btnExport);
+            this.Controls.Add(this.btnPrint);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmReports";
@@ -132,5 +134,6 @@
         private System.Windows.Forms.TabPage tabMissing;
         private System.Windows.Forms.DataGridView dgvMissing;
         private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnPrint;
     }
 }
