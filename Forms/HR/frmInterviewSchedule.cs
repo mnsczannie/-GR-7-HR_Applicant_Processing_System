@@ -16,9 +16,7 @@ namespace HRApplicantSystem.Forms.HR
             _applicationId = applicationId;
         }
 
-        // ─────────────────────────────────────────────
-        // LOAD
-        // ─────────────────────────────────────────────
+        // Load event handler to initialize form data
         private void frmInterviewSchedule_Load(object sender, EventArgs e)
         {
             LoadApplicantInfo();
@@ -26,11 +24,11 @@ namespace HRApplicantSystem.Forms.HR
             LoadInterviewTypes();
             LoadStatusOptions();
 
-            // Defaults
             dtpDate.Value = DateTime.Today.AddDays(1);
             dtpTime.Value = DateTime.Today.AddHours(9);
         }
 
+        // Load applicant name and position applied for
         private void LoadApplicantInfo()
         {
             string query = @"
@@ -57,6 +55,7 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
+        // Load interviewers with role 'hr_staff' or 'hr_manager'
         private void LoadInterviewers()
         {
             string query = @"
@@ -79,6 +78,7 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
+        // Load interview types from the database
         private void LoadInterviewTypes()
         {
             string query = "SELECT interview_type_id, type_name FROM interview_types ORDER BY type_name";
@@ -97,6 +97,7 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
+        // Load predefined status options
         private void LoadStatusOptions()
         {
             cboStatus.Items.Clear();
@@ -106,9 +107,7 @@ namespace HRApplicantSystem.Forms.HR
             cboStatus.SelectedIndex = 0;
         }
 
-        // ─────────────────────────────────────────────
-        // SAVE
-        // ─────────────────────────────────────────────
+        // Save button click event handler to validate input and save the interview schedule
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (cboInterviewer.SelectedValue == null)
@@ -160,7 +159,7 @@ namespace HRApplicantSystem.Forms.HR
                             cmd.ExecuteNonQuery();
                         }
 
-                        // Updated application status
+                        // Updated status 
                         string updateSql = @"
                             UPDATE applications
                             SET    status     = 'for_interview',
@@ -193,6 +192,7 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
+        // Cancel button click event handler to close the form without saving
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
