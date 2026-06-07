@@ -100,7 +100,6 @@
     <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
       <Private>True</Private>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Diagnostics.DiagnosticSource.10.0.3\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -124,7 +123,6 @@
     </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
-      <Private>True</Private>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Security" />
@@ -156,6 +154,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\Maintenance\frmAssessmentTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\HR\frmApplicantReview.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,6 +215,7 @@
     </Compile>
     <Compile Include="Forms\Applicant\frmMyProfile.Designer.cs">
       <DependentUpon>frmMyProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HR\frmHRLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -302,8 +303,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Maintenance\frmMaintenance.resx">
       <DependentUpon>frmMaintenance.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\HR\frmHRLogin.resx">
       <DependentUpon>frmHRLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Applicant\frmApplicantDashboard.resx">
       <DependentUpon>frmApplicantDashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -351,7 +354,6 @@
   <ItemGroup>
     <Folder Include="Forms\HR\" />
     <Folder Include="Forms\Applicant\" />
-    <Folder Include="Forms\HR\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\schema.sql" />
