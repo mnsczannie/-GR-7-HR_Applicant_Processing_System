@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using HRApplicantSystem.Helpers;
@@ -8,28 +7,26 @@ namespace HRApplicantSystem.Forms.HR
 {
     public partial class frmHRLogin : Form
     {
+        private int _failedAttempts = 0;
+        private const int MaxAttempts = 3;
+
         public frmHRLogin()
         {
             InitializeComponent();
         }
 
-        // ─────────────────────────────────────────────
-        // LOAD
-        // ─────────────────────────────────────────────
+        // Set initial focus to email field when form loads
         private void frmHRLogin_Load(object sender, EventArgs e)
         {
             txtEmail.Focus();
         }
 
-        // ─────────────────────────────────────────────
-        // LOGIN BUTTON
-        // ─────────────────────────────────────────────
+        // Handle login button click event
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string email = txtEmail.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            // Basic validation
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Please enter your email and password.",
@@ -44,7 +41,6 @@ namespace HRApplicantSystem.Forms.HR
                 return;
             }
 
-            // Query users table
             string query = @"
                 SELECT user_id, first_name, last_name, email, role
                 FROM   users
@@ -65,7 +61,8 @@ namespace HRApplicantSystem.Forms.HR
                     {
                         if (reader.Read())
                         {
-                            // Load user into SessionManager
+                            _failedAttempts = 0;
+
                             SessionManager.CurrentUser = new Models.SystemModels.User
                             {
                                 UserId = Convert.ToInt32(reader["user_id"]),
@@ -75,14 +72,24 @@ namespace HRApplicantSystem.Forms.HR
                                 Role = reader["role"].ToString()
                             };
 
-                            // Open dashboard
                             var dashboard = new frmHRDashboard();
                             dashboard.Show();
                             this.Hide();
                         }
                         else
                         {
-                            MessageBox.Show("Invalid email or password. Please try again.",
+                            _failedAttempts++;
+                            int remaining = MaxAttempts - _failedAttempts;
+
+                            if (_failedAttempts >= MaxAttempts)
+                            {
+                                MessageBox.Show("Too many failed login attempts. Please contact your administrator.",
+                                                "Account Locked", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                btnLogin.Enabled = false;
+                                return;
+                            }
+
+                            MessageBox.Show($"Invalid email or password. You have {remaining} attempt(s) remaining.",
                                             "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             txtPassword.Clear();
                             txtPassword.Focus();
@@ -97,15 +104,14 @@ namespace HRApplicantSystem.Forms.HR
             }
         }
 
-        // ─────────────────────────────────────────────
-        // ALLOW PRESSING ENTER TO LOGIN
-        // ─────────────────────────────────────────────
+        // Allow pressing Enter key to trigger login
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 btnLogin_Click(sender, e);
         }
 
+        // Allow pressing Enter key in email field to move focus to password field
         private void txtEmail_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

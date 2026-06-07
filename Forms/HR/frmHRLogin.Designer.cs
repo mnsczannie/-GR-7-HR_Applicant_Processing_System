@@ -23,7 +23,7 @@
 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(100, 25);
+            this.lblTitle.Location = new System.Drawing.Point(80, 25);
             this.lblTitle.Text = "HR Applicant System";
 
             this.lblEmail.AutoSize = true;
