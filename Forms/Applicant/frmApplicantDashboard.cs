@@ -28,9 +28,6 @@ namespace HRApplicantSystem
 
             int applicantId = SessionManager.CurrentApplicant.ApplicantId;
 
-            lblWelcome.Text =
-                "Welcome " + SessionManager.CurrentApplicant.FullName;
-
             try
             {
                 using (var conn = DatabaseHelper.GetConnection())
@@ -48,16 +45,12 @@ namespace HRApplicantSystem
 
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", applicantId);
-
                     object result = cmd.ExecuteScalar();
-
                     lblAppStatus.Text = (result != null)
                         ? "Application Status: " + result.ToString()
                         : "Application Status: No application yet";
 
-                    // -------------------------
                     // MISSING DOCUMENTS COUNT
-                    // -------------------------
                     string docQuery = @"
     SELECT COUNT(*)
     FROM applicant_documents
@@ -66,14 +59,9 @@ namespace HRApplicantSystem
 
                     SqlCommand docCmd = new SqlCommand(docQuery, conn);
                     docCmd.Parameters.AddWithValue("@id", applicantId);
-
                     int missingDocs = (int)docCmd.ExecuteScalar();
 
-                    lblMissingDocs.Text =
-                        "Missing Documents: " + missingDocs;
-                    // -------------------------
                     // UPCOMING INTERVIEW
-                    // -------------------------
                     string interviewQuery = @"
     SELECT TOP 1 scheduled_date, location
     FROM interview_schedules
@@ -100,16 +88,8 @@ namespace HRApplicantSystem
                             date.ToString("yyyy-MM-dd HH:mm") +
                             " @ " + location;
                     }
-                    else
-                    {
-                        lblInterview.Text = "Upcoming Interview: Not scheduled";
-                    }
 
-                    reader.Close();
-
-                    // -------------------------
                     // RECENT UPDATES (STATUS HISTORY)
-                    // -------------------------
                     string historyQuery = @"
     SELECT TOP 5
         application_id,
@@ -128,10 +108,8 @@ namespace HRApplicantSystem
 
                     SqlDataAdapter da = new SqlDataAdapter(historyQuery, conn);
                     da.SelectCommand.Parameters.AddWithValue("@id", applicantId);
-
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-
                     dgvStatusHistory.DataSource = dt;
                 }
             }
