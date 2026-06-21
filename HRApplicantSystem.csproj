@@ -314,12 +314,6 @@
     <Compile Include="Forms\HR\frmScreening.Designer.cs">
       <DependentUpon>frmScreening.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\HR\frmHRApplicantForms.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\HR\frmHRApplicantForms.Designer.cs">
-      <DependentUpon>frmHRApplicantForms.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Maintenance\frmUserManagement.cs">
       <SubType>Form</SubType>
     </Compile>
