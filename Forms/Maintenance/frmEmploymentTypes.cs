@@ -1,15 +1,13 @@
-﻿using System;
-using System.Data;
+﻿using HRApplicantSystem.Helpers;
 using Microsoft.Data.SqlClient;
+using System;
+using System.Data;
 using System.Windows.Forms;
-using HRApplicantSystem.Helpers;
 
 namespace HRApplicantSystem.Forms.Maintenance
 {
     public partial class frmEmploymentTypes : Form
     {
-        private int selectedTypeId = -1;
-
         public frmEmploymentTypes()
         {
             InitializeComponent();
@@ -24,129 +22,102 @@ namespace HRApplicantSystem.Forms.Maintenance
         {
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "SELECT id, name FROM employment_types";
-                    using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dgvEmploymentTypes.DataSource = dt;
-                    }
+                    conn.Open();
+                    string query = "SELECT type_id AS ID, label AS Name FROM employment_types ORDER BY label";
+                    var adapter = new SqlDataAdapter(query, conn);
+                    var table = new DataTable();
+                    adapter.Fill(table);
+                    dgvEmploymentTypes.DataSource = table;
                 }
-                ClearInput();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading records: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error loading data: " + ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtTypeName.Text))
-            {
-                MessageBox.Show("Please enter a type name.", "Validation Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            string name = txtTypeName.Text.Trim();
+            if (string.IsNullOrWhiteSpace(name)) { MessageBox.Show("Please enter an employment type."); return; }
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "INSERT INTO employment_types (name) VALUES (@Name)";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    conn.Open();
+                    using (var cmd = new SqlCommand("INSERT INTO employment_types (label) VALUES (@name)", conn))
                     {
-                        cmd.Parameters.AddWithValue("@Name", txtTypeName.Text.Trim());
-                        conn.Open();
+                        cmd.Parameters.AddWithValue("@name", name);
                         cmd.ExecuteNonQuery();
                     }
+                    MessageBox.Show("Employment type added!");
+                    ClearFields();
+                    LoadEmploymentTypes();
                 }
-                MessageBox.Show("Employment type registered successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadEmploymentTypes();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving record: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error adding: " + ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (selectedTypeId == -1)
-            {
-                MessageBox.Show("Please select a target row record to update.", "Selection Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            if (dgvEmploymentTypes.SelectedRows.Count == 0) { MessageBox.Show("Select a row first."); return; }
+            string name = txtTypeName.Text.Trim();
+            if (string.IsNullOrWhiteSpace(name)) { MessageBox.Show("Please enter a new name."); return; }
+            int id = Convert.ToInt32(dgvEmploymentTypes.SelectedRows[0].Cells["ID"].Value);
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "UPDATE employment_types SET name = @Name WHERE id = @Id";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    conn.Open();
+                    using (var cmd = new SqlCommand("UPDATE employment_types SET label = @name WHERE type_id = @id", conn))
                     {
-                        cmd.Parameters.AddWithValue("@Name", txtTypeName.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Id", selectedTypeId);
-                        conn.Open();
+                        cmd.Parameters.AddWithValue("@name", name);
+                        cmd.Parameters.AddWithValue("@id", id);
                         cmd.ExecuteNonQuery();
                     }
+                    MessageBox.Show("Updated!");
+                    ClearFields();
+                    LoadEmploymentTypes();
                 }
-                MessageBox.Show("Record updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadEmploymentTypes();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error updating record: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error updating: " + ex.Message); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (selectedTypeId == -1)
-            {
-                MessageBox.Show("Please select a record entry row to remove.", "Selection Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (MessageBox.Show("Are you sure you want to delete this structural type configuration reference?", "Confirm Action", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (dgvEmploymentTypes.SelectedRows.Count == 0) { MessageBox.Show("Select a row first."); return; }
+            int id = Convert.ToInt32(dgvEmploymentTypes.SelectedRows[0].Cells["ID"].Value);
+            if (MessageBox.Show("Are you sure you want to delete this employment type?", "Confirm Delete",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
-                    using (SqlConnection conn = DatabaseHelper.GetConnection())
+                    using (var conn = DatabaseHelper.GetConnection())
                     {
-                        string query = "DELETE FROM employment_types WHERE id = @Id";
-                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        conn.Open();
+                        using (var cmd = new SqlCommand("DELETE FROM employment_types WHERE type_id = @id", conn))
                         {
-                            cmd.Parameters.AddWithValue("@Id", selectedTypeId);
-                            conn.Open();
+                            cmd.Parameters.AddWithValue("@id", id);
                             cmd.ExecuteNonQuery();
                         }
+                        MessageBox.Show("Deleted!");
+                        ClearFields();
+                        LoadEmploymentTypes();
                     }
-                    MessageBox.Show("Configuration removed cleanly.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadEmploymentTypes();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error executing database deletions: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                catch (Exception ex) { MessageBox.Show("Error deleting: " + ex.Message); }
             }
         }
 
         private void dgvEmploymentTypes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dgvEmploymentTypes.Rows[e.RowIndex];
-                selectedTypeId = Convert.ToInt32(row.Cells["id"].Value);
-                txtTypeName.Text = row.Cells["name"].Value.ToString();
-            }
+                txtTypeName.Text = dgvEmploymentTypes.Rows[e.RowIndex].Cells["Name"].Value.ToString();
         }
 
-        private void ClearInput()
+        private void ClearFields()
         {
-            selectedTypeId = -1;
-            txtTypeName.Clear();
+            txtTypeName.Text = "";
+            dgvEmploymentTypes.ClearSelection();
         }
     }
 }
