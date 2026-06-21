@@ -1,15 +1,13 @@
-﻿using System;
-using System.Data;
+﻿using HRApplicantSystem.Helpers;
 using Microsoft.Data.SqlClient;
+using System;
+using System.Data;
 using System.Windows.Forms;
-using HRApplicantSystem.Helpers;
 
 namespace HRApplicantSystem.Forms.Maintenance
 {
     public partial class frmAssessmentTypes : Form
     {
-        private int selectedId = -1;
-
         public frmAssessmentTypes()
         {
             InitializeComponent();
@@ -24,99 +22,101 @@ namespace HRApplicantSystem.Forms.Maintenance
         {
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "SELECT id, label FROM assessment_types";
-                    using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dgvData.DataSource = dt;
-                    }
+                    conn.Open();
+                    string query = "SELECT assessment_type_id AS ID, label AS Name FROM assessment_types ORDER BY label";
+                    var adapter = new SqlDataAdapter(query, conn);
+                    var table = new DataTable();
+                    adapter.Fill(table);
+                    dgvData.DataSource = table;
                 }
-                ClearInput();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("Error loading data: " + ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtLabel.Text)) return;
+            string name = txtLabel.Text.Trim();
+            if (string.IsNullOrEmpty(name)) { MessageBox.Show("Please enter an assessment type."); return; }
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "INSERT INTO assessment_types (label) VALUES (@Label)";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    conn.Open();
+                    using (var cmd = new SqlCommand("INSERT INTO assessment_types (label) VALUES (@name)", conn))
                     {
-                        cmd.Parameters.AddWithValue("@Label", txtLabel.Text.Trim());
-                        conn.Open();
+                        cmd.Parameters.AddWithValue("@name", name);
                         cmd.ExecuteNonQuery();
                     }
+                    MessageBox.Show("Assessment type added!");
+                    ClearFields();
+                    LoadData();
                 }
-                LoadData();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("Error adding: " + ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (selectedId == -1 || string.IsNullOrWhiteSpace(txtLabel.Text)) return;
+            if (dgvData.SelectedRows.Count == 0) { MessageBox.Show("Select a row first."); return; }
+            string name = txtLabel.Text.Trim();
+            if (string.IsNullOrEmpty(name)) { MessageBox.Show("Please enter a new name."); return; }
+            int id = Convert.ToInt32(dgvData.SelectedRows[0].Cells["ID"].Value);
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "UPDATE assessment_types SET label = @Label WHERE id = @Id";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    conn.Open();
+                    using (var cmd = new SqlCommand("UPDATE assessment_types SET label = @name WHERE assessment_type_id = @id", conn))
                     {
-                        cmd.Parameters.AddWithValue("@Label", txtLabel.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Id", selectedId);
-                        conn.Open();
+                        cmd.Parameters.AddWithValue("@name", name);
+                        cmd.Parameters.AddWithValue("@id", id);
                         cmd.ExecuteNonQuery();
                     }
+                    MessageBox.Show("Updated!");
+                    ClearFields();
+                    LoadData();
                 }
-                LoadData();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("Error updating: " + ex.Message); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (selectedId == -1) return;
-            if (MessageBox.Show("Delete this structural evaluation matrix item?", "Confirm delete request", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dgvData.SelectedRows.Count == 0) { MessageBox.Show("Select a row first."); return; }
+            if (MessageBox.Show("Delete this assessment type?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                int id = Convert.ToInt32(dgvData.SelectedRows[0].Cells["ID"].Value);
                 try
                 {
-                    using (SqlConnection conn = DatabaseHelper.GetConnection())
+                    using (var conn = DatabaseHelper.GetConnection())
                     {
-                        string query = "DELETE FROM assessment_types WHERE id = @Id";
-                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        conn.Open();
+                        using (var cmd = new SqlCommand("DELETE FROM assessment_types WHERE assessment_type_id = @id", conn))
                         {
-                            cmd.Parameters.AddWithValue("@Id", selectedId);
-                            conn.Open();
+                            cmd.Parameters.AddWithValue("@id", id);
                             cmd.ExecuteNonQuery();
                         }
+                        MessageBox.Show("Deleted!");
+                        ClearFields();
+                        LoadData();
                     }
-                    LoadData();
                 }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
+                catch (Exception ex) { MessageBox.Show("Error deleting: " + ex.Message); }
             }
         }
 
         private void dgvData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dgvData.Rows[e.RowIndex];
-                selectedId = Convert.ToInt32(row.Cells["id"].Value);
-                txtLabel.Text = row.Cells["label"].Value.ToString();
-            }
+                txtLabel.Text = dgvData.Rows[e.RowIndex].Cells["Name"].Value.ToString();
         }
 
-        private void ClearInput()
+        private void ClearFields()
         {
-            selectedId = -1;
-            txtLabel.Clear();
+            txtLabel.Text = "";
+            dgvData.ClearSelection();
         }
     }
 }

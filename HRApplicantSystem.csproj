@@ -296,6 +296,12 @@
     <Compile Include="Forms\HR\HRApplicantForms.Designer.cs">
       <DependentUpon>HRApplicantForms.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Maintenance\frmUserManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Maintenance\frmUserManagement.Designer.cs">
+      <DependentUpon>frmUserManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\SystemHelper.cs" />
     <Compile Include="Models\ApplicantModel.cs" />
     <Compile Include="Models\EvaluationModels.cs" />

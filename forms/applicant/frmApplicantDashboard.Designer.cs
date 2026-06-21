@@ -58,7 +58,7 @@
             this.lblWelcome.Location = new System.Drawing.Point(216, 21);
             this.lblWelcome.MaximumSize = new System.Drawing.Size(2000000, 100000);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(429, 54);
+            this.lblWelcome.Size = new System.Drawing.Size(364, 46);
             this.lblWelcome.TabIndex = 0;
             this.lblWelcome.Text = "Welcome, {FullName}";
             this.lblWelcome.Click += new System.EventHandler(this.lblWelcome_Click);
@@ -128,7 +128,7 @@
             this.lblAppStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAppStatus.Location = new System.Drawing.Point(152, 29);
             this.lblAppStatus.Name = "lblAppStatus";
-            this.lblAppStatus.Size = new System.Drawing.Size(154, 22);
+            this.lblAppStatus.Size = new System.Drawing.Size(125, 18);
             this.lblAppStatus.TabIndex = 0;
             this.lblAppStatus.Text = "Application Status";
             this.lblAppStatus.Click += new System.EventHandler(this.lblStatus_Click);
@@ -147,7 +147,7 @@
             this.lblMissingDocs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMissingDocs.Location = new System.Drawing.Point(175, 27);
             this.lblMissingDocs.Name = "lblMissingDocs";
-            this.lblMissingDocs.Size = new System.Drawing.Size(116, 22);
+            this.lblMissingDocs.Size = new System.Drawing.Size(99, 18);
             this.lblMissingDocs.TabIndex = 0;
             this.lblMissingDocs.Text = "Missing Docs";
             this.lblMissingDocs.Click += new System.EventHandler(this.lblMissingDocs_Click);
@@ -165,7 +165,7 @@
             this.lblInterview.AutoSize = true;
             this.lblInterview.Location = new System.Drawing.Point(152, 31);
             this.lblInterview.Name = "lblInterview";
-            this.lblInterview.Size = new System.Drawing.Size(148, 20);
+            this.lblInterview.Size = new System.Drawing.Size(124, 16);
             this.lblInterview.TabIndex = 0;
             this.lblInterview.Text = "Upcoming Interview";
             // 
@@ -184,7 +184,7 @@
             // 
             // frmApplicantDashboard
             // 
-            this.ClientSize = new System.Drawing.Size(842, 491);
+            this.ClientSize = new System.Drawing.Size(1367, 741);
             this.Controls.Add(this.dgvStatusHistory);
             this.Controls.Add(this.btnMyApplication);
             this.Controls.Add(this.pnlInterview);
