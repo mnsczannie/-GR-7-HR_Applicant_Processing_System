@@ -2,16 +2,7 @@
 using HRApplicantSystem.Models;
 using Microsoft.Data.SqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-
 
 namespace HRApplicantSystem.Forms.Applicant
 {
@@ -22,176 +13,124 @@ namespace HRApplicantSystem.Forms.Applicant
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void frmApplicantLogin_Load(object sender, EventArgs e)
         {
-
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void btnLogIn_Click(object sender, EventArgs e)
         {
-            string email = txtEmail.Text.Trim();
-            string password = txtPassword.Text.Trim();
-
-            if (string.IsNullOrWhiteSpace(email) ||
-                string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(txtEmail.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
             {
-                MessageBox.Show("Please enter email and password.");
+                MessageBox.Show("Enter email and password.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             try
             {
+                string cleanedEmail = txtEmail.Text.Trim();
+                string passwordInput = txtPassword.Text.Trim();
+
+                int applicantId = 0;
+                string name = string.Empty;
+                string hash = string.Empty;
+                bool isActive = false;
+                bool userFound = false;
+
                 using (var conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
-
-                    string query = @"
-                SELECT applicant_id, full_name, email
-                FROM applicants
-                WHERE email = @email
-                AND password = @password
-                AND is_active = 1";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", password);
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
+                    using (var cmd = new SqlCommand(
+                        "SELECT applicant_id, full_name, password, is_active FROM applicants WHERE email=@e", conn))
                     {
-                        Models.Applicant applicant = new Models.Applicant
+                        cmd.Parameters.AddWithValue("@e", cleanedEmail);
+                        using (var dr = cmd.ExecuteReader())
                         {
-                            ApplicantId = Convert.ToInt32(reader["applicant_id"]),
-                            FullName = reader["full_name"].ToString(),
-                            Email = reader["email"].ToString()
-                        };
-
-                        SessionManager.LoginApplicant(applicant);
-
-                        frmApplicantDashboard dashboard =
-                            new frmApplicantDashboard();
-
-                        dashboard.Show();
-
-                        this.Hide();
+                            if (dr.Read())
+                            {
+                                userFound = true;
+                                applicantId = Convert.ToInt32(dr["applicant_id"]);
+                                name = dr["full_name"].ToString();
+                                hash = dr["password"].ToString();
+                                isActive = dr["is_active"] != DBNull.Value && Convert.ToBoolean(dr["is_active"]);
+                            }
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Invalid email or password.");
-                    }
-
-                    reader.Close();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void btnOpenProfile_Click(object sender, EventArgs e)
-        {
-            string email = txtEmail.Text.Trim();
 
-            frmMyProfile profile = new frmMyProfile();
-            profile.ShowDialog();
-        }
-
-        private void btnTestDatabase_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (var conn = DatabaseHelper.GetConnection())
+                if (!userFound) { ShowFail(); return; }
+                if (!isActive)
                 {
-                    conn.Open();
-
-                    MessageBox.Show(
-                        "Database Connected Successfully!");
+                    MessageBox.Show("This account is inactive.", "Account Disabled", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
-        private void btnLoadData_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (var conn = DatabaseHelper.GetConnection())
+                bool ok = BCrypt.Net.BCrypt.Verify(passwordInput, hash);
+                if (!ok) { ShowFail(); return; }
+
+                SessionManager.LoginApplicant(new Applicant
                 {
-                    conn.Open();
+                    ApplicantId = applicantId,
+                    FullName = name,
+                    Email = cleanedEmail
+                });
 
-                    string query =
-                        "SELECT COUNT(*) FROM applicants";
+                AuditLogger.LogAction(applicantId, "Logged in", "applicants");
 
-                    SqlCommand cmd =
-                        new SqlCommand(query, conn);
-
-                    int count =
-                        Convert.ToInt32(cmd.ExecuteScalar());
-
-                    MessageBox.Show(
-                        "Applicants Count: " + count);
-                }
+                frmApplicantDashboard dashboard = new frmApplicantDashboard(cleanedEmail);
+                dashboard.Show();
+                this.Hide();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Login error: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void btnSaveTest_Click(object sender, EventArgs e)
+        private void ShowFail()
         {
-            try
-            {
-                using (var conn = DatabaseHelper.GetConnection())
-                {
-                    conn.Open();
-
-                    string query = @"
-            INSERT INTO applicants
-            (full_name, email, password)
-            VALUES
-            (@name, @email, @password)";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-
-                    string email =
-                        "test" + DateTime.Now.Ticks + "@email.com";
-
-                    cmd.Parameters.AddWithValue("@name",
-                        "Mascarinas Test");
-
-                    cmd.Parameters.AddWithValue("@email",
-                        email);
-
-                    cmd.Parameters.AddWithValue("@password",
-                        "123456");
-
-                    cmd.ExecuteNonQuery();
-
-                    MessageBox.Show(
-                        "Saved!\nEmail: " + email);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            MessageBox.Show("Invalid email or password.", "Login Failed",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            txtPassword.Clear();
+            txtPassword.Focus();
         }
 
-        private void btnRegister_Click(object sender, EventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
-            frmApplicantRegister register =
-        new frmApplicantRegister();
+            txtEmail.Clear();
+            txtPassword.Clear();
+            txtEmail.Focus();
+        }
 
-            register.Show();
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            new HRApplicantSystem.Forms.frmRoleSelection().Show();
+            this.Close();
+        }
 
+        private void CheckbxShowPas_CheckedChanged(object sender, EventArgs e)
+        {
+            txtPassword.PasswordChar = CheckbxShowPas.Checked ? '\0' : '●';
+        }
+
+        private void lblCreateAcc_Click(object sender, EventArgs e)
+        {
+            new frmApplicantRegister().Show();
             this.Hide();
         }
-    }
 
+        private void linklblFgtPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmChangePassword cp = new frmChangePassword(txtEmail.Text);
+            cp.Show();
+            this.Hide();
+        }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+        }
+    }
 }
