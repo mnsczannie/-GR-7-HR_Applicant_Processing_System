@@ -6,9 +6,9 @@ using HRApplicantSystem.Helpers;
 
 namespace HRApplicantSystem.Forms.HR
 {
-    public partial class HRApplicantForms : Form
+    public partial class frmHRApplicantForms : Form
     {
-        public HRApplicantForms()
+        public frmHRApplicantForms()
         {
             InitializeComponent();
         }

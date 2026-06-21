@@ -1,6 +1,6 @@
 ﻿namespace HRApplicantSystem.Forms.HR
 {
-    partial class HRApplicantForms
+    partial class frmHRApplicantForms
     {
         private System.ComponentModel.IContainer components = null;
 

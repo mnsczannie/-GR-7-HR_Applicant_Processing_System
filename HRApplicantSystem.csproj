@@ -155,6 +155,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\HR\frmApplicantList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmApplicantList.Designer.cs">
+      <DependentUpon>frmApplicantList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmHRApplicantProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmHRApplicantProfile.Designer.cs">
+      <DependentUpon>frmHRApplicantProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmHRRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmHRRegister.Designer.cs">
+      <DependentUpon>frmHRRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HR\frmHRViewDocuments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HR\frmHRViewDocuments.Designer.cs">
+      <DependentUpon>frmHRViewDocuments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Maintenance\frmAssessmentTypes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,11 +314,11 @@
     <Compile Include="Forms\HR\frmScreening.Designer.cs">
       <DependentUpon>frmScreening.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\HR\HRApplicantForms.cs">
+    <Compile Include="Forms\HR\frmHRApplicantForms.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\HR\HRApplicantForms.Designer.cs">
-      <DependentUpon>HRApplicantForms.cs</DependentUpon>
+    <Compile Include="Forms\HR\frmHRApplicantForms.Designer.cs">
+      <DependentUpon>frmHRApplicantForms.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Maintenance\frmUserManagement.cs">
       <SubType>Form</SubType>
