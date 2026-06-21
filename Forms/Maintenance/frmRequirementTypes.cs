@@ -1,15 +1,13 @@
-﻿using System;
-using System.Data;
+﻿using HRApplicantSystem.Helpers;
 using Microsoft.Data.SqlClient;
+using System;
+using System.Data;
 using System.Windows.Forms;
-using HRApplicantSystem.Helpers;
 
 namespace HRApplicantSystem.Forms.Maintenance
 {
     public partial class frmRequirementTypes : Form
     {
-        private int selectedId = -1;
-
         public frmRequirementTypes()
         {
             InitializeComponent();
@@ -24,129 +22,105 @@ namespace HRApplicantSystem.Forms.Maintenance
         {
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "SELECT id, name FROM requirement_types";
-                    using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dgvRequirementTypes.DataSource = dt;
-                    }
+                    conn.Open();
+                    string query = "SELECT req_type_id AS ID, label AS Name FROM requirement_types ORDER BY label";
+                    var adapter = new SqlDataAdapter(query, conn);
+                    var table = new DataTable();
+                    adapter.Fill(table);
+                    dgvRequirementTypes.DataSource = table;
                 }
-                ClearInput();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error reading database profiles: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error loading data: " + ex.Message); }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtRequirementName.Text))
-            {
-                MessageBox.Show("Please define a profile type category schema title description text value entry.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            string name = txtRequirementName.Text.Trim();
+            if (string.IsNullOrEmpty(name)) { MessageBox.Show("Please enter a requirement type."); return; }
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "INSERT INTO requirement_types (name) VALUES (@Name)";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    conn.Open();
+                    using (var cmd = new SqlCommand(
+                        "INSERT INTO requirement_types (label) VALUES (@name)", conn))
                     {
-                        cmd.Parameters.AddWithValue("@Name", txtRequirementName.Text.Trim());
-                        conn.Open();
+                        cmd.Parameters.AddWithValue("@name", name);
                         cmd.ExecuteNonQuery();
                     }
+                    MessageBox.Show("Requirement type added!");
+                    ClearFields();
+                    LoadRequirementTypes();
                 }
-                MessageBox.Show("New application tracking requirement classification template defined safely.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadRequirementTypes();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Insertion failed tracking database pipelines safely: {ex.Message}", "Processing Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error adding: " + ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (selectedId == -1)
-            {
-                MessageBox.Show("Please choose a profile layout baseline record grid entry path.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            if (dgvRequirementTypes.SelectedRows.Count == 0) { MessageBox.Show("Select a row first."); return; }
+            string name = txtRequirementName.Text.Trim();
+            if (string.IsNullOrEmpty(name)) { MessageBox.Show("Please enter a new name."); return; }
+            int id = Convert.ToInt32(dgvRequirementTypes.SelectedRows[0].Cells["ID"].Value);
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "UPDATE requirement_types SET name = @Name WHERE id = @Id";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    conn.Open();
+                    using (var cmd = new SqlCommand(
+                        "UPDATE requirement_types SET label = @name WHERE req_type_id = @id", conn))
                     {
-                        cmd.Parameters.AddWithValue("@Name", txtRequirementName.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Id", selectedId);
-                        conn.Open();
+                        cmd.Parameters.AddWithValue("@name", name);
+                        cmd.Parameters.AddWithValue("@id", id);
                         cmd.ExecuteNonQuery();
                     }
+                    MessageBox.Show("Updated!");
+                    ClearFields();
+                    LoadRequirementTypes();
                 }
-                MessageBox.Show("Target schema field structural naming convention synchronized successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadRequirementTypes();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Modification updates terminated unexpectedly: {ex.Message}", "Processing Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error updating: " + ex.Message); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (selectedId == -1)
-            {
-                MessageBox.Show("Select an active schema element data configuration profile grid row definition path pointer.", "Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (MessageBox.Show("Remove chosen baseline rule schema from production lists? Warning: Linked validation tracks may cascade layout assignments structural drops.", "Confirm Cascade Drop Safety Checklist", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (dgvRequirementTypes.SelectedRows.Count == 0) { MessageBox.Show("Select a row first."); return; }
+            int id = Convert.ToInt32(dgvRequirementTypes.SelectedRows[0].Cells["ID"].Value);
+            if (MessageBox.Show("Are you sure you want to delete this requirement type?", "Confirm Delete",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
-                    using (SqlConnection conn = DatabaseHelper.GetConnection())
+                    using (var conn = DatabaseHelper.GetConnection())
                     {
-                        string query = "DELETE FROM requirement_types WHERE id = @Id";
-                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        conn.Open();
+                        using (var cmd = new SqlCommand(
+                            "DELETE FROM requirement_types WHERE req_type_id = @id", conn))
                         {
-                            cmd.Parameters.AddWithValue("@Id", selectedId);
-                            conn.Open();
+                            cmd.Parameters.AddWithValue("@id", id);
                             cmd.ExecuteNonQuery();
                         }
+                        MessageBox.Show("Deleted!");
+                        ClearFields();
+                        LoadRequirementTypes();
                     }
-                    MessageBox.Show("Requirement layout item configuration dropped cleanly without data memory allocation fragmentations.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadRequirementTypes();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Deletion operation rejected on primary validation level constraints profiles: {ex.Message}", "Database Integrity Breach Block", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                catch (Exception ex) { MessageBox.Show("Error deleting: " + ex.Message); }
             }
         }
 
         private void dgvRequirementTypes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dgvRequirementTypes.Rows[e.RowIndex];
-                selectedId = Convert.ToInt32(row.Cells["id"].Value);
-                txtRequirementName.Text = row.Cells["name"].Value.ToString();
-            }
+                txtRequirementName.Text = dgvRequirementTypes.Rows[e.RowIndex].Cells["Name"].Value.ToString();
         }
 
-        private void ClearInput()
+        private void ClearFields()
         {
-            selectedId = -1;
-            txtRequirementName.Clear();
+            txtRequirementName.Text = "";
+            dgvRequirementTypes.ClearSelection();
         }
     }
 }
