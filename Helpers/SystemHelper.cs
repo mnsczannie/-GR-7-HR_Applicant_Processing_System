@@ -50,6 +50,7 @@ namespace HRApplicantSystem.Helpers
         public static string CurrentRole { get; set; }
         public static HRApplicantSystem.Models.Applicant CurrentApplicant { get; set; }
 
+        public static int CurrentUserId => CurrentUser?.UserId ?? 0;
         public static void Login(User user)
         {
             CurrentUser = user;
