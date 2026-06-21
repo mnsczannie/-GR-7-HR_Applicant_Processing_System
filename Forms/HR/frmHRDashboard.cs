@@ -1,8 +1,7 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
+﻿using HRApplicantSystem.Helpers;
 using Microsoft.Data.SqlClient;
-using HRApplicantSystem.Helpers;
+using System;
+using System.Windows.Forms;
 
 namespace HRApplicantSystem.Forms.HR
 {
@@ -13,92 +12,94 @@ namespace HRApplicantSystem.Forms.HR
             InitializeComponent();
         }
 
-        // LOAD 
         private void frmHRDashboard_Load(object sender, EventArgs e)
         {
-            lblWelcome.Text = $"Welcome, {SessionManager.CurrentUser.FullName}  ({SessionManager.CurrentUser.Role})";
+            lblWelcome.Text = $"Welcome, {SessionManager.CurrentUser.FullName} ({SessionManager.CurrentUser.Role})";
             LoadSummaryCards();
             ApplyRoleVisibility();
         }
 
         private void LoadSummaryCards()
         {
-            string query = @"
-                SELECT
-                    COUNT(*)                                                        AS total,
-                    SUM(CASE WHEN status = 'submitted'       THEN 1 ELSE 0 END)   AS pending,
-                    SUM(CASE WHEN status = 'for_interview'   THEN 1 ELSE 0 END)   AS interviews,
-                    SUM(CASE WHEN status = 'accepted'        THEN 1 ELSE 0 END)   AS accepted,
-                    SUM(CASE WHEN status = 'rejected'        THEN 1 ELSE 0 END)   AS rejected
-                FROM applications";
-
-            using (var conn = DatabaseHelper.GetConnection())
-            using (var cmd = new SqlCommand(query, conn))
+            try
             {
-                conn.Open();
-                using (var reader = cmd.ExecuteReader())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    if (reader.Read())
-                    {
-                        lblTotal.Text = reader["total"].ToString();
-                        lblPending.Text = reader["pending"].ToString();
-                        lblInterviews.Text = reader["interviews"].ToString();
-                        lblAccepted.Text = reader["accepted"].ToString();
-                        lblRejected.Text = reader["rejected"].ToString();
-                    }
+                    conn.Open();
+
+                    using (var cmd = new SqlCommand("SELECT COUNT(*) FROM applicants", conn))
+                        lblTotal.Text = cmd.ExecuteScalar().ToString();
+
+                    using (var cmd = new SqlCommand(
+                        "SELECT COUNT(*) FROM applications WHERE status IN ('submitted','under_review')", conn))
+                        lblPending.Text = cmd.ExecuteScalar().ToString();
+
+                    using (var cmd = new SqlCommand(
+                        "SELECT COUNT(*) FROM interview_schedules WHERE status = 'scheduled'", conn))
+                        lblInterviews.Text = cmd.ExecuteScalar().ToString();
+
+                    using (var cmd = new SqlCommand(
+                        "SELECT COUNT(*) FROM hiring_decisions WHERE final_decision = 'accepted'", conn))
+                        lblAccepted.Text = cmd.ExecuteScalar().ToString();
+
+                    using (var cmd = new SqlCommand(
+                        "SELECT COUNT(*) FROM hiring_decisions WHERE final_decision = 'rejected'", conn))
+                        lblRejected.Text = cmd.ExecuteScalar().ToString();
                 }
+            }
+            catch (Exception ex)
+            {
+                lblTotal.Text = "—";
+                lblPending.Text = "—";
+                lblInterviews.Text = "—";
+                lblAccepted.Text = "—";
+                lblRejected.Text = "—";
+                MessageBox.Show("Error loading summary: " + ex.Message);
             }
         }
 
-        // Admin-only buttons visibility
         private void ApplyRoleVisibility()
         {
             string role = SessionManager.CurrentUser?.Role ?? string.Empty;
             btnMaintenance.Visible = (role == "admin");
         }
 
-        // BUTTONS
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadSummaryCards();
-            MessageBox.Show("Dashboard refreshed successfully.",
-                            "Refreshed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Dashboard refreshed.", "Refreshed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnApplicantReview_Click(object sender, EventArgs e)
         {
-            var form = new frmApplicantReview();
-            form.Show();
+            new frmApplicantReview().Show();
+            this.Hide();
         }
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-            var form = new frmReports();
-            form.Show();
+            new frmReports().Show();
+            this.Hide();
         }
 
         private void btnVacancyManagement_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Vacancy Management — handled by Micaller's module.",
-                            "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            new HRApplicantSystem.Forms.Maintenance.frmJobVacancyManagement().Show();
+            this.Hide();
         }
 
         private void btnMaintenance_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Maintenance — handled by Micaller's module.",
-                            "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            new HRApplicantSystem.Forms.Maintenance.frmMaintenance().ShowDialog();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            DialogResult confirm = MessageBox.Show("Are you sure you want to logout?",
-                                                   "Logout", MessageBoxButtons.YesNo,
-                                                   MessageBoxIcon.Question);
-            if (confirm == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to logout?", "Logout",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                SessionManager.Clear();
-                var login = new frmHRLogin();
-                login.Show();
+                SessionManager.Logout();
+                new frmHRLogin().Show();
                 this.Close();
             }
         }
