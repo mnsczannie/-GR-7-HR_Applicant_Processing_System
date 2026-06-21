@@ -1,15 +1,13 @@
-﻿using System;
-using System.Data;
+﻿using HRApplicantSystem.Helpers;
 using Microsoft.Data.SqlClient;
+using System;
+using System.Data;
 using System.Windows.Forms;
-using HRApplicantSystem.Helpers;
 
 namespace HRApplicantSystem.Forms.Maintenance
 {
     public partial class frmPositions : Form
     {
-        private int selectedPositionId = -1;
-
         public frmPositions()
         {
             InitializeComponent();
@@ -25,144 +23,134 @@ namespace HRApplicantSystem.Forms.Maintenance
         {
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "SELECT id, name FROM departments";
-                    using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        cmbDepartment.DataSource = dt;
-                        cmbDepartment.DisplayMember = "name";
-                        cmbDepartment.ValueMember = "id";
-                    }
+                    conn.Open();
+                    var cmd = new SqlCommand("SELECT department_id, name FROM departments ORDER BY name", conn);
+                    var dr = cmd.ExecuteReader();
+                    cmbDepartment.Items.Clear();
+                    cmbDepartment.Items.Add(new DeptItem { Text = "-- Select Department --", Value = 0 });
+                    while (dr.Read())
+                        cmbDepartment.Items.Add(new DeptItem
+                        {
+                            Text = dr["name"].ToString(),
+                            Value = (int)dr["department_id"]
+                        });
+                    cmbDepartment.DisplayMember = "Text";
+                    cmbDepartment.SelectedIndex = 0;
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading departments: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error loading departments: " + ex.Message); }
         }
 
         private void LoadPositions()
         {
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "SELECT p.id, p.title, d.name AS department_name, p.department_id " +
-                                   "FROM positions p JOIN departments d ON p.department_id = d.id";
-                    using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dgvPositions.DataSource = dt;
-
-                        if (dgvPositions.Columns["department_id"] != null)
-                            dgvPositions.Columns["department_id"].Visible = false;
-                    }
+                    conn.Open();
+                    string query = @"SELECT p.position_id AS ID,
+                        p.title AS Name,
+                        ISNULL(d.name, 'No Department') AS Department
+                        FROM positions p
+                        LEFT JOIN departments d ON p.department_id = d.department_id
+                        ORDER BY p.title";
+                    var adapter = new SqlDataAdapter(query, conn);
+                    var table = new DataTable();
+                    adapter.Fill(table);
+                    dgvPositions.DataSource = table;
                 }
-                ClearInput();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading positions: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error loading data: " + ex.Message); }
+        }
+
+        private int GetSelectedDeptId()
+        {
+            if (cmbDepartment.SelectedIndex <= 0) return 0;
+            return ((DeptItem)cmbDepartment.SelectedItem).Value;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtPositionTitle.Text) || cmbDepartment.SelectedValue == null)
-            {
-                MessageBox.Show("Please complete all input elements.", "Validation Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            string name = txtPositionTitle.Text.Trim();
+            if (string.IsNullOrEmpty(name)) { MessageBox.Show("Please enter a position title."); return; }
+            int deptId = GetSelectedDeptId();
+            if (deptId == 0) { MessageBox.Show("Please select a department."); return; }
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "INSERT INTO positions (title, department_id) VALUES (@Title, @DeptId)";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    conn.Open();
+                    using (var cmd = new SqlCommand(
+                        "INSERT INTO positions (title, department_id) VALUES (@name, @deptId)", conn))
                     {
-                        cmd.Parameters.AddWithValue("@Title", txtPositionTitle.Text.Trim());
-                        cmd.Parameters.AddWithValue("@DeptId", cmbDepartment.SelectedValue);
-
-                        conn.Open();
+                        cmd.Parameters.AddWithValue("@name", name);
+                        cmd.Parameters.AddWithValue("@deptId", deptId);
                         cmd.ExecuteNonQuery();
                     }
+                    MessageBox.Show("Position added!");
+                    ClearFields();
+                    LoadPositions();
                 }
-                MessageBox.Show("Position registered successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadPositions();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving position: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error adding: " + ex.Message); }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (selectedPositionId == -1 || cmbDepartment.SelectedValue == null)
-            {
-                MessageBox.Show("Please select a target position context record to modify.", "Selection Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            if (dgvPositions.SelectedRows.Count == 0) { MessageBox.Show("Select a row first."); return; }
+            string name = txtPositionTitle.Text.Trim();
+            if (string.IsNullOrEmpty(name)) { MessageBox.Show("Please enter a new title."); return; }
+            int id = Convert.ToInt32(dgvPositions.SelectedRows[0].Cells["ID"].Value);
+            int deptId = GetSelectedDeptId();
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "UPDATE positions SET title = @Title, department_id = @DeptId WHERE id = @Id";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    conn.Open();
+                    string sql = deptId > 0
+                        ? "UPDATE positions SET title = @name, department_id = @d WHERE position_id = @id"
+                        : "UPDATE positions SET title = @name WHERE position_id = @id";
+                    using (var cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.AddWithValue("@Title", txtPositionTitle.Text.Trim());
-                        cmd.Parameters.AddWithValue("@DeptId", cmbDepartment.SelectedValue);
-                        cmd.Parameters.AddWithValue("@Id", selectedPositionId);
-
-                        conn.Open();
+                        cmd.Parameters.AddWithValue("@name", name);
+                        cmd.Parameters.AddWithValue("@id", id);
+                        if (deptId > 0) cmd.Parameters.AddWithValue("@d", deptId);
                         cmd.ExecuteNonQuery();
                     }
+                    MessageBox.Show("Updated!");
+                    ClearFields();
+                    LoadPositions();
                 }
-                MessageBox.Show("Position record updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadPositions();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error updating position: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error updating: " + ex.Message); }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (selectedPositionId == -1)
-            {
-                MessageBox.Show("Please select a valid record entity row.", "Selection Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (MessageBox.Show("Are you sure you want to delete this position?", "Confirm Delete Action", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (dgvPositions.SelectedRows.Count == 0) { MessageBox.Show("Select a row first."); return; }
+            int id = Convert.ToInt32(dgvPositions.SelectedRows[0].Cells["ID"].Value);
+            if (MessageBox.Show("Are you sure you want to delete this position?", "Confirm Delete",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
-                    using (SqlConnection conn = DatabaseHelper.GetConnection())
+                    using (var conn = DatabaseHelper.GetConnection())
                     {
-                        string query = "DELETE FROM positions WHERE id = @Id";
-                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        conn.Open();
+                        using (var cmd = new SqlCommand(
+                            "DELETE FROM positions WHERE position_id = @id", conn))
                         {
-                            cmd.Parameters.AddWithValue("@Id", selectedPositionId);
-
-                            conn.Open();
+                            cmd.Parameters.AddWithValue("@id", id);
                             cmd.ExecuteNonQuery();
                         }
+                        MessageBox.Show("Position deleted!");
+                        ClearFields();
+                        LoadPositions();
                     }
-                    MessageBox.Show("Position removed cleanly.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadPositions();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error executing deletion operations: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                catch (Exception ex) { MessageBox.Show("Error deleting: " + ex.Message); }
             }
         }
 
@@ -171,16 +159,23 @@ namespace HRApplicantSystem.Forms.Maintenance
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvPositions.Rows[e.RowIndex];
-                selectedPositionId = Convert.ToInt32(row.Cells["id"].Value);
-                txtPositionTitle.Text = row.Cells["title"].Value.ToString();
-                cmbDepartment.SelectedValue = row.Cells["department_id"].Value;
+                txtPositionTitle.Text = row.Cells["Name"].Value.ToString();
+                cmbDepartment.SelectedIndex = 0;
             }
         }
 
-        private void ClearInput()
+        private void ClearFields()
         {
-            selectedPositionId = -1;
-            txtPositionTitle.Clear();
+            txtPositionTitle.Text = "";
+            cmbDepartment.SelectedIndex = 0;
+            dgvPositions.ClearSelection();
+        }
+
+        private class DeptItem
+        {
+            public string Text { get; set; }
+            public int Value { get; set; }
+            public override string ToString() => Text;
         }
     }
 }
