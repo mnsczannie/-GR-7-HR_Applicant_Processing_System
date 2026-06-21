@@ -16,128 +16,134 @@ namespace HRApplicantSystem.Forms.Maintenance
             InitializeComponent();
         }
 
+        public class RequirementItem
+        {
+            public string Text { get; set; }
+            public int Value { get; set; }
+            public override string ToString() => Text;
+        }
+
         private void frmJobVacancyManagement_Load(object sender, EventArgs e)
         {
-            cmbStatusFilter.SelectedIndex = 0;
-            PopulateDropdowns();
-            PopulateRequirementsList();
+            LoadDepartments();
+            LoadPositions();
+            LoadEmploymentTypes();
+            LoadRequirements();
             LoadVacancies();
         }
 
-        private void PopulateDropdowns()
+        private void LoadDepartments()
         {
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
                     conn.Open();
-
-                    using (SqlCommand cmd = new SqlCommand("SELECT id, name FROM positions", conn))
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        DataTable dt = new DataTable();
-                        dt.Load(reader);
-                        cmbPosition.DataSource = dt;
-                        cmbPosition.DisplayMember = "name";
-                        cmbPosition.ValueMember = "id";
-                    }
-
-                    using (SqlCommand cmd = new SqlCommand("SELECT id, name FROM departments", conn))
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        DataTable dt = new DataTable();
-                        dt.Load(reader);
-                        cmbDepartment.DataSource = dt;
-                        cmbDepartment.DisplayMember = "name";
-                        cmbDepartment.ValueMember = "id";
-                    }
-
-                    using (SqlCommand cmd = new SqlCommand("SELECT id, name FROM employment_types", conn))
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        DataTable dt = new DataTable();
-                        dt.Load(reader);
-                        cmbEmpType.DataSource = dt;
-                        cmbEmpType.DisplayMember = "name";
-                        cmbEmpType.ValueMember = "id";
-                    }
+                    var cmd = new SqlCommand("SELECT department_id, name FROM departments ORDER BY name", conn);
+                    var reader = cmd.ExecuteReader();
+                    cmbDepartment.Items.Clear();
+                    cmbDepartment.Items.Add(new RequirementItem { Text = "-- Select Department --", Value = 0 });
+                    while (reader.Read())
+                        cmbDepartment.Items.Add(new RequirementItem { Text = reader["name"].ToString(), Value = (int)reader["department_id"] });
+                    cmbDepartment.DisplayMember = "Text";
+                    cmbDepartment.SelectedIndex = 0;
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error seeding lookup dropdown items: {ex.Message}", "Data Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error loading departments: " + ex.Message); }
         }
 
-        private void PopulateRequirementsList()
+        private void LoadPositions(int departmentId = 0)
         {
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "SELECT id, name FROM requirement_types";
-                    using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
-                    {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        clbRequirements.DataSource = dt;
-                        clbRequirements.DisplayMember = "name";
-                        clbRequirements.ValueMember = "id";
-                    }
+                    conn.Open();
+                    string sql = departmentId > 0
+                        ? "SELECT position_id, title FROM positions WHERE department_id = @d ORDER BY title"
+                        : "SELECT position_id, title FROM positions ORDER BY title";
+                    var cmd = new SqlCommand(sql, conn);
+                    if (departmentId > 0) cmd.Parameters.AddWithValue("@d", departmentId);
+                    var reader = cmd.ExecuteReader();
+                    cmbPosition.Items.Clear();
+                    cmbPosition.Items.Add(new RequirementItem { Text = "-- Select Position --", Value = 0 });
+                    while (reader.Read())
+                        cmbPosition.Items.Add(new RequirementItem { Text = reader["title"].ToString(), Value = (int)reader["position_id"] });
+                    cmbPosition.DisplayMember = "Text";
+                    cmbPosition.SelectedIndex = 0;
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading systemic requirements: {ex.Message}", "Component Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error loading positions: " + ex.Message); }
         }
 
-        private void LoadVacancies()
+        private void LoadEmploymentTypes()
         {
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = @"
-                        SELECT 
-                            jv.id AS [Vacancy ID],
-                            p.name AS [Position],
-                            d.name AS [Department],
-                            et.name AS [Employment Type],
-                            jv.description AS [Description],
-                            jv.qualifications AS [Qualifications],
-                            jv.slots AS [Slots Open],
-                            jv.status AS [Status],
-                            jv.position_id,
-                            jv.department_id,
-                            jv.employment_type_id
-                        FROM job_vacancies jv
-                        INNER JOIN positions p ON jv.position_id = p.id
-                        INNER JOIN departments d ON jv.department_id = d.id
-                        INNER JOIN employment_types et ON jv.employment_type_id = et.id";
+                    conn.Open();
+                    var cmd = new SqlCommand("SELECT type_id, label FROM employment_types ORDER BY label", conn);
+                    var reader = cmd.ExecuteReader();
+                    cmbEmpType.Items.Clear();
+                    cmbEmpType.Items.Add(new RequirementItem { Text = "-- Select Type --", Value = 0 });
+                    while (reader.Read())
+                        cmbEmpType.Items.Add(new RequirementItem { Text = reader["label"].ToString(), Value = (int)reader["type_id"] });
+                    cmbEmpType.DisplayMember = "Text";
+                    cmbEmpType.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex) { MessageBox.Show("Error loading employment types: " + ex.Message); }
+        }
 
-                    string filter = cmbStatusFilter.SelectedItem?.ToString() ?? "All";
-                    if (filter == "Open") query += " WHERE jv.status = 'open'";
-                    else if (filter == "Closed") query += " WHERE jv.status = 'closed'";
-
-                    query += " ORDER BY jv.id DESC";
-
-                    using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
+        private void LoadRequirements()
+        {
+            try
+            {
+                using (var conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    using (var cmd = new SqlCommand("SELECT req_type_id, label FROM requirement_types ORDER BY label", conn))
+                    using (var dr = cmd.ExecuteReader())
                     {
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        dgvVacancies.DataSource = dt;
-
-                        if (dgvVacancies.Columns.Contains("position_id")) dgvVacancies.Columns["position_id"].Visible = false;
-                        if (dgvVacancies.Columns.Contains("department_id")) dgvVacancies.Columns["department_id"].Visible = false;
-                        if (dgvVacancies.Columns.Contains("employment_type_id")) dgvVacancies.Columns["employment_type_id"].Visible = false;
+                        clbRequirements.Items.Clear();
+                        while (dr.Read())
+                            clbRequirements.Items.Add(new RequirementItem
+                            {
+                                Text = dr["label"].ToString(),
+                                Value = Convert.ToInt32(dr["req_type_id"])
+                            });
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) { MessageBox.Show("Error loading requirements: " + ex.Message); }
+        }
+
+        private void LoadVacancies(string filter = "")
+        {
+            try
             {
-                MessageBox.Show($"Error loading structural job records data map: {ex.Message}", "Database Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                using (var conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    string sql = @"SELECT v.vacancy_id, p.title AS Position,
+                        d.name AS Department, et.label AS Type,
+                        v.slots AS Slots, v.status AS Status
+                        FROM job_vacancies v
+                        INNER JOIN positions p ON v.position_id = p.position_id
+                        INNER JOIN departments d ON v.department_id = d.department_id
+                        INNER JOIN employment_types et ON v.employment_type_id = et.type_id";
+                    if (!string.IsNullOrEmpty(filter))
+                        sql += " WHERE p.title LIKE @f OR d.name LIKE @f";
+                    var adapter = new SqlDataAdapter(sql, conn);
+                    if (!string.IsNullOrEmpty(filter))
+                        adapter.SelectCommand.Parameters.AddWithValue("@f", "%" + filter + "%");
+                    var table = new DataTable();
+                    adapter.Fill(table);
+                    dgvVacancies.DataSource = table;
+                }
             }
+            catch (Exception ex) { MessageBox.Show("Error loading vacancies: " + ex.Message); }
         }
 
         private void cmbStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
@@ -145,20 +151,20 @@ namespace HRApplicantSystem.Forms.Maintenance
             LoadVacancies();
         }
 
+        private void cmbDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDepartment.SelectedIndex <= 0) { LoadPositions(); return; }
+            int deptId = ((RequirementItem)cmbDepartment.SelectedItem).Value;
+            LoadPositions(deptId);
+        }
+
         private void dgvVacancies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvVacancies.Rows[e.RowIndex];
-                selectedVacancyId = Convert.ToInt32(row.Cells["Vacancy ID"].Value);
-
-                cmbPosition.SelectedValue = row.Cells["position_id"].Value;
-                cmbDepartment.SelectedValue = row.Cells["department_id"].Value;
-                cmbEmpType.SelectedValue = row.Cells["employment_type_id"].Value;
-                txtDescription.Text = row.Cells["Description"].Value?.ToString();
-                txtQualifications.Text = row.Cells["Qualifications"].Value?.ToString();
-                numSlots.Value = Convert.ToDecimal(row.Cells["Slots Open"].Value);
-
+                selectedVacancyId = Convert.ToInt32(row.Cells["vacancy_id"].Value);
+                numSlots.Value = Convert.ToDecimal(row.Cells["Slots"].Value);
                 LoadSelectedVacancyRequirements(selectedVacancyId);
             }
         }
@@ -166,206 +172,187 @@ namespace HRApplicantSystem.Forms.Maintenance
         private void LoadSelectedVacancyRequirements(int vacancyId)
         {
             for (int i = 0; i < clbRequirements.Items.Count; i++)
-            {
                 clbRequirements.SetItemChecked(i, false);
-            }
-
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "SELECT requirement_type_id FROM vacancy_requirements WHERE vacancy_id = @VacancyId";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    conn.Open();
+                    using (var cmd = new SqlCommand(
+                        "SELECT req_type_id FROM job_requirements WHERE job_id = @id", conn))
                     {
-                        cmd.Parameters.AddWithValue("@VacancyId", vacancyId);
-                        conn.Open();
-
-                        List<int> checkedIds = new List<int>();
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                checkedIds.Add(reader.GetInt32(0));
-                            }
-                        }
+                        cmd.Parameters.AddWithValue("@id", vacancyId);
+                        var checkedIds = new List<int>();
+                        using (var dr = cmd.ExecuteReader())
+                            while (dr.Read()) checkedIds.Add(dr.GetInt32(0));
 
                         for (int i = 0; i < clbRequirements.Items.Count; i++)
                         {
-                            DataRowView drv = clbRequirements.Items[i] as DataRowView;
-                            if (drv != null)
-                            {
-                                int currentId = Convert.ToInt32(drv["id"]);
-                                if (checkedIds.Contains(currentId))
-                                {
-                                    clbRequirements.SetItemChecked(i, true);
-                                }
-                            }
+                            var item = clbRequirements.Items[i] as RequirementItem;
+                            if (item != null && checkedIds.Contains(item.Value))
+                                clbRequirements.SetItemChecked(i, true);
                         }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error resolving requirement tracks mappings: {ex.Message}", "Relational Link Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error loading requirements: " + ex.Message); }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (cmbPosition.SelectedValue == null || cmbDepartment.SelectedValue == null || cmbEmpType.SelectedValue == null)
+            if (cmbDepartment.SelectedIndex <= 0 ||
+                cmbPosition.SelectedIndex <= 0 ||
+                cmbEmpType.SelectedIndex <= 0)
             {
-                MessageBox.Show("Please ensure structural setup reference items are valid entities fields.", "Validation Flag", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select Department, Position, and Employment Type.");
                 return;
             }
 
-            using (SqlConnection conn = DatabaseHelper.GetConnection())
+            int deptId = ((RequirementItem)cmbDepartment.SelectedItem).Value;
+            int posId = ((RequirementItem)cmbPosition.SelectedItem).Value;
+            int empId = ((RequirementItem)cmbEmpType.SelectedItem).Value;
+
+            try
             {
-                conn.Open();
-                SqlTransaction transaction = conn.BeginTransaction();
-
-                try
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    int vacancyId = selectedVacancyId;
-
-                    if (selectedVacancyId == -1)
+                    conn.Open();
+                    using (var transaction = conn.BeginTransaction())
                     {
-                        string insertQuery = @"
-                            INSERT INTO job_vacancies (position_id, department_id, employment_type_id, description, qualifications, slots, status)
-                            VALUES (@PositionId, @DepartmentId, @EmpTypeId, @Desc, @Quals, @Slots, 'open');
-                            SELECT SCOPE_IDENTITY();";
-
-                        using (SqlCommand cmd = new SqlCommand(insertQuery, conn, transaction))
+                        try
                         {
-                            cmd.Parameters.AddWithValue("@PositionId", cmbPosition.SelectedValue);
-                            cmd.Parameters.AddWithValue("@DepartmentId", cmbDepartment.SelectedValue);
-                            cmd.Parameters.AddWithValue("@EmpTypeId", cmbEmpType.SelectedValue);
-                            cmd.Parameters.AddWithValue("@Desc", txtDescription.Text.Trim());
-                            cmd.Parameters.AddWithValue("@Quals", txtQualifications.Text.Trim());
-                            cmd.Parameters.AddWithValue("@Slots", (int)numSlots.Value);
+                            int vacancyId = selectedVacancyId;
 
-                            vacancyId = Convert.ToInt32(cmd.ExecuteScalar());
-                        }
-                    }
-                    else
-                    {
-
-                        string updateQuery = @"
-                            UPDATE job_vacancies 
-                            SET position_id = @PositionId, department_id = @DepartmentId, employment_type_id = @EmpTypeId, 
-                                description = @Desc, qualifications = @Quals, slots = @Slots
-                            WHERE id = @VacancyId";
-
-                        using (SqlCommand cmd = new SqlCommand(updateQuery, conn, transaction))
-                        {
-                            cmd.Parameters.AddWithValue("@PositionId", cmbPosition.SelectedValue);
-                            cmd.Parameters.AddWithValue("@DepartmentId", cmbDepartment.SelectedValue);
-                            cmd.Parameters.AddWithValue("@EmpTypeId", cmbEmpType.SelectedValue);
-                            cmd.Parameters.AddWithValue("@Desc", txtDescription.Text.Trim());
-                            cmd.Parameters.AddWithValue("@Quals", txtQualifications.Text.Trim());
-                            cmd.Parameters.AddWithValue("@Slots", (int)numSlots.Value);
-                            cmd.Parameters.AddWithValue("@VacancyId", vacancyId);
-
-                            cmd.ExecuteNonQuery();
-                        }
-
-                        string deleteOldReqs = "DELETE FROM vacancy_requirements WHERE vacancy_id = @VacancyId";
-                        using (SqlCommand cmdDelete = new SqlCommand(deleteOldReqs, conn, transaction))
-                        {
-                            cmdDelete.Parameters.AddWithValue("@VacancyId", vacancyId);
-                            cmdDelete.ExecuteNonQuery();
-                        }
-                    }
-
-                    string insertReqQuery = "INSERT INTO vacancy_requirements (vacancy_id, requirement_type_id) VALUES (@VacancyId, @ReqTypeId)";
-                    foreach (var item in clbRequirements.CheckedItems)
-                    {
-                        DataRowView drv = item as DataRowView;
-                        if (drv != null)
-                        {
-                            using (SqlCommand cmdReq = new SqlCommand(insertReqQuery, conn, transaction))
+                            if (selectedVacancyId == -1)
                             {
-                                cmdReq.Parameters.AddWithValue("@VacancyId", vacancyId);
-                                cmdReq.Parameters.AddWithValue("@ReqTypeId", Convert.ToInt32(drv["id"]));
-                                cmdReq.ExecuteNonQuery();
+                                string insertSql = @"INSERT INTO job_vacancies 
+                                    (position_id, department_id, employment_type_id, slots, status, posted_by, posted_at)
+                                    OUTPUT INSERTED.vacancy_id
+                                    VALUES (@pos, @dept, @emp, @slots, 'open', @postedBy, GETDATE())";
+                                using (var cmd = new SqlCommand(insertSql, conn, transaction))
+                                {
+                                    cmd.Parameters.AddWithValue("@pos", posId);
+                                    cmd.Parameters.AddWithValue("@dept", deptId);
+                                    cmd.Parameters.AddWithValue("@emp", empId);
+                                    cmd.Parameters.AddWithValue("@slots", (int)numSlots.Value);
+                                    cmd.Parameters.AddWithValue("@postedBy", SessionManager.CurrentUser?.UserId ?? 1);
+                                    vacancyId = Convert.ToInt32(cmd.ExecuteScalar());
+                                }
                             }
+                            else
+                            {
+                                string updateSql = @"UPDATE job_vacancies 
+                                    SET position_id = @pos, department_id = @dept, employment_type_id = @emp, slots = @slots
+                                    WHERE vacancy_id = @id";
+                                using (var cmd = new SqlCommand(updateSql, conn, transaction))
+                                {
+                                    cmd.Parameters.AddWithValue("@pos", posId);
+                                    cmd.Parameters.AddWithValue("@dept", deptId);
+                                    cmd.Parameters.AddWithValue("@emp", empId);
+                                    cmd.Parameters.AddWithValue("@slots", (int)numSlots.Value);
+                                    cmd.Parameters.AddWithValue("@id", vacancyId);
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                                using (var cmd = new SqlCommand(
+                                    "DELETE FROM job_requirements WHERE job_id = @id", conn, transaction))
+                                {
+                                    cmd.Parameters.AddWithValue("@id", vacancyId);
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+
+                            foreach (var item in clbRequirements.CheckedItems)
+                            {
+                                var req = item as RequirementItem;
+                                if (req != null)
+                                {
+                                    using (var cmd = new SqlCommand(
+                                        "INSERT INTO job_requirements (job_id, req_type_id) VALUES (@job, @req)",
+                                        conn, transaction))
+                                    {
+                                        cmd.Parameters.AddWithValue("@job", vacancyId);
+                                        cmd.Parameters.AddWithValue("@req", req.Value);
+                                        cmd.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+
+                            transaction.Commit();
+                            MessageBox.Show("Vacancy saved!");
+                            ClearForm();
+                            LoadVacancies();
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("Error saving vacancy: " + ex.Message);
                         }
                     }
-
-                    transaction.Commit();
-                    MessageBox.Show("Job Opening configuration saved and linked properly.", "Processing Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    ClearForm();
-                    LoadVacancies();
-                }
-                catch (Exception ex)
-                {
-                    transaction.Rollback();
-                    MessageBox.Show($"Transaction aborted tracking processing pipelines errors: {ex.Message}", "Database Rejection Block", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
         private void btnCloseVacancy_Click(object sender, EventArgs e)
         {
-            UpdateVacancyStatus("closed", "Vacancy marked as Closed successfully.");
+            if (dgvVacancies.SelectedRows.Count == 0) { MessageBox.Show("Select a vacancy first."); return; }
+            int id = Convert.ToInt32(dgvVacancies.SelectedRows[0].Cells["vacancy_id"].Value);
+            if (MessageBox.Show("Close this vacancy?", "Confirm", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+            try
+            {
+                using (var conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    using (var cmd = new SqlCommand("UPDATE job_vacancies SET status = 'closed' WHERE vacancy_id = @id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Vacancy closed.");
+                ClearForm();
+                LoadVacancies();
+            }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
         private void btnReopenVacancy_Click(object sender, EventArgs e)
         {
-            UpdateVacancyStatus("open", "Vacancy successfully initialized back to Open state tracking pipelines.");
-        }
-
-        private void UpdateVacancyStatus(string newStatus, string completionMessage)
-        {
-            if (selectedVacancyId == -1)
-            {
-                MessageBox.Show("Please choose an active opening from the structural record tracks grid first.", "Action Context Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            if (dgvVacancies.SelectedRows.Count == 0) { MessageBox.Show("Select a vacancy first."); return; }
+            int id = Convert.ToInt32(dgvVacancies.SelectedRows[0].Cells["vacancy_id"].Value);
             try
             {
-                using (SqlConnection conn = DatabaseHelper.GetConnection())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    string query = "UPDATE job_vacancies SET status = @Status WHERE id = @Id";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    conn.Open();
+                    using (var cmd = new SqlCommand("UPDATE job_vacancies SET status = 'open' WHERE vacancy_id = @id", conn))
                     {
-                        cmd.Parameters.AddWithValue("@Status", newStatus);
-                        cmd.Parameters.AddWithValue("@Id", selectedVacancyId);
-                        conn.Open();
+                        cmd.Parameters.AddWithValue("@id", id);
                         cmd.ExecuteNonQuery();
                     }
                 }
-                MessageBox.Show(completionMessage, "Status Synchronization Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Vacancy reopened!");
                 ClearForm();
                 LoadVacancies();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed manipulating status bounds constraints flags: {ex.Message}", "Processing Exception Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearForm();
-        }
+        private void btnClear_Click(object sender, EventArgs e) => ClearForm();
 
         private void ClearForm()
         {
             selectedVacancyId = -1;
-            if (cmbPosition.Items.Count > 0) cmbPosition.SelectedIndex = 0;
-            if (cmbDepartment.Items.Count > 0) cmbDepartment.SelectedIndex = 0;
-            if (cmbEmpType.Items.Count > 0) cmbEmpType.SelectedIndex = 0;
-
+            cmbDepartment.SelectedIndex = 0;
+            cmbPosition.SelectedIndex = 0;
+            cmbEmpType.SelectedIndex = 0;
             txtDescription.Clear();
             txtQualifications.Clear();
             numSlots.Value = 0;
-
             for (int i = 0; i < clbRequirements.Items.Count; i++)
-            {
                 clbRequirements.SetItemChecked(i, false);
-            }
+            dgvVacancies.ClearSelection();
         }
     }
 }
