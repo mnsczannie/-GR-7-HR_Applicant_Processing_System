@@ -1,165 +1,193 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
+﻿using HRApplicantSystem.Helpers;
 using Microsoft.Data.SqlClient;
-using HRApplicantSystem.Helpers;
+using System;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace HRApplicantSystem.Forms.HR
 {
     public partial class frmScreening : Form
     {
-        private readonly int _applicationId;
+        private int _appId = -1;
+        private int _aplId = -1;
 
-        public frmScreening(int applicationId)
+        public frmScreening()
         {
             InitializeComponent();
-            _applicationId = applicationId;
+            SetupGrid();
         }
 
-        // Load event handler to initialize form data
-        private void frmScreening_Load(object sender, EventArgs e)
+        public frmScreening(int appId) : this()
         {
-            LoadApplicantInfo();
-            LoadDocumentsChecklist();
-            btnProceed.Enabled = false;
+            _appId = appId;
         }
 
-        // Load applicant's full name and applied position
-        private void LoadApplicantInfo()
+        private void SetupGrid()
         {
-            string query = @"
-                SELECT a.first_name + ' ' + a.last_name   AS full_name,
-                       jv.title                            AS position
-                FROM   applications ap
-                JOIN   applicants   a  ON ap.applicant_id = a.applicant_id
-                JOIN   job_vacancies jv ON ap.job_vacancy_id = jv.job_vacancy_id
-                WHERE  ap.application_id = @AppId";
+            dgvApplications.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvApplications.ReadOnly = true;
+            dgvApplications.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvApplications.AllowUserToAddRows = false;
+            dgvApplications.RowHeadersVisible = false;
+            dgvApplications.SelectionChanged += Dgv_SelectionChanged;
+        }
 
-            using (var conn = DatabaseHelper.GetConnection())
-            using (var cmd = new SqlCommand(query, conn))
+        private void frmScreening_Load(object s, EventArgs e)
+        {
+            LoadData();
+
+            if (_appId != -1)
             {
-                cmd.Parameters.AddWithValue("@AppId", _applicationId);
-                conn.Open();
-                using (var reader = cmd.ExecuteReader())
+                foreach (DataGridViewRow row in dgvApplications.Rows)
                 {
-                    if (reader.Read())
+                    if (row.Cells["AppID"].Value != null &&
+                        Convert.ToInt32(row.Cells["AppID"].Value) == _appId)
                     {
-                        lblApplicantName.Text = reader["full_name"].ToString();
-                        lblPosition.Text = reader["position"].ToString();
+                        row.Selected = true;
+                        dgvApplications.CurrentCell = row.Cells[0];
+                        break;
                     }
                 }
             }
         }
 
-        // Load the checklist of required documents and their submission status
-        private void LoadDocumentsChecklist()
+        private void LoadData()
         {
-            string query = @"
-                SELECT rt.requirement_name,
-                       CASE WHEN ad.document_id IS NOT NULL THEN 'Submitted' ELSE 'Missing' END AS status
-                FROM   requirement_types rt
-                LEFT JOIN applicant_documents ad
-                       ON rt.requirement_type_id = ad.requirement_type_id
-                      AND ad.application_id      = @AppId
-                ORDER BY rt.requirement_name";
-
-            var dt = new DataTable();
-            using (var conn = DatabaseHelper.GetConnection())
-            using (var cmd = new SqlCommand(query, conn))
+            try
             {
-                cmd.Parameters.AddWithValue("@AppId", _applicationId);
-                conn.Open();
-                using (var adapter = new SqlDataAdapter(cmd))
-                    adapter.Fill(dt);
-            }
-
-            dgvDocuments.DataSource = dt;
-
-            if (dgvDocuments.Columns["requirement_name"] != null)
-                dgvDocuments.Columns["requirement_name"].HeaderText = "Requirement";
-            if (dgvDocuments.Columns["status"] != null)
-                dgvDocuments.Columns["status"].HeaderText = "Status";
-        }
-
-        // Enable the Proceed button only if "Qualified" is selected
-        private void rdoQualified_CheckedChanged(object sender, EventArgs e)
-        {
-            btnProceed.Enabled = rdoQualified.Checked;
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (!rdoQualified.Checked && !rdoNotQualified.Checked)
-            {
-                MessageBox.Show("Please select Qualified or Not Qualified.",
-                                "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            string result = rdoQualified.Checked ? "qualified" : "not_qualified";
-            // Updated status
-            string newStatus = rdoQualified.Checked ? "shortlisted" : "rejected";
-
-            using (var conn = DatabaseHelper.GetConnection())
-            {
-                conn.Open();
-                using (var tx = conn.BeginTransaction())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    try
+                    conn.Open();
+                    string sql = @"SELECT a.application_id AS [AppID],
+                        ap.applicant_id AS [ApplicantID], ap.full_name AS [Applicant],
+                        p.title AS [Position], d.name AS [Department],
+                        a.status AS [Status], a.submitted_at AS [Submitted]
+                        FROM applications a
+                        INNER JOIN applicants ap ON a.applicant_id = ap.applicant_id
+                        INNER JOIN job_vacancies v ON a.vacancy_id = v.vacancy_id
+                        INNER JOIN positions p ON v.position_id = p.position_id
+                        INNER JOIN departments d ON v.department_id = d.department_id
+                        WHERE a.status = 'under_review'
+                        ORDER BY a.submitted_at";
+
+                    var ada = new SqlDataAdapter(sql, conn);
+                    var dt = new DataTable();
+                    ada.Fill(dt);
+                    dgvApplications.DataSource = dt;
+
+                    if (dgvApplications.Columns["AppID"] != null)
+                        dgvApplications.Columns["AppID"].Visible = false;
+                    if (dgvApplications.Columns["ApplicantID"] != null)
+                        dgvApplications.Columns["ApplicantID"].Visible = false;
+                }
+            }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
+        }
+
+        private void Dgv_SelectionChanged(object s, EventArgs e)
+        {
+            if (dgvApplications.SelectedRows.Count == 0) return;
+            var row = dgvApplications.SelectedRows[0];
+            _appId = Convert.ToInt32(row.Cells["AppID"].Value);
+            _aplId = Convert.ToInt32(row.Cells["ApplicantID"].Value);
+            lblApplicantName.Text = row.Cells["Applicant"].Value?.ToString() ?? "";
+            lblJobApplied.Text = row.Cells["Position"].Value?.ToString() ?? "";
+            lblSelectedApplicant.Text = "Selected: " + row.Cells["Applicant"].Value;
+            lblStatus.Text = "Status: " + row.Cells["Status"].Value;
+            lblStatus.ForeColor = Color.Gray;
+        }
+
+        private void SaveResult(string result)
+        {
+            if (_appId == -1) { MessageBox.Show("Select an application first."); return; }
+
+            try
+            {
+                using (var conn = DatabaseHelper.GetConnection())
+                {
+                    conn.Open();
+                    using (var tx = conn.BeginTransaction())
                     {
-                        string insertSql = @"
-                            INSERT INTO screening_results
-                                   (application_id, result, remarks, screened_by, screened_at)
-                            VALUES (@AppId, @Result, @Remarks, @UserId, GETDATE())";
-
-                        using (var cmd = new SqlCommand(insertSql, conn, tx))
+                        try
                         {
-                            cmd.Parameters.AddWithValue("@AppId", _applicationId);
-                            cmd.Parameters.AddWithValue("@Result", result);
-                            cmd.Parameters.AddWithValue("@Remarks", txtRemarks.Text.Trim());
-                            cmd.Parameters.AddWithValue("@UserId", SessionManager.CurrentUser.UserId);
-                            cmd.ExecuteNonQuery();
+                            using (var cmd = new SqlCommand(@"
+                                IF EXISTS (SELECT 1 FROM screening_results WHERE application_id = @id)
+                                    UPDATE screening_results
+                                    SET result = @r, remarks = @rm,
+                                        reviewed_by = @by, reviewed_at = GETDATE()
+                                    WHERE application_id = @id
+                                ELSE
+                                    INSERT INTO screening_results
+                                        (application_id, reviewed_by, result, remarks, reviewed_at)
+                                    VALUES (@id, @by, @r, @rm, GETDATE())", conn, tx))
+                            {
+                                cmd.Parameters.AddWithValue("@id", _appId);
+                                cmd.Parameters.AddWithValue("@by", SessionManager.CurrentUser.UserId);
+                                cmd.Parameters.AddWithValue("@r", result);
+                                cmd.Parameters.AddWithValue("@rm", txtRemarks.Text.Trim());
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            string next = result == "qualified" ? "screened" : "rejected";
+
+                            using (var cmd = new SqlCommand(@"
+                                UPDATE applications
+                                SET status = @status, updated_at = GETDATE()
+                                WHERE application_id = @id", conn, tx))
+                            {
+                                cmd.Parameters.AddWithValue("@status", next);
+                                cmd.Parameters.AddWithValue("@id", _appId);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            StatusHistoryLogger.LogStatusChange(
+                                _appId, "under_review", next,
+                                SessionManager.CurrentUser.UserId,
+                                $"Screening: {result}.");
+
+                            tx.Commit();
+
+                            lblStatus.Text = "Status: " + next;
+                            lblStatus.ForeColor = result == "qualified" ? Color.Green : Color.Red;
+                            MessageBox.Show($"Marked as {result.ToUpper()}.");
+                            LoadData();
                         }
-
-                        string updateSql = @"
-                            UPDATE applications
-                            SET    status     = @Status,
-                                   updated_at = GETDATE()
-                            WHERE  application_id = @AppId";
-
-                        using (var cmd = new SqlCommand(updateSql, conn, tx))
+                        catch (Exception ex)
                         {
-                            cmd.Parameters.AddWithValue("@Status", newStatus);
-                            cmd.Parameters.AddWithValue("@AppId", _applicationId);
-                            cmd.ExecuteNonQuery();
+                            tx.Rollback();
+                            MessageBox.Show("Error saving result:\n" + ex.Message);
                         }
-
-                        SystemHelper.StatusHistoryLogger.Log(
-                            conn, tx, _applicationId, newStatus,
-                            SessionManager.CurrentUser.UserId);
-
-                        tx.Commit();
-
-                        MessageBox.Show("Screening result saved successfully.",
-                                        "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        btnProceed.Enabled = rdoQualified.Checked;
-                    }
-                    catch (Exception ex)
-                    {
-                        tx.Rollback();
-                        MessageBox.Show("Error saving screening result:\n" + ex.Message,
-                                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
-        private void btnProceed_Click(object sender, EventArgs e)
+        private void btnQualified_Click(object s, EventArgs e) => SaveResult("qualified");
+        private void btnNotQualified_Click(object s, EventArgs e) => SaveResult("not_qualified");
+
+        private void btnViewDocuments_Click(object s, EventArgs e)
         {
-            var schedForm = new frmInterviewSchedule(_applicationId);
-            schedForm.Show();
+            if (_aplId == -1) { MessageBox.Show("Select an applicant first."); return; }
+            new frmHRViewDocuments(_aplId).ShowDialog();
+        }
+
+        private void btnNext_Click(object s, EventArgs e)
+        {
+            if (_appId == -1) { MessageBox.Show("Select an application first."); return; }
+            new frmInterviewSchedule().Show();
+            this.Hide();
+        }
+
+        private void btnBack_Click(object s, EventArgs e)
+        {
+            new frmApplicantReview().Show();
             this.Close();
         }
+
+        private void txtRemarks_TextChanged(object sender, EventArgs e) { }
+        private void dgvApplications_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+        private void groupBox3_Enter(object sender, EventArgs e) { }
     }
 }
