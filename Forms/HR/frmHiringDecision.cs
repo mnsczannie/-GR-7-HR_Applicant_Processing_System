@@ -1,179 +1,229 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using HRApplicantSystem.Helpers;
 using Microsoft.Data.SqlClient;
-using HRApplicantSystem.Helpers;
+using System;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace HRApplicantSystem.Forms.HR
 {
     public partial class frmHiringDecision : Form
     {
-        private readonly int _applicationId;
+        private int _appId = -1;
 
-        public frmHiringDecision(int applicationId)
+        public frmHiringDecision()
         {
             InitializeComponent();
-            _applicationId = applicationId;
+            dgvPassed.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPassed.ReadOnly = true;
+            dgvPassed.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvPassed.AllowUserToAddRows = false;
+            dgvPassed.RowHeadersVisible = false;
         }
 
-        // ─────────────────────────────────────────────
-        // LOAD — enforce role gate immediately
-        // ─────────────────────────────────────────────
-        private void frmHiringDecision_Load(object sender, EventArgs e)
+        private void frmHiringDecision_Load(object s, EventArgs e)
         {
-            string role = SessionManager.CurrentUser?.Role ?? string.Empty;
-            if (role != "admin" && role != "hr_manager")
+            if (SessionManager.CurrentRole != "admin" && SessionManager.CurrentRole != "hr_manager")
             {
-                MessageBox.Show("Access denied. Only Admin or HR Manager can make hiring decisions.",
-                                "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("Access denied. Admin or HR Manager only.");
                 this.Close();
                 return;
             }
-
-            LoadApplicantAndEvaluation();
+            LoadData();
         }
 
-        private void LoadApplicantAndEvaluation()
+        private void LoadData()
         {
-            string query = @"
-                SELECT a.first_name + ' ' + a.last_name  AS full_name,
-                       jv.title                          AS position,
-                       ie.score,
-                       ie.result                         AS eval_result,
-                       ie.recommendation
-                FROM   applications ap
-                JOIN   applicants    a  ON ap.applicant_id    = a.applicant_id
-                JOIN   job_vacancies jv ON ap.job_vacancy_id  = jv.job_vacancy_id
-                LEFT JOIN interview_evaluations ie
-                       ON ie.application_id = ap.application_id
-                WHERE  ap.application_id = @AppId
-                ORDER BY ie.evaluated_at DESC";
-
-            using (var conn = DatabaseHelper.GetConnection())
-            using (var cmd = new SqlCommand(query, conn))
+            try
             {
-                cmd.Parameters.AddWithValue("@AppId", _applicationId);
-                conn.Open();
-                using (var reader = cmd.ExecuteReader())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    if (reader.Read())
+                    conn.Open();
+                    string sql = @"SELECT a.application_id AS [AppID],
+                        ap.full_name AS [Applicant], ap.email AS [Email],
+                        p.title AS [Position], d.name AS [Department],
+                        ie.score AS [Score], ie.recommendation AS [Recommendation],
+                        CAST(CASE WHEN EXISTS (
+                            SELECT 1 FROM applications x
+                            WHERE x.applicant_id = a.applicant_id
+                              AND x.status = 'accepted'
+                              AND x.application_id <> a.application_id
+                        ) THEN 1 ELSE 0 END AS BIT) AS [IsAlreadyAccepted]
+                        FROM applications a
+                        INNER JOIN applicants ap ON a.applicant_id = ap.applicant_id
+                        INNER JOIN job_vacancies v ON a.vacancy_id = v.vacancy_id
+                        INNER JOIN positions p ON v.position_id = p.position_id
+                        INNER JOIN departments d ON v.department_id = d.department_id
+                        INNER JOIN interview_evaluations ie ON ie.application_id = a.application_id
+                        WHERE a.status = 'evaluated' AND ie.result = 'pass'";
+
+                    var ada = new SqlDataAdapter(sql, conn);
+                    var dt = new DataTable();
+                    ada.Fill(dt);
+                    dgvPassed.DataSource = dt;
+
+                    if (dgvPassed.Columns["AppID"] != null)
+                        dgvPassed.Columns["AppID"].Visible = false;
+                    if (dgvPassed.Columns["IsAlreadyAccepted"] != null)
+                        dgvPassed.Columns["IsAlreadyAccepted"].Visible = false;
+
+                    foreach (DataGridViewRow row in dgvPassed.Rows)
                     {
-                        lblApplicantName.Text = reader["full_name"].ToString();
-
-                        string score = reader["score"] == DBNull.Value ? "N/A" : reader["score"].ToString();
-                        string result = reader["eval_result"] == DBNull.Value ? "N/A" : reader["eval_result"].ToString();
-                        string rec = reader["recommendation"] == DBNull.Value ? "—" : reader["recommendation"].ToString();
-
-                        lblEvalSummary.Text = $"Score: {score}   |   Result: {result}\nRecommendation: {rec}";
+                        bool locked = row.Cells["IsAlreadyAccepted"].Value != DBNull.Value &&
+                            Convert.ToBoolean(row.Cells["IsAlreadyAccepted"].Value);
+                        if (locked)
+                        {
+                            row.DefaultCellStyle.BackColor = Color.FromArgb(220, 220, 220);
+                            row.DefaultCellStyle.ForeColor = Color.FromArgb(150, 150, 150);
+                            row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(200, 200, 200);
+                            row.DefaultCellStyle.SelectionForeColor = Color.FromArgb(120, 120, 120);
+                            row.DefaultCellStyle.Font = new Font(dgvPassed.Font, FontStyle.Italic);
+                            row.Tag = "locked";
+                        }
                     }
                 }
             }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
-        // ─────────────────────────────────────────────
-        // SAVE
-        // ─────────────────────────────────────────────
-        private void btnSave_Click(object sender, EventArgs e)
+        private void Decide(string decision)
         {
-            // Second role check
-            string role = SessionManager.CurrentUser?.Role ?? string.Empty;
-            if (role != "admin" && role != "hr_manager")
-            {
-                MessageBox.Show("Access denied.",
-                                "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return;
-            }
+            if (_appId == -1) { MessageBox.Show("Select an applicant first."); return; }
 
-            if (!rdoAccepted.Checked && !rdoRejected.Checked && !rdoOnHold.Checked)
-            {
-                MessageBox.Show("Please select Accepted, Rejected, or On Hold.",
-                                "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            if (MessageBox.Show($"Mark as {decision.ToUpper()}?", "Confirm",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
 
-            string decision;
-            string newAppStatus;
-
-            if (rdoAccepted.Checked)
+            try
             {
-                decision = "accepted";
-                newAppStatus = "accepted";
-            }
-            else if (rdoRejected.Checked)
-            {
-                decision = "rejected";
-                newAppStatus = "rejected";
-            }
-            else
-            {
-                decision = "on_hold";
-                newAppStatus = "for_final_review";
-            }
-
-            DialogResult confirm = MessageBox.Show(
-                $"Are you sure you want to mark this applicant as '{decision.ToUpper()}'?",
-                "Confirm Decision", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (confirm != DialogResult.Yes) return;
-
-            using (var conn = DatabaseHelper.GetConnection())
-            {
-                conn.Open();
-                using (var tx = conn.BeginTransaction())
+                using (var conn = DatabaseHelper.GetConnection())
                 {
-                    try
+                    conn.Open();
+
+                    if (decision == "accepted")
                     {
-                        // Insert hiring decision record
-                        string insertSql = @"
-                            INSERT INTO hiring_decisions
-                                   (application_id, decision, final_remarks, decided_by, decided_at)
-                            VALUES (@AppId, @Decision, @Remarks, @UserId, GETDATE())";
-
-                        using (var cmd = new SqlCommand(insertSql, conn, tx))
+                        using (var check = new SqlCommand(@"
+                            SELECT COUNT(*) FROM applications a
+                            INNER JOIN applications b ON a.applicant_id = b.applicant_id
+                            WHERE b.application_id = @id AND a.status = 'accepted'", conn))
                         {
-                            cmd.Parameters.AddWithValue("@AppId", _applicationId);
-                            cmd.Parameters.AddWithValue("@Decision", decision);
-                            cmd.Parameters.AddWithValue("@Remarks", txtFinalRemarks.Text.Trim());
-                            cmd.Parameters.AddWithValue("@UserId", SessionManager.CurrentUser.UserId);
-                            cmd.ExecuteNonQuery();
+                            check.Parameters.AddWithValue("@id", _appId);
+                            if ((int)check.ExecuteScalar() > 0)
+                            {
+                                MessageBox.Show("This applicant is already accepted for another job.",
+                                    "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
                         }
+                    }
 
-                        // Update application status
-                        string updateSql = @"
+                    using (var cmd = new SqlCommand(@"
+                        UPDATE applications
+                        SET status = @status, updated_at = GETDATE()
+                        WHERE application_id = @id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@status", decision);
+                        cmd.Parameters.AddWithValue("@id", _appId);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    if (decision == "accepted")
+                    {
+                        using (var cmd = new SqlCommand(@"
                             UPDATE applications
-                            SET    status     = @Status,
-                                   updated_at = GETDATE()
-                            WHERE  application_id = @AppId";
-
-                        using (var cmd = new SqlCommand(updateSql, conn, tx))
+                            SET status = 'rejected', updated_at = GETDATE()
+                            WHERE applicant_id = (
+                                SELECT applicant_id FROM applications WHERE application_id = @id
+                            )
+                            AND application_id <> @id", conn))
                         {
-                            cmd.Parameters.AddWithValue("@Status", newAppStatus);
-                            cmd.Parameters.AddWithValue("@AppId", _applicationId);
+                            cmd.Parameters.AddWithValue("@id", _appId);
                             cmd.ExecuteNonQuery();
                         }
-
-                        SystemHelper.StatusHistoryLogger.Log(
-                            conn, tx, _applicationId, newAppStatus,
-                            SessionManager.CurrentUser.UserId);
-
-                        tx.Commit();
-
-                        MessageBox.Show($"Applicant has been marked as {decision.ToUpper()}.",
-                                        "Decision Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close();
                     }
-                    catch (Exception ex)
+
+                    using (var cmd = new SqlCommand(@"
+                        IF EXISTS (SELECT 1 FROM hiring_decisions WHERE application_id = @id)
+                            UPDATE hiring_decisions
+                            SET final_decision = @d, remarks = @rm,
+                                decided_by = @by, decided_at = GETDATE()
+                        ELSE
+                            INSERT INTO hiring_decisions
+                                (application_id, final_decision, remarks, decided_by, decided_at)
+                            VALUES (@id, @d, @rm, @by, GETDATE())", conn))
                     {
-                        tx.Rollback();
-                        MessageBox.Show("Error saving hiring decision:\n" + ex.Message,
-                                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        cmd.Parameters.AddWithValue("@id", _appId);
+                        cmd.Parameters.AddWithValue("@d", decision);
+                        cmd.Parameters.AddWithValue("@rm", txtFinalRemarks.Text.Trim());
+                        cmd.Parameters.AddWithValue("@by", SessionManager.CurrentUser.UserId);
+                        cmd.ExecuteNonQuery();
                     }
                 }
+
+                StatusHistoryLogger.LogStatusChange(
+                    _appId, "evaluated", decision,
+                    SessionManager.CurrentUser.UserId,
+                    $"Final decision: {decision}");
+
+                lblDecision.Text = $"Decision: {decision.ToUpper()}";
+                lblDecision.ForeColor = decision == "accepted" ? Color.Green : Color.Red;
+                lblStatus.Text = "Status: " + decision;
+
+                MessageBox.Show($"Decision saved: {decision.ToUpper()}",
+                    "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LoadData();
             }
+            catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void dgvPassed_SelectionChanged(object sender, EventArgs e)
         {
+            if (dgvPassed.SelectedRows.Count == 0) return;
+
+            var row = dgvPassed.SelectedRows[0];
+
+            if (row.Tag?.ToString() == "locked")
+            {
+                _appId = -1;
+                lblApplicantName.Text = row.Cells["Applicant"].Value?.ToString() ?? "";
+                lblJobApplied.Text = $"{row.Cells["Position"].Value} – {row.Cells["Department"].Value}";
+                lblInterviewScore.Text = row.Cells["Score"].Value?.ToString() ?? "";
+                lblDecision.Text = "Final Decision: LOCKED";
+                lblDecision.ForeColor = Color.FromArgb(150, 150, 150);
+                lblStatus.Text = "Status: Already Accepted Elsewhere";
+                lblStatus.ForeColor = Color.FromArgb(150, 150, 150);
+                txtFinalRemarks.Clear();
+                txtFinalRemarks.Enabled = false;
+                btnHire.Enabled = false;
+                btnReject.Enabled = false;
+                return;
+            }
+
+            _appId = Convert.ToInt32(row.Cells["AppID"].Value);
+            lblApplicantName.Text = row.Cells["Applicant"].Value?.ToString() ?? "";
+            lblJobApplied.Text = $"{row.Cells["Position"].Value} – {row.Cells["Department"].Value}";
+            lblInterviewScore.Text = row.Cells["Score"].Value?.ToString() ?? "";
+            lblDecision.Text = $"Final Decision: {row.Cells["Recommendation"].Value}";
+            lblDecision.ForeColor = Color.FromArgb(85, 85, 85);
+            lblStatus.Text = "Status: evaluated";
+            lblStatus.ForeColor = Color.FromArgb(212, 122, 0);
+            txtFinalRemarks.Clear();
+            txtFinalRemarks.Enabled = true;
+            btnHire.Enabled = true;
+            btnReject.Enabled = true;
+        }
+
+        private void btnHire_Click(object s, EventArgs e) => Decide("accepted");
+        private void btnReject_Click(object s, EventArgs e) => Decide("rejected");
+
+        private void btnBack_Click(object s, EventArgs e)
+        {
+            new frmHRDashboard().Show();
             this.Close();
         }
+
+        private void groupBox2_Enter(object sender, EventArgs e) { }
+        private void dgvPassed_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+        private void txtFinalRemarks_TextChanged(object sender, EventArgs e) { }
     }
 }
