@@ -82,7 +82,7 @@ namespace HRApplicantSystem.Forms.Maintenance
                     }
                 }
                 MessageBox.Show("Account activated.");
-                AuditLogger.LogAction(SessionManager.CurrentUserId,
+                AuditLogger.LogAction(SessionManager.CurrentUser.UserId,
                     "Activated HR account", "users", id);
                 LoadData();
             }
@@ -97,7 +97,7 @@ namespace HRApplicantSystem.Forms.Maintenance
             int id = Convert.ToInt32(
                 dgvUsers.SelectedRows[0].Cells["ID"].Value);
 
-            if (id == SessionManager.CurrentUserId)
+            if (id == SessionManager.CurrentUser.UserId)
             {
                 MessageBox.Show("You cannot deactivate your own account.");
                 return;
@@ -117,7 +117,7 @@ namespace HRApplicantSystem.Forms.Maintenance
                     }
                 }
                 MessageBox.Show("Account deactivated.");
-                AuditLogger.LogAction(SessionManager.CurrentUserId,
+                AuditLogger.LogAction(SessionManager.CurrentUser.UserId,
                     "Deactivated HR account", "users", id);
                 LoadData();
             }
