@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
+
 namespace HRApplicantSystem.Forms.Applicant
 {
     public partial class frmApplicantDashboard : Form
@@ -358,5 +359,12 @@ namespace HRApplicantSystem.Forms.Applicant
         private void groupBox1_Enter(object sender, EventArgs e) { }
         private void groupBox2_Enter(object sender, EventArgs e) { }
         private void groupBox4_Enter(object sender, EventArgs e) { }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SessionManager.Logout();
+            new frmApplicantLogin().Show();
+            this.Hide();
+        }
     }
 }

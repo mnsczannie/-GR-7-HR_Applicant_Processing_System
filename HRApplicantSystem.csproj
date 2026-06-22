@@ -346,6 +346,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UITheme.cs" />
+    <None Include="Resources\cato1.png" />
+    <None Include="Resources\projectlog1.png" />
     <None Include="Resources\projectlog.png" />
     <None Include="Resources\snoop-removebg-preview %282%29.png" />
     <EmbeddedResource Include="Forms\Maintenance\frmMaintenance.resx">
