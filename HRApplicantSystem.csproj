@@ -346,6 +346,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UITheme.cs" />
+    <None Include="Resources\projectlog.png" />
+    <None Include="Resources\snoop-removebg-preview %282%29.png" />
     <EmbeddedResource Include="Forms\Maintenance\frmMaintenance.resx">
       <DependentUpon>frmMaintenance.cs</DependentUpon>
     </EmbeddedResource>
@@ -378,6 +380,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Content Include="Database\db_config.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

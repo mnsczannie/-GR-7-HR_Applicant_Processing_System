@@ -67,7 +67,7 @@ namespace HRApplicantSystem.Forms.Applicant
                 bool ok = BCrypt.Net.BCrypt.Verify(passwordInput, hash);
                 if (!ok) { ShowFail(); return; }
 
-                SessionManager.LoginApplicant(new Applicant
+                SessionManager.LoginApplicant(new HRApplicantSystem.Models.Applicant
                 {
                     ApplicantId = applicantId,
                     FullName = name,
@@ -101,12 +101,6 @@ namespace HRApplicantSystem.Forms.Applicant
             txtEmail.Focus();
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            new HRApplicantSystem.Forms.frmRoleSelection().Show();
-            this.Close();
-        }
-
         private void CheckbxShowPas_CheckedChanged(object sender, EventArgs e)
         {
             txtPassword.PasswordChar = CheckbxShowPas.Checked ? '\0' : '●';
@@ -132,5 +126,7 @@ namespace HRApplicantSystem.Forms.Applicant
         private void lblTitle_Click(object sender, EventArgs e)
         {
         }
+
+        
     }
 }

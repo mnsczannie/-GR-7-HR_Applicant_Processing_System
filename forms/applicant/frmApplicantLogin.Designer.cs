@@ -23,7 +23,6 @@
             this.CheckbxShowPas = new System.Windows.Forms.CheckBox();
             this.btnLogIn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.lblCreateAcc = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -158,21 +157,6 @@
             this.btnClear.Text = "CLEAR";
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnBack
-            // 
-            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBack.FlatAppearance.BorderSize = 0;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            this.btnBack.Location = new System.Drawing.Point(525, 467);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(150, 23);
-            this.btnBack.TabIndex = 10;
-            this.btnBack.Text = "← Back to Role Selection";
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -219,8 +203,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1368, 741);
+            this.BackColor = System.Drawing.Color.Ivory;
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblSubtitle);
             this.Controls.Add(this.label2);
@@ -231,7 +215,6 @@
             this.Controls.Add(this.CheckbxShowPas);
             this.Controls.Add(this.btnLogIn);
             this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lblCreateAcc);
             this.Controls.Add(this.label1);
@@ -259,7 +242,6 @@
         private System.Windows.Forms.CheckBox CheckbxShowPas;
         private System.Windows.Forms.Button btnLogIn;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblCreateAcc;
         private System.Windows.Forms.Label label1;

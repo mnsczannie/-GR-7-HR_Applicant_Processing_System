@@ -3,6 +3,8 @@ using HRApplicantSystem.Helpers;
 using HRApplicantSystem.Forms.HR;
 using System;
 using System.Windows.Forms;
+using BCrypt.Net;
+
 
 namespace HRApplicantSystem
 {
