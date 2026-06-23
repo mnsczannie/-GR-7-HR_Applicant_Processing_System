@@ -11,6 +11,7 @@ namespace HRApplicantSystem.Forms.HR
         public frmHRLogin()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmHRLogin_Load(object sender, EventArgs e)

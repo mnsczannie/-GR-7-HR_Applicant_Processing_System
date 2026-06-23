@@ -16,6 +16,7 @@ namespace HRApplicantSystem.Forms.HR
         public frmReports()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmReports_Load(object sender, EventArgs e)

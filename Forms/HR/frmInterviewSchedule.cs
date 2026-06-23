@@ -30,6 +30,7 @@ namespace HRApplicantSystem.Forms.HR
             dgvSchedules.AllowUserToAddRows = false;
             dgvSchedules.RowHeadersVisible = false;
             dgvSchedules.SelectionChanged += Dgv_Schedules_SelectionChanged;
+            UITheme.Apply(this);
         }
 
         private void frmInterviewSchedule_Load(object sender, EventArgs e)

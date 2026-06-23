@@ -16,7 +16,7 @@ namespace HRApplicantSystem.Forms.HR
         {
             InitializeComponent();
             _email = string.Empty;
-
+            UITheme.Apply(this);
         }
 
 

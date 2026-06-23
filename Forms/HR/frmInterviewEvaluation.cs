@@ -32,6 +32,7 @@ namespace HRApplicantSystem.Forms.HR
                 lblApplicantName.Text = row.Cells["Applicant"].Value?.ToString() ?? "";
                 lblJobApplied.Text = row.Cells["Position"].Value?.ToString() ?? "";
             };
+            UITheme.Apply(this);
         }
 
         private void frmInterviewEvaluation_Load(object sender, EventArgs e)

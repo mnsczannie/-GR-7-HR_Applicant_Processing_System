@@ -15,7 +15,9 @@ namespace HRApplicantSystem.Forms.Applicant
         public frmApplicantDashboard(string email)
         {
             InitializeComponent();
+            UITheme.Apply(this);
             _userEmail = email;
+
         }
 
         private void frmApplicantDashboard_Load_1(object sender, EventArgs e)

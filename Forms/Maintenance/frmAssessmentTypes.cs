@@ -11,6 +11,7 @@ namespace HRApplicantSystem.Forms.Maintenance
         public frmAssessmentTypes()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmAssessmentTypes_Load(object sender, EventArgs e)

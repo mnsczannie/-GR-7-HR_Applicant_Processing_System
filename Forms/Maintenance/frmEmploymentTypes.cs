@@ -11,6 +11,7 @@ namespace HRApplicantSystem.Forms.Maintenance
         public frmEmploymentTypes()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmEmploymentTypes_Load(object sender, EventArgs e)

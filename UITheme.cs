@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace HRApplicantSystem
 {
-    internal class UITheme
+    public static class UITheme
     {
+        public static void Apply(Form form)
+        {
+            form.ClientSize = new Size(1386, 788);
+            form.BackColor = Color.Ivory;
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace HRApplicantSystem.Forms.Maintenance
         public frmRequirementTypes()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmRequirementTypes_Load(object sender, EventArgs e)

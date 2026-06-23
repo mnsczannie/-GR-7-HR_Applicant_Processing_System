@@ -12,7 +12,11 @@ namespace HRApplicantSystem.Forms.HR
     {
         private readonly int _applicantId;
         public frmHRViewDocuments(int applicantId)
-        { InitializeComponent(); _applicantId = applicantId; }
+        { 
+            InitializeComponent(); 
+            _applicantId = applicantId;
+            UITheme.Apply(this);
+        }
 
         private void frmHRViewDocuments_Load(object s, EventArgs e)
         { LoadName(); LoadDocuments(); }

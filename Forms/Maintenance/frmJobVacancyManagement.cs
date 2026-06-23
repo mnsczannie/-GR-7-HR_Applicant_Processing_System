@@ -14,6 +14,7 @@ namespace HRApplicantSystem.Forms.Maintenance
         public frmJobVacancyManagement()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         public class RequirementItem

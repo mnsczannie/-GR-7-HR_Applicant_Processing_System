@@ -10,6 +10,7 @@ namespace HRApplicantSystem.Forms.HR
         public frmHRDashboard()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmHRDashboard_Load(object sender, EventArgs e)

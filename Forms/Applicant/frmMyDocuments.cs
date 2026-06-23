@@ -14,6 +14,7 @@ namespace HRApplicantSystem.Forms.Applicant
         {
             InitializeComponent();
             userEmail = email;
+            UITheme.Apply(this);
         }
 
         private void frmMyDocuments_Load_1(object sender, EventArgs e)

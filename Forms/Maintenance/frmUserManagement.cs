@@ -9,7 +9,11 @@ namespace HRApplicantSystem.Forms.Maintenance
 {
     public partial class frmUserManagement : Form
     {
-        public frmUserManagement() { InitializeComponent(); }
+        public frmUserManagement() 
+        { 
+            InitializeComponent();
+            UITheme.Apply(this);
+        }
 
         private void frmUserManagement_Load(object sender, EventArgs e)
         {

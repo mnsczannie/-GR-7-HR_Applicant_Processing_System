@@ -3,6 +3,7 @@ using HRApplicantSystem.Models;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace HRApplicantSystem.Forms.Applicant
 {
@@ -11,6 +12,7 @@ namespace HRApplicantSystem.Forms.Applicant
         public frmApplicantLogin()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmApplicantLogin_Load(object sender, EventArgs e)

@@ -10,6 +10,7 @@ namespace HRApplicantSystem.Forms.HR
         public frmHRRegister()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmHRRegister_Load(object sender, EventArgs e)

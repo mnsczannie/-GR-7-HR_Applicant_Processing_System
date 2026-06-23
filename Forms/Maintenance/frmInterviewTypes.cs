@@ -11,6 +11,7 @@ namespace HRApplicantSystem.Forms.Maintenance
         public frmInterviewTypes()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmInterviewTypes_Load(object sender, EventArgs e)

@@ -9,7 +9,11 @@ namespace HRApplicantSystem.Forms.HR
 {
     public partial class frmApplicantList : Form
     {
-        public frmApplicantList() { InitializeComponent(); }
+        public frmApplicantList() 
+        { 
+            InitializeComponent();
+            UITheme.Apply(this);
+        }
 
         private void frmApplicantList_Load(object sender, EventArgs e)
             => LoadApplicants();

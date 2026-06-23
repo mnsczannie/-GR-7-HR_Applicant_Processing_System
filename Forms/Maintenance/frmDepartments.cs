@@ -11,6 +11,7 @@ namespace HRApplicantSystem.Forms.Maintenance
         public frmDepartments()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmDepartments_Load(object sender, EventArgs e)

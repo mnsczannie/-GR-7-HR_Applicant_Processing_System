@@ -11,6 +11,7 @@ namespace HRApplicantSystem.Forms.Maintenance
         public frmPositions()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmPositions_Load(object sender, EventArgs e)

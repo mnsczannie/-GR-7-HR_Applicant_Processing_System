@@ -9,6 +9,7 @@ namespace HRApplicantSystem.Forms.Maintenance
         public frmMaintenance()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmMaintenance_Load(object sender, EventArgs e)

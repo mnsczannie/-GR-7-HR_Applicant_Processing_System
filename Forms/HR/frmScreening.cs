@@ -16,6 +16,7 @@ namespace HRApplicantSystem.Forms.HR
         {
             InitializeComponent();
             SetupGrid();
+            UITheme.Apply(this);
         }
 
         public frmScreening(int appId) : this()

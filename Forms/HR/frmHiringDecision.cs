@@ -19,6 +19,7 @@ namespace HRApplicantSystem.Forms.HR
             dgvPassed.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPassed.AllowUserToAddRows = false;
             dgvPassed.RowHeadersVisible = false;
+            UITheme.Apply(this);
         }
 
         private void frmHiringDecision_Load(object s, EventArgs e)

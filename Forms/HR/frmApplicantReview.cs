@@ -11,6 +11,7 @@ namespace HRApplicantSystem.Forms.HR
         public frmApplicantReview()
         {
             InitializeComponent();
+            UITheme.Apply(this);
         }
 
         private void frmApplicantReview_Load(object sender, EventArgs e)
