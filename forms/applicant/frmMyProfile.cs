@@ -15,6 +15,7 @@ namespace HRApplicantSystem.Forms.Applicant
         {
             InitializeComponent();
             userEmail = email;
+            UITheme.Apply(this);
         }
 
         private void frmMyProfile_Load_1(object sender, EventArgs e)

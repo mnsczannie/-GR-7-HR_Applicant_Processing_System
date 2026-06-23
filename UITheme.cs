@@ -9,6 +9,8 @@ namespace HRApplicantSystem
         {
             form.ClientSize = new Size(1386, 788);
             form.BackColor = Color.Ivory;
+            form.WindowState = FormWindowState.Maximized;
+            form.StartPosition = FormStartPosition.CenterScreen;
         }
     }
 }

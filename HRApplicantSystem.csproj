@@ -346,10 +346,22 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UITheme.cs" />
+    <None Include="Resources\time.png" />
+    <None Include="Resources\cato.png" />
+    <None Include="Resources\spiral1.png" />
     <None Include="Resources\cato1.png" />
     <None Include="Resources\projectlog1.png" />
     <None Include="Resources\projectlog.png" />
     <None Include="Resources\snoop-removebg-preview %282%29.png" />
+    <EmbeddedResource Include="Forms\Applicant\frmApplicationStatus.resx">
+      <DependentUpon>frmApplicationStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmMyApplication.resx">
+      <DependentUpon>frmMyApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Applicant\frmMyDocuments.resx">
+      <DependentUpon>frmMyDocuments.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Maintenance\frmMaintenance.resx">
       <DependentUpon>frmMaintenance.cs</DependentUpon>
     </EmbeddedResource>

@@ -72,6 +72,7 @@ namespace HRApplicantSystem.Forms.Applicant
             // cboVacancy is hidden until the applicant clicks Edit.
             cboVacancy.Visible = false;
             lblPickJob.Visible = false;
+            UITheme.Apply(this);
         }
 
         // Opens frmMyDocuments as a dialog so the applicant can upload

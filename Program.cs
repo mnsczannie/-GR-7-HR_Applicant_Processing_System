@@ -16,13 +16,6 @@ namespace HRApplicantSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             DatabaseHelper.LoadConfig("Database/db_config.ini");
-            Application.Run(new frmHRLogin());
-
-            DatabaseHelper.LoadConfig(
-                "Database/db_config.ini");
-
-            // Temporarily open a blank form until
-            // frmApplicantLogin is created
             Application.Run(new frmApplicantLogin());
         }
     }

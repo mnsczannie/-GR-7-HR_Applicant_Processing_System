@@ -15,7 +15,9 @@ namespace HRApplicantSystem.Forms.Applicant
         public frmApplicantDashboard(string email)
         {
             InitializeComponent();
+            UITheme.Apply(this);
             _userEmail = email;
+
         }
 
         private void frmApplicantDashboard_Load_1(object sender, EventArgs e)
@@ -303,6 +305,7 @@ namespace HRApplicantSystem.Forms.Applicant
         private void btnViewStatus_Click(object sender, EventArgs e)
         {
             new frmApplicationStatus(_userEmail).Show();
+            this.Hide();
         }
 
         private void btnJobVacancies_Click(object sender, EventArgs e)
@@ -364,6 +367,17 @@ namespace HRApplicantSystem.Forms.Applicant
         {
             SessionManager.Logout();
             new frmApplicantLogin().Show();
+            this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new frmMyDocuments(_userEmail).Show();
             this.Hide();
         }
     }

@@ -15,6 +15,7 @@ namespace HRApplicantSystem.Forms.Applicant
             currentUserEmail = userEmail;
             txtEmail.Text = userEmail;
             txtEmail.ReadOnly = true;
+            UITheme.Apply(this);
         }
 
         private void frmChangePassword_Load(object sender, EventArgs e)

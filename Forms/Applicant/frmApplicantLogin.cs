@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-
+using HRApplicantSystem.Forms.HR;
 namespace HRApplicantSystem.Forms.Applicant
 {
     public partial class frmApplicantLogin : Form
@@ -129,6 +129,20 @@ namespace HRApplicantSystem.Forms.Applicant
         {
         }
 
-        
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            new frmHRLogin().Show();
+            this.Hide();
+        }
+
+        private void lblTime_Click(object sender, EventArgs e)
+        {
+            lblTime.Text = DateTime.Now.ToString("MMM dd, yyyy | hh:mm:ss tt");
+        }
     }
 }
