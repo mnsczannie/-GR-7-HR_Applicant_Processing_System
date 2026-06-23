@@ -12,10 +12,7 @@
 
         private void InitializeComponent()
         {
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblSubtitle = new System.Windows.Forms.Label();
             this.lblOverallStatus = new System.Windows.Forms.Label();
-            this.btnBack = new System.Windows.Forms.Button();
             this.groupBoxChecklist = new System.Windows.Forms.GroupBox();
             this.flpDocuments = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBoxRemarks = new System.Windows.Forms.GroupBox();
@@ -41,6 +38,10 @@
             this.btnJobVacancies = new System.Windows.Forms.Button();
             this.btnViewStatus = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBoxChecklist.SuspendLayout();
             this.groupBoxRemarks.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -50,63 +51,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
-            this.lblTitle.Location = new System.Drawing.Point(444, 66);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(210, 29);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "My Documents";
-            // 
-            // lblSubtitle
-            // 
-            this.lblSubtitle.AutoSize = true;
-            this.lblSubtitle.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Italic);
-            this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            this.lblSubtitle.Location = new System.Drawing.Point(446, 100);
-            this.lblSubtitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblSubtitle.Name = "lblSubtitle";
-            this.lblSubtitle.Size = new System.Drawing.Size(412, 16);
-            this.lblSubtitle.TabIndex = 1;
-            this.lblSubtitle.Text = "Upload the requirements needed to process your application";
             // 
             // lblOverallStatus
             // 
             this.lblOverallStatus.AutoSize = true;
-            this.lblOverallStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblOverallStatus.Location = new System.Drawing.Point(446, 139);
+            this.lblOverallStatus.Font = new System.Drawing.Font("Patrick Hand", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOverallStatus.Location = new System.Drawing.Point(366, 106);
             this.lblOverallStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOverallStatus.Name = "lblOverallStatus";
-            this.lblOverallStatus.Size = new System.Drawing.Size(136, 21);
+            this.lblOverallStatus.Size = new System.Drawing.Size(145, 29);
             this.lblOverallStatus.TabIndex = 2;
             this.lblOverallStatus.Text = "Overall Status: --";
-            // 
-            // btnBack
-            // 
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Font = new System.Drawing.Font("Verdana", 10F);
-            this.btnBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            this.btnBack.Location = new System.Drawing.Point(1196, 24);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(150, 29);
-            this.btnBack.TabIndex = 3;
-            this.btnBack.Text = "← Back to Profile";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // groupBoxChecklist
             // 
             this.groupBoxChecklist.Controls.Add(this.flpDocuments);
-            this.groupBoxChecklist.Font = new System.Drawing.Font("Verdana", 10F);
-            this.groupBoxChecklist.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.groupBoxChecklist.Location = new System.Drawing.Point(444, 175);
+            this.groupBoxChecklist.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxChecklist.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.groupBoxChecklist.Location = new System.Drawing.Point(364, 142);
             this.groupBoxChecklist.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxChecklist.Name = "groupBoxChecklist";
             this.groupBoxChecklist.Padding = new System.Windows.Forms.Padding(2);
@@ -120,24 +84,24 @@
             this.flpDocuments.AutoScroll = true;
             this.flpDocuments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpDocuments.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpDocuments.Location = new System.Drawing.Point(2, 19);
+            this.flpDocuments.Location = new System.Drawing.Point(2, 24);
             this.flpDocuments.Margin = new System.Windows.Forms.Padding(2);
             this.flpDocuments.Name = "flpDocuments";
             this.flpDocuments.Padding = new System.Windows.Forms.Padding(8);
-            this.flpDocuments.Size = new System.Drawing.Size(521, 467);
+            this.flpDocuments.Size = new System.Drawing.Size(521, 462);
             this.flpDocuments.TabIndex = 0;
             this.flpDocuments.WrapContents = false;
             // 
             // groupBoxRemarks
             // 
             this.groupBoxRemarks.Controls.Add(this.txtRemarks);
-            this.groupBoxRemarks.Font = new System.Drawing.Font("Verdana", 10F);
-            this.groupBoxRemarks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.groupBoxRemarks.Location = new System.Drawing.Point(1013, 184);
+            this.groupBoxRemarks.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxRemarks.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.groupBoxRemarks.Location = new System.Drawing.Point(918, 142);
             this.groupBoxRemarks.Margin = new System.Windows.Forms.Padding(2);
             this.groupBoxRemarks.Name = "groupBoxRemarks";
             this.groupBoxRemarks.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBoxRemarks.Size = new System.Drawing.Size(323, 191);
+            this.groupBoxRemarks.Size = new System.Drawing.Size(392, 238);
             this.groupBoxRemarks.TabIndex = 5;
             this.groupBoxRemarks.TabStop = false;
             this.groupBoxRemarks.Text = "HR Remarks / Screening Feedback";
@@ -145,14 +109,14 @@
             // txtRemarks
             // 
             this.txtRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtRemarks.Font = new System.Drawing.Font("Verdana", 10F);
+            this.txtRemarks.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRemarks.Location = new System.Drawing.Point(14, 30);
             this.txtRemarks.Margin = new System.Windows.Forms.Padding(2);
             this.txtRemarks.Multiline = true;
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.ReadOnly = true;
             this.txtRemarks.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtRemarks.Size = new System.Drawing.Size(294, 138);
+            this.txtRemarks.Size = new System.Drawing.Size(362, 193);
             this.txtRemarks.TabIndex = 0;
             // 
             // openFileDialog1
@@ -428,17 +392,61 @@
             this.btnProfile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProfile.UseVisualStyleBackColor = false;
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.panel4.Controls.Add(this.lblTime);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.label2);
+            this.panel4.Location = new System.Drawing.Point(336, 4);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1030, 59);
+            this.panel4.TabIndex = 24;
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.lblTime.Location = new System.Drawing.Point(927, 11);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(95, 36);
+            this.lblTime.TabIndex = 105;
+            this.lblTime.Text = "lblTime";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Patrick Hand", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label1.Location = new System.Drawing.Point(16, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(168, 39);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "My Documents";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label2.Location = new System.Drawing.Point(185, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(352, 22);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Upload the requirements needed to process your application";
+            // 
             // frmMyDocuments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
             this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.lblSubtitle);
             this.Controls.Add(this.lblOverallStatus);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.groupBoxChecklist);
             this.Controls.Add(this.groupBoxRemarks);
             this.Name = "frmMyDocuments";
@@ -458,15 +466,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label lblSubtitle;
         private System.Windows.Forms.Label lblOverallStatus;
-        private System.Windows.Forms.Button btnBack;
 
         private System.Windows.Forms.GroupBox groupBoxChecklist;
 
@@ -500,5 +506,9 @@
         private System.Windows.Forms.Button btnJobVacancies;
         private System.Windows.Forms.Button btnViewStatus;
         private System.Windows.Forms.Button btnProfile;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
