@@ -17,9 +17,7 @@
 
         private void InitializeComponent()
         {
-            this.lblTitle = new System.Windows.Forms.Label();
             this.lblSubtitle = new System.Windows.Forms.Label();
-            this.btnBack = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.listViewJobs = new System.Windows.Forms.ListView();
@@ -46,6 +44,9 @@
             this.btnJobVacancies = new System.Windows.Forms.Button();
             this.btnViewStatus = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -53,65 +54,40 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
-            this.lblTitle.Location = new System.Drawing.Point(437, 16);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(200, 29);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Job Vacancies";
             // 
             // lblSubtitle
             // 
             this.lblSubtitle.AutoSize = true;
-            this.lblSubtitle.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Italic);
-            this.lblSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            this.lblSubtitle.Location = new System.Drawing.Point(439, 50);
+            this.lblSubtitle.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubtitle.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.lblSubtitle.Location = new System.Drawing.Point(181, 19);
             this.lblSubtitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSubtitle.Name = "lblSubtitle";
-            this.lblSubtitle.Size = new System.Drawing.Size(444, 16);
+            this.lblSubtitle.Size = new System.Drawing.Size(377, 22);
             this.lblSubtitle.TabIndex = 1;
             this.lblSubtitle.Text = "Browse open positions and review requirements before you apply";
             // 
-            // btnBack
-            // 
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Font = new System.Drawing.Font("Verdana", 10F);
-            this.btnBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            this.btnBack.Location = new System.Drawing.Point(1193, 21);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(150, 29);
-            this.btnBack.TabIndex = 5;
-            this.btnBack.Text = "← Back to Dashboard";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
             // txtSearch
             // 
-            this.txtSearch.Font = new System.Drawing.Font("Verdana", 11F);
-            this.txtSearch.Location = new System.Drawing.Point(437, 94);
+            this.txtSearch.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(371, 104);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(256, 25);
+            this.txtSearch.Size = new System.Drawing.Size(256, 29);
             this.txtSearch.TabIndex = 0;
             // 
             // btnSearch
             // 
-            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
+            this.btnSearch.BackColor = System.Drawing.Color.SaddleBrown;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSearch.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(700, 93);
+            this.btnSearch.Location = new System.Drawing.Point(634, 103);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 28);
+            this.btnSearch.Size = new System.Drawing.Size(75, 31);
             this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
@@ -119,14 +95,14 @@
             // 
             // listViewJobs
             // 
-            this.listViewJobs.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.listViewJobs.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listViewJobs.FullRowSelect = true;
             this.listViewJobs.GridLines = true;
             this.listViewJobs.HideSelection = false;
-            this.listViewJobs.Location = new System.Drawing.Point(442, 134);
+            this.listViewJobs.Location = new System.Drawing.Point(376, 144);
             this.listViewJobs.Margin = new System.Windows.Forms.Padding(2);
             this.listViewJobs.Name = "listViewJobs";
-            this.listViewJobs.Size = new System.Drawing.Size(901, 312);
+            this.listViewJobs.Size = new System.Drawing.Size(939, 312);
             this.listViewJobs.TabIndex = 2;
             this.listViewJobs.UseCompatibleStateImageBehavior = false;
             this.listViewJobs.View = System.Windows.Forms.View.Details;
@@ -135,9 +111,9 @@
             // btnViewDetails
             // 
             this.btnViewDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewDetails.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
-            this.btnViewDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.btnViewDetails.Location = new System.Drawing.Point(441, 473);
+            this.btnViewDetails.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewDetails.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnViewDetails.Location = new System.Drawing.Point(375, 483);
             this.btnViewDetails.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewDetails.Name = "btnViewDetails";
             this.btnViewDetails.Size = new System.Drawing.Size(152, 32);
@@ -148,11 +124,11 @@
             // 
             // btnApply
             // 
-            this.btnApply.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
+            this.btnApply.BackColor = System.Drawing.Color.SaddleBrown;
             this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnApply.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.btnApply.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.ForeColor = System.Drawing.Color.White;
-            this.btnApply.Location = new System.Drawing.Point(598, 473);
+            this.btnApply.Location = new System.Drawing.Point(532, 483);
             this.btnApply.Margin = new System.Windows.Forms.Padding(2);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(112, 32);
@@ -164,11 +140,11 @@
             // cboDepartment
             // 
             this.cboDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboDepartment.Font = new System.Drawing.Font("Verdana", 10F);
-            this.cboDepartment.Location = new System.Drawing.Point(790, 94);
+            this.cboDepartment.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboDepartment.Location = new System.Drawing.Point(724, 104);
             this.cboDepartment.Margin = new System.Windows.Forms.Padding(2);
             this.cboDepartment.Name = "cboDepartment";
-            this.cboDepartment.Size = new System.Drawing.Size(166, 24);
+            this.cboDepartment.Size = new System.Drawing.Size(166, 30);
             this.cboDepartment.TabIndex = 2;
             this.cboDepartment.SelectedIndexChanged += new System.EventHandler(this.cboDepartment_SelectedIndexChanged);
             // 
@@ -438,16 +414,49 @@
             this.btnProfile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProfile.UseVisualStyleBackColor = false;
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.panel4.Controls.Add(this.lblTime);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.lblSubtitle);
+            this.panel4.Location = new System.Drawing.Point(336, 4);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1030, 59);
+            this.panel4.TabIndex = 16;
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.lblTime.Location = new System.Drawing.Point(927, 11);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(95, 36);
+            this.lblTime.TabIndex = 105;
+            this.lblTime.Text = "lblTime";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Patrick Hand", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label1.Location = new System.Drawing.Point(16, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(161, 39);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Job Vacancies";
+            // 
             // frmJobVacancies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
             this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.lblSubtitle);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.listViewJobs);
@@ -469,6 +478,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -476,9 +487,7 @@
 
         #endregion
         private System.Windows.Forms.ComboBox cboDepartment;
-        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblSubtitle;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.ListView listViewJobs;
@@ -504,5 +513,8 @@
         private System.Windows.Forms.Button btnJobVacancies;
         private System.Windows.Forms.Button btnViewStatus;
         private System.Windows.Forms.Button btnProfile;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Label label1;
     }
 }
