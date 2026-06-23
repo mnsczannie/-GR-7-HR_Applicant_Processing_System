@@ -362,6 +362,15 @@
     <EmbeddedResource Include="Forms\Applicant\frmMyDocuments.resx">
       <DependentUpon>frmMyDocuments.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HR\frmApplicantList.resx">
+      <DependentUpon>frmApplicantList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HR\frmApplicantReview.resx">
+      <DependentUpon>frmApplicantReview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HR\frmHiringDecision.resx">
+      <DependentUpon>frmHiringDecision.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Maintenance\frmMaintenance.resx">
       <DependentUpon>frmMaintenance.cs</DependentUpon>
     </EmbeddedResource>

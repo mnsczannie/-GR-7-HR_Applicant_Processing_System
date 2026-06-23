@@ -268,5 +268,18 @@ namespace HRApplicantSystem.Forms.Applicant
         private void groupBox2_Enter(object sender, EventArgs e)
         {
         }
+
+        private void lblFN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (var frm = new frmMyDocuments(userEmail))
+            {
+                frm.ShowDialog();
+            }
+        }
     }
 }
