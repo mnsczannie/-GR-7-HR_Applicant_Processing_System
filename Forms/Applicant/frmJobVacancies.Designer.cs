@@ -280,9 +280,10 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.button1.BackColor = System.Drawing.Color.Goldenrod;
             this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.Font = new System.Drawing.Font("Patrick Hand", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Patrick Hand", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Location = new System.Drawing.Point(-2, 251);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
@@ -367,12 +368,11 @@
             // 
             // btnJobVacancies
             // 
-            this.btnJobVacancies.BackColor = System.Drawing.Color.Goldenrod;
+            this.btnJobVacancies.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.btnJobVacancies.FlatAppearance.BorderSize = 0;
-            this.btnJobVacancies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnJobVacancies.Font = new System.Drawing.Font("Patrick Hand", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnJobVacancies.Font = new System.Drawing.Font("Patrick Hand", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnJobVacancies.ForeColor = System.Drawing.Color.Black;
-            this.btnJobVacancies.Location = new System.Drawing.Point(-5, 345);
+            this.btnJobVacancies.Location = new System.Drawing.Point(-3, 344);
             this.btnJobVacancies.Margin = new System.Windows.Forms.Padding(2);
             this.btnJobVacancies.Name = "btnJobVacancies";
             this.btnJobVacancies.Size = new System.Drawing.Size(317, 52);
@@ -388,7 +388,7 @@
             this.btnViewStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnViewStatus.Font = new System.Drawing.Font("Patrick Hand", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewStatus.ForeColor = System.Drawing.Color.Black;
-            this.btnViewStatus.Location = new System.Drawing.Point(-3, 300);
+            this.btnViewStatus.Location = new System.Drawing.Point(-3, 293);
             this.btnViewStatus.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewStatus.Name = "btnViewStatus";
             this.btnViewStatus.Size = new System.Drawing.Size(315, 52);

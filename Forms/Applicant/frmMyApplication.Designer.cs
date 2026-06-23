@@ -34,45 +34,47 @@ namespace HRApplicantSystem.Forms.Applicant
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnWithdraw = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
             this.btnUploadDocs = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.lblPickJob = new System.Windows.Forms.Label();
             this.cboVacancy = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnMyApplication = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnJobVacancies = new System.Windows.Forms.Button();
             this.btnViewStatus = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // listViewApps
             // 
             this.listViewApps.HideSelection = false;
-            this.listViewApps.Location = new System.Drawing.Point(463, 114);
+            this.listViewApps.Location = new System.Drawing.Point(382, 101);
             this.listViewApps.Name = "listViewApps";
             this.listViewApps.Size = new System.Drawing.Size(607, 417);
             this.listViewApps.TabIndex = 0;
@@ -83,11 +85,11 @@ namespace HRApplicantSystem.Forms.Applicant
             // 
             this.btnSaveDraft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
             this.btnSaveDraft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveDraft.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSaveDraft.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveDraft.ForeColor = System.Drawing.Color.White;
-            this.btnSaveDraft.Location = new System.Drawing.Point(1088, 89);
+            this.btnSaveDraft.Location = new System.Drawing.Point(1037, 101);
             this.btnSaveDraft.Name = "btnSaveDraft";
-            this.btnSaveDraft.Size = new System.Drawing.Size(214, 36);
+            this.btnSaveDraft.Size = new System.Drawing.Size(225, 36);
             this.btnSaveDraft.TabIndex = 1;
             this.btnSaveDraft.Text = "Save Draft";
             this.btnSaveDraft.UseVisualStyleBackColor = false;
@@ -97,11 +99,11 @@ namespace HRApplicantSystem.Forms.Applicant
             // 
             this.btnSubmit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
             this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSubmit.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSubmit.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.ForeColor = System.Drawing.Color.White;
-            this.btnSubmit.Location = new System.Drawing.Point(1088, 135);
+            this.btnSubmit.Location = new System.Drawing.Point(1037, 147);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(214, 36);
+            this.btnSubmit.Size = new System.Drawing.Size(225, 36);
             this.btnSubmit.TabIndex = 2;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = false;
@@ -111,11 +113,11 @@ namespace HRApplicantSystem.Forms.Applicant
             // 
             this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(18)))));
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.btnEdit.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.Location = new System.Drawing.Point(1088, 180);
+            this.btnEdit.Location = new System.Drawing.Point(1037, 192);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(214, 36);
+            this.btnEdit.Size = new System.Drawing.Size(225, 36);
             this.btnEdit.TabIndex = 3;
             this.btnEdit.Text = "Edit Position";
             this.btnEdit.UseVisualStyleBackColor = false;
@@ -125,11 +127,11 @@ namespace HRApplicantSystem.Forms.Applicant
             // 
             this.btnWithdraw.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(68)))), ((int)(((byte)(173)))));
             this.btnWithdraw.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWithdraw.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.btnWithdraw.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnWithdraw.ForeColor = System.Drawing.Color.White;
-            this.btnWithdraw.Location = new System.Drawing.Point(1088, 226);
+            this.btnWithdraw.Location = new System.Drawing.Point(1037, 238);
             this.btnWithdraw.Name = "btnWithdraw";
-            this.btnWithdraw.Size = new System.Drawing.Size(214, 36);
+            this.btnWithdraw.Size = new System.Drawing.Size(225, 36);
             this.btnWithdraw.TabIndex = 4;
             this.btnWithdraw.Text = "Withdraw";
             this.btnWithdraw.UseVisualStyleBackColor = false;
@@ -139,39 +141,26 @@ namespace HRApplicantSystem.Forms.Applicant
             // 
             this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.btnDelete.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(1088, 271);
+            this.btnDelete.Location = new System.Drawing.Point(1037, 283);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(214, 36);
+            this.btnDelete.Size = new System.Drawing.Size(225, 36);
             this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // btnBack
-            // 
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
-            this.btnBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            this.btnBack.Location = new System.Drawing.Point(1088, 414);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(214, 36);
-            this.btnBack.TabIndex = 6;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
             // btnUploadDocs
             // 
             this.btnUploadDocs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(160)))), ((int)(((byte)(133)))));
             this.btnUploadDocs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUploadDocs.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.btnUploadDocs.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUploadDocs.ForeColor = System.Drawing.Color.White;
-            this.btnUploadDocs.Location = new System.Drawing.Point(1088, 317);
+            this.btnUploadDocs.Location = new System.Drawing.Point(1037, 329);
             this.btnUploadDocs.Margin = new System.Windows.Forms.Padding(2);
             this.btnUploadDocs.Name = "btnUploadDocs";
-            this.btnUploadDocs.Size = new System.Drawing.Size(214, 36);
+            this.btnUploadDocs.Size = new System.Drawing.Size(225, 36);
             this.btnUploadDocs.TabIndex = 7;
             this.btnUploadDocs.Text = "Upload Documents";
             this.btnUploadDocs.UseVisualStyleBackColor = false;
@@ -180,36 +169,24 @@ namespace HRApplicantSystem.Forms.Applicant
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            this.label2.Location = new System.Drawing.Point(463, 86);
+            this.label2.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label2.Location = new System.Drawing.Point(185, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(694, 17);
+            this.label2.Size = new System.Drawing.Size(564, 22);
             this.label2.TabIndex = 12;
             this.label2.Text = "Select an application to manage it. Drafts are created when you apply on the Job " +
     "Vacancies page.";
             // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
-            this.lblTitle.Location = new System.Drawing.Point(458, 41);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(211, 29);
-            this.lblTitle.TabIndex = 11;
-            this.lblTitle.Text = "My Application";
-            // 
             // lblPickJob
             // 
             this.lblPickJob.AutoSize = true;
-            this.lblPickJob.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Italic);
-            this.lblPickJob.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.lblPickJob.Location = new System.Drawing.Point(463, 549);
+            this.lblPickJob.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPickJob.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.lblPickJob.Location = new System.Drawing.Point(378, 542);
             this.lblPickJob.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPickJob.Name = "lblPickJob";
-            this.lblPickJob.Size = new System.Drawing.Size(279, 14);
+            this.lblPickJob.Size = new System.Drawing.Size(267, 22);
             this.lblPickJob.TabIndex = 20;
             this.lblPickJob.Text = "Choose a new position, then click Save Draft:";
             this.lblPickJob.Visible = false;
@@ -217,11 +194,11 @@ namespace HRApplicantSystem.Forms.Applicant
             // cboVacancy
             // 
             this.cboVacancy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboVacancy.Font = new System.Drawing.Font("Verdana", 10F);
-            this.cboVacancy.Location = new System.Drawing.Point(463, 570);
+            this.cboVacancy.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboVacancy.Location = new System.Drawing.Point(382, 575);
             this.cboVacancy.Margin = new System.Windows.Forms.Padding(2);
             this.cboVacancy.Name = "cboVacancy";
-            this.cboVacancy.Size = new System.Drawing.Size(646, 24);
+            this.cboVacancy.Size = new System.Drawing.Size(607, 30);
             this.cboVacancy.TabIndex = 21;
             this.cboVacancy.Visible = false;
             this.cboVacancy.SelectedIndexChanged += new System.EventHandler(this.cboVacancy_SelectedIndexChanged);
@@ -247,6 +224,18 @@ namespace HRApplicantSystem.Forms.Applicant
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(317, 111);
             this.panel3.TabIndex = 17;
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = global::HRApplicantSystem.Properties.Resources.projectlog;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(146, -4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(76, 60);
+            this.button3.TabIndex = 3;
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // textBox6
             // 
@@ -274,16 +263,26 @@ namespace HRApplicantSystem.Forms.Applicant
             this.textBox1.TabIndex = 0;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackgroundImage = global::HRApplicantSystem.Properties.Resources.cato1;
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox4.Location = new System.Drawing.Point(-43, -49);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(253, 182);
+            this.pictureBox4.TabIndex = 1;
+            this.pictureBox4.TabStop = false;
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Goldenrod;
+            this.panel2.Controls.Add(this.btnMyApplication);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.pictureBox5);
             this.panel2.Controls.Add(this.textBox5);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.textBox4);
             this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Controls.Add(this.btnMyApplication);
             this.panel2.Controls.Add(this.textBox3);
             this.panel2.Controls.Add(this.textBox2);
             this.panel2.Controls.Add(this.pictureBox1);
@@ -312,6 +311,16 @@ namespace HRApplicantSystem.Forms.Applicant
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.UseVisualStyleBackColor = false;
             // 
+            // pictureBox5
+            // 
+            this.pictureBox5.BackgroundImage = global::HRApplicantSystem.Properties.Resources.cato1;
+            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox5.Location = new System.Drawing.Point(-46, 548);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(253, 182);
+            this.pictureBox5.TabIndex = 14;
+            this.pictureBox5.TabStop = false;
+            // 
             // textBox5
             // 
             this.textBox5.BackColor = System.Drawing.Color.Goldenrod;
@@ -326,9 +335,10 @@ namespace HRApplicantSystem.Forms.Applicant
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.button1.BackColor = System.Drawing.Color.Goldenrod;
             this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.Font = new System.Drawing.Font("Patrick Hand", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Patrick Hand", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Location = new System.Drawing.Point(-2, 251);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
@@ -351,17 +361,26 @@ namespace HRApplicantSystem.Forms.Applicant
             this.textBox4.TabIndex = 15;
             this.textBox4.Text = "MAIN";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = global::HRApplicantSystem.Properties.Resources.projectlog;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox2.Location = new System.Drawing.Point(90, 15);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(49, 61);
+            this.pictureBox2.TabIndex = 15;
+            this.pictureBox2.TabStop = false;
+            // 
             // btnMyApplication
             // 
-            this.btnMyApplication.BackColor = System.Drawing.Color.Goldenrod;
+            this.btnMyApplication.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.btnMyApplication.FlatAppearance.BorderSize = 0;
-            this.btnMyApplication.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMyApplication.Font = new System.Drawing.Font("Patrick Hand", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMyApplication.Font = new System.Drawing.Font("Patrick Hand", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMyApplication.ForeColor = System.Drawing.Color.Black;
-            this.btnMyApplication.Location = new System.Drawing.Point(-1, 471);
+            this.btnMyApplication.Location = new System.Drawing.Point(0, 471);
             this.btnMyApplication.Margin = new System.Windows.Forms.Padding(2);
             this.btnMyApplication.Name = "btnMyApplication";
-            this.btnMyApplication.Size = new System.Drawing.Size(313, 52);
+            this.btnMyApplication.Size = new System.Drawing.Size(314, 52);
             this.btnMyApplication.TabIndex = 11;
             this.btnMyApplication.Text = "     My Application";
             this.btnMyApplication.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -391,6 +410,16 @@ namespace HRApplicantSystem.Forms.Applicant
             this.textBox2.TabIndex = 14;
             this.textBox2.Text = "C-ARTPROJECT_G7";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::HRApplicantSystem.Properties.Resources.snoop_removebg_preview__2_;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(-3, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(236, 232);
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            // 
             // btnJobVacancies
             // 
             this.btnJobVacancies.BackColor = System.Drawing.Color.Goldenrod;
@@ -414,7 +443,7 @@ namespace HRApplicantSystem.Forms.Applicant
             this.btnViewStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnViewStatus.Font = new System.Drawing.Font("Patrick Hand", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewStatus.ForeColor = System.Drawing.Color.Black;
-            this.btnViewStatus.Location = new System.Drawing.Point(-3, 300);
+            this.btnViewStatus.Location = new System.Drawing.Point(-3, 297);
             this.btnViewStatus.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewStatus.Name = "btnViewStatus";
             this.btnViewStatus.Size = new System.Drawing.Size(315, 52);
@@ -440,57 +469,40 @@ namespace HRApplicantSystem.Forms.Applicant
             this.btnProfile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProfile.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // panel4
             // 
-            this.button3.BackgroundImage = global::HRApplicantSystem.Properties.Resources.projectlog;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(146, -4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(76, 60);
-            this.button3.TabIndex = 3;
-            this.button3.UseVisualStyleBackColor = true;
+            this.panel4.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.panel4.Controls.Add(this.lblTime);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.label2);
+            this.panel4.Location = new System.Drawing.Point(336, 4);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1030, 59);
+            this.panel4.TabIndex = 23;
             // 
-            // pictureBox4
+            // lblTime
             // 
-            this.pictureBox4.BackgroundImage = global::HRApplicantSystem.Properties.Resources.cato1;
-            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox4.Location = new System.Drawing.Point(-43, -49);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(253, 182);
-            this.pictureBox4.TabIndex = 1;
-            this.pictureBox4.TabStop = false;
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.lblTime.Location = new System.Drawing.Point(927, 11);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(95, 36);
+            this.lblTime.TabIndex = 105;
+            this.lblTime.Text = "lblTime";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // pictureBox5
+            // label1
             // 
-            this.pictureBox5.BackgroundImage = global::HRApplicantSystem.Properties.Resources.cato1;
-            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox5.Location = new System.Drawing.Point(-46, 548);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(253, 182);
-            this.pictureBox5.TabIndex = 14;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = global::HRApplicantSystem.Properties.Resources.projectlog;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.Location = new System.Drawing.Point(90, 15);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(49, 61);
-            this.pictureBox2.TabIndex = 15;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::HRApplicantSystem.Properties.Resources.snoop_removebg_preview__2_;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(-3, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(236, 232);
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Patrick Hand", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label1.Location = new System.Drawing.Point(16, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(168, 39);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "My Application";
             // 
             // frmMyApplication
             // 
@@ -498,9 +510,8 @@ namespace HRApplicantSystem.Forms.Applicant
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
             this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.listViewApps);
             this.Controls.Add(this.lblPickJob);
             this.Controls.Add(this.cboVacancy);
@@ -510,7 +521,6 @@ namespace HRApplicantSystem.Forms.Applicant
             this.Controls.Add(this.btnWithdraw);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUploadDocs);
-            this.Controls.Add(this.btnBack);
             this.MinimumSize = new System.Drawing.Size(859, 511);
             this.Name = "frmMyApplication";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -520,12 +530,14 @@ namespace HRApplicantSystem.Forms.Applicant
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -539,9 +551,7 @@ namespace HRApplicantSystem.Forms.Applicant
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnWithdraw;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblPickJob;
         private System.Windows.Forms.ComboBox cboVacancy;
         private System.Windows.Forms.Button btnUploadDocs;
@@ -565,5 +575,8 @@ namespace HRApplicantSystem.Forms.Applicant
         private System.Windows.Forms.Button btnJobVacancies;
         private System.Windows.Forms.Button btnViewStatus;
         private System.Windows.Forms.Button btnProfile;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Label label1;
     }
 }
