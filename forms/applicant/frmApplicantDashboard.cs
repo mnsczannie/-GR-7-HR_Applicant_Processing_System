@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
+
 namespace HRApplicantSystem.Forms.Applicant
 {
     public partial class frmApplicantDashboard : Form
@@ -302,6 +303,7 @@ namespace HRApplicantSystem.Forms.Applicant
         private void btnViewStatus_Click(object sender, EventArgs e)
         {
             new frmApplicationStatus(_userEmail).Show();
+            this.Hide();
         }
 
         private void btnJobVacancies_Click(object sender, EventArgs e)
@@ -358,5 +360,23 @@ namespace HRApplicantSystem.Forms.Applicant
         private void groupBox1_Enter(object sender, EventArgs e) { }
         private void groupBox2_Enter(object sender, EventArgs e) { }
         private void groupBox4_Enter(object sender, EventArgs e) { }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SessionManager.Logout();
+            new frmApplicantLogin().Show();
+            this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new frmMyDocuments(_userEmail).Show();
+            this.Hide();
+        }
     }
 }
