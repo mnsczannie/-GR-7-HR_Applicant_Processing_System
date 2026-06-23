@@ -24,7 +24,7 @@ namespace HRApplicantSystem.Forms.Applicant
         {
             LoadWelcomeName();
             LoadDashboardData();
-            LoadAuditTrail();
+           
         }
 
         private void LoadWelcomeName()
@@ -40,7 +40,7 @@ namespace HRApplicantSystem.Forms.Applicant
                         cmd.Parameters.AddWithValue("@Email", _userEmail);
                         object result = cmd.ExecuteScalar();
                         if (result != null)
-                            textBox1.Text = $"Welcome, {result}!";
+                            textBox1.Text = $"{result}";
                     }
                 }
             }
@@ -239,46 +239,12 @@ namespace HRApplicantSystem.Forms.Applicant
             catch (Exception ex) { MessageBox.Show("Error loading dashboard: " + ex.Message); }
         }
 
-        private void LoadAuditTrail()
-        {
-            try
-            {
-                using (var conn = DatabaseHelper.GetConnection())
-                {
-                    conn.Open();
-                    using (var cmd = new SqlCommand(@"
-                        SELECT al.performed_at AS [Date & Time],
-                            al.action AS [Action],
-                            al.target AS [Area],
-                            al.target_id AS [Record ID]
-                        FROM audit_logs al
-                        INNER JOIN applicants ap ON al.user_id = ap.applicant_id
-                        WHERE ap.email = @Email
-                        ORDER BY al.performed_at DESC", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Email", _userEmail);
-                        var dt = new DataTable();
-                        new SqlDataAdapter(cmd).Fill(dt);
-                        dgvAuditTrail.DataSource = dt;
-
-                        foreach (DataGridViewRow row in dgvAuditTrail.Rows)
-                        {
-                            string action = row.Cells["Action"].Value?.ToString().ToLower() ?? "";
-                            if (action.Contains("submitted")) row.DefaultCellStyle.ForeColor = Color.Green;
-                            else if (action.Contains("deleted") || action.Contains("withdrew")) row.DefaultCellStyle.ForeColor = Color.Red;
-                            else if (action.Contains("uploaded")) row.DefaultCellStyle.ForeColor = Color.Blue;
-                            else if (action.Contains("draft")) row.DefaultCellStyle.ForeColor = Color.Gray;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex) { MessageBox.Show("Error loading audit trail: " + ex.Message); }
-        }
+        
 
         public void RefreshDashboardData()
         {
             LoadDashboardData();
-            LoadAuditTrail();
+         
         }
 
         private void btnProfile_Click(object sender, EventArgs e)
@@ -289,12 +255,7 @@ namespace HRApplicantSystem.Forms.Applicant
             this.Hide();
         }
 
-        private void btnChangePass_Click(object sender, EventArgs e)
-        {
-            new frmChangePassword(_userEmail).ShowDialog();
-            RefreshDashboardData();
-        }
-
+    
         private void btnLogout_Click(object sender, EventArgs e)
         {
             AuditLogger.LogActionByEmail(_userEmail, "Logged out", "applicants");
@@ -319,40 +280,10 @@ namespace HRApplicantSystem.Forms.Applicant
             using (var form = new frmMyApplication(_userEmail))
                 form.ShowDialog(this);
             LoadDashboardData();
-            LoadAuditTrail();
+           
         }
 
-        private void dgvAuditTrail_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            try
-            {
-                string dateTime = dgvAuditTrail.Rows[e.RowIndex].Cells["Date & Time"].Value?.ToString() ?? "N/A";
-                string action = dgvAuditTrail.Rows[e.RowIndex].Cells["Action"].Value?.ToString() ?? "";
-                string area = dgvAuditTrail.Rows[e.RowIndex].Cells["Area"].Value?.ToString() ?? "";
-                string recordId = dgvAuditTrail.Rows[e.RowIndex].Cells["Record ID"].Value?.ToString() ?? "N/A";
-
-                switch (area.ToLower())
-                {
-                    case "applicants":
-                        if (action.ToLower().Contains("password"))
-                            MessageBox.Show($"Security Log:\n\nAction: {action}\nTime: {dateTime}", "Security Notification");
-                        else
-                            MessageBox.Show($"Session Activity:\n\nYou {action.ToLower()} on {dateTime}.", "Activity Log");
-                        break;
-                    case "documents":
-                    case "applicant_documents":
-                        if (MessageBox.Show($"Document Activity:\n\nAction: {action}\nID: {recordId}\nTime: {dateTime}\n\nOpen profile to manage documents?",
-                            "Document Log", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                            btnProfile_Click(this, EventArgs.Empty);
-                        break;
-                    default:
-                        MessageBox.Show($"Log Entry:\n\nArea: {area}\nAction: {action}\nRecord ID: {recordId}\nTimestamp: {dateTime}", "Audit Trail");
-                        break;
-                }
-            }
-            catch (Exception ex) { MessageBox.Show("Error reading audit trail: " + ex.Message); }
-        }
+        
 
         private void lblStatus_Click(object sender, EventArgs e) { }
         private void lblMissingDocs_Click(object sender, EventArgs e) { }
@@ -380,5 +311,7 @@ namespace HRApplicantSystem.Forms.Applicant
             new frmMyDocuments(_userEmail).Show();
             this.Hide();
         }
+
+        
     }
 }

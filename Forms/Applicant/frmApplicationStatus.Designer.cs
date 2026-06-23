@@ -15,7 +15,6 @@
 
         private void InitializeComponent()
         {
-            this.lblTitle = new System.Windows.Forms.Label();
             this.lblCurrentStatus = new System.Windows.Forms.Label();
             this.lblResult = new System.Windows.Forms.Label();
             this.lblRemarks = new System.Windows.Forms.Label();
@@ -31,7 +30,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.grpHistory = new System.Windows.Forms.GroupBox();
             this.dgvHistory = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -54,6 +52,9 @@
             this.btnJobVacancies = new System.Windows.Forms.Button();
             this.btnViewStatus = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -66,26 +67,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
-            this.lblTitle.Location = new System.Drawing.Point(374, 129);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(258, 29);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Application Status";
             // 
             // lblCurrentStatus
             // 
             this.lblCurrentStatus.AutoSize = true;
             this.lblCurrentStatus.Font = new System.Drawing.Font("Verdana", 11F, System.Drawing.FontStyle.Bold);
             this.lblCurrentStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.lblCurrentStatus.Location = new System.Drawing.Point(374, 161);
+            this.lblCurrentStatus.Location = new System.Drawing.Point(346, 84);
             this.lblCurrentStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCurrentStatus.Name = "lblCurrentStatus";
             this.lblCurrentStatus.Size = new System.Drawing.Size(154, 18);
@@ -132,7 +122,7 @@
             // 
             this.lblStep1.BackColor = System.Drawing.Color.Gray;
             this.lblStep1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStep1.Location = new System.Drawing.Point(378, 203);
+            this.lblStep1.Location = new System.Drawing.Point(350, 126);
             this.lblStep1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStep1.Name = "lblStep1";
             this.lblStep1.Size = new System.Drawing.Size(16, 17);
@@ -142,7 +132,7 @@
             // 
             this.lblStep2.BackColor = System.Drawing.Color.Gray;
             this.lblStep2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStep2.Location = new System.Drawing.Point(378, 235);
+            this.lblStep2.Location = new System.Drawing.Point(350, 158);
             this.lblStep2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStep2.Name = "lblStep2";
             this.lblStep2.Size = new System.Drawing.Size(16, 17);
@@ -152,7 +142,7 @@
             // 
             this.lblStep3.BackColor = System.Drawing.Color.Gray;
             this.lblStep3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStep3.Location = new System.Drawing.Point(378, 268);
+            this.lblStep3.Location = new System.Drawing.Point(350, 191);
             this.lblStep3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStep3.Name = "lblStep3";
             this.lblStep3.Size = new System.Drawing.Size(16, 17);
@@ -162,7 +152,7 @@
             // 
             this.lblStep4.BackColor = System.Drawing.Color.Gray;
             this.lblStep4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblStep4.Location = new System.Drawing.Point(378, 300);
+            this.lblStep4.Location = new System.Drawing.Point(350, 223);
             this.lblStep4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStep4.Name = "lblStep4";
             this.lblStep4.Size = new System.Drawing.Size(16, 17);
@@ -173,7 +163,7 @@
             this.lblStep1Text.AutoSize = true;
             this.lblStep1Text.Font = new System.Drawing.Font("Verdana", 9F);
             this.lblStep1Text.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            this.lblStep1Text.Location = new System.Drawing.Point(399, 205);
+            this.lblStep1Text.Location = new System.Drawing.Point(371, 128);
             this.lblStep1Text.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStep1Text.Name = "lblStep1Text";
             this.lblStep1Text.Size = new System.Drawing.Size(143, 14);
@@ -185,7 +175,7 @@
             this.lblStep2Text.AutoSize = true;
             this.lblStep2Text.Font = new System.Drawing.Font("Verdana", 9F);
             this.lblStep2Text.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            this.lblStep2Text.Location = new System.Drawing.Point(399, 237);
+            this.lblStep2Text.Location = new System.Drawing.Point(371, 160);
             this.lblStep2Text.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStep2Text.Name = "lblStep2Text";
             this.lblStep2Text.Size = new System.Drawing.Size(94, 14);
@@ -197,7 +187,7 @@
             this.lblStep3Text.AutoSize = true;
             this.lblStep3Text.Font = new System.Drawing.Font("Verdana", 9F);
             this.lblStep3Text.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            this.lblStep3Text.Location = new System.Drawing.Point(399, 270);
+            this.lblStep3Text.Location = new System.Drawing.Point(371, 193);
             this.lblStep3Text.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStep3Text.Name = "lblStep3Text";
             this.lblStep3Text.Size = new System.Drawing.Size(67, 14);
@@ -209,7 +199,7 @@
             this.lblStep4Text.AutoSize = true;
             this.lblStep4Text.Font = new System.Drawing.Font("Verdana", 9F);
             this.lblStep4Text.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            this.lblStep4Text.Location = new System.Drawing.Point(399, 302);
+            this.lblStep4Text.Location = new System.Drawing.Point(371, 225);
             this.lblStep4Text.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStep4Text.Name = "lblStep4Text";
             this.lblStep4Text.Size = new System.Drawing.Size(92, 14);
@@ -221,7 +211,7 @@
             this.groupBox1.Controls.Add(this.lblRemarks);
             this.groupBox1.Font = new System.Drawing.Font("Verdana", 10F);
             this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.groupBox1.Location = new System.Drawing.Point(792, 469);
+            this.groupBox1.Location = new System.Drawing.Point(764, 392);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -235,7 +225,7 @@
             this.groupBox2.Controls.Add(this.lblSchedule);
             this.groupBox2.Font = new System.Drawing.Font("Verdana", 10F);
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.groupBox2.Location = new System.Drawing.Point(548, 383);
+            this.groupBox2.Location = new System.Drawing.Point(520, 306);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -249,7 +239,7 @@
             this.groupBox3.Controls.Add(this.lblResult);
             this.groupBox3.Font = new System.Drawing.Font("Verdana", 10F);
             this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.groupBox3.Location = new System.Drawing.Point(548, 197);
+            this.groupBox3.Location = new System.Drawing.Point(520, 120);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
@@ -258,26 +248,12 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Final Result";
             // 
-            // button1
-            // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Verdana", 10F);
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(85)))), ((int)(((byte)(85)))));
-            this.button1.Location = new System.Drawing.Point(1227, 140);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(172, 32);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Back to Dashboard";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // grpHistory
             // 
             this.grpHistory.Controls.Add(this.dgvHistory);
             this.grpHistory.Font = new System.Drawing.Font("Verdana", 10F);
             this.grpHistory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.grpHistory.Location = new System.Drawing.Point(789, 178);
+            this.grpHistory.Location = new System.Drawing.Point(761, 101);
             this.grpHistory.Margin = new System.Windows.Forms.Padding(2);
             this.grpHistory.Name = "grpHistory";
             this.grpHistory.Padding = new System.Windows.Forms.Padding(2);
@@ -375,6 +351,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Goldenrod;
+            this.panel2.Controls.Add(this.btnViewStatus);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.pictureBox5);
             this.panel2.Controls.Add(this.textBox5);
@@ -386,7 +363,6 @@
             this.panel2.Controls.Add(this.textBox2);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.btnJobVacancies);
-            this.panel2.Controls.Add(this.btnViewStatus);
             this.panel2.Controls.Add(this.btnProfile);
             this.panel2.Location = new System.Drawing.Point(3, 9);
             this.panel2.Name = "panel2";
@@ -434,9 +410,10 @@
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.button4.BackColor = System.Drawing.Color.Goldenrod;
             this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.Font = new System.Drawing.Font("Patrick Hand", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Patrick Hand", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.Black;
             this.button4.Location = new System.Drawing.Point(-2, 251);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
@@ -446,6 +423,7 @@
             this.button4.Text = "     Dashboard";
             this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBox4
             // 
@@ -537,12 +515,11 @@
             // 
             // btnViewStatus
             // 
-            this.btnViewStatus.BackColor = System.Drawing.Color.Goldenrod;
+            this.btnViewStatus.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.btnViewStatus.FlatAppearance.BorderSize = 0;
-            this.btnViewStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnViewStatus.Font = new System.Drawing.Font("Patrick Hand", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewStatus.Font = new System.Drawing.Font("Patrick Hand", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnViewStatus.ForeColor = System.Drawing.Color.Black;
-            this.btnViewStatus.Location = new System.Drawing.Point(-3, 300);
+            this.btnViewStatus.Location = new System.Drawing.Point(-1, 300);
             this.btnViewStatus.Margin = new System.Windows.Forms.Padding(2);
             this.btnViewStatus.Name = "btnViewStatus";
             this.btnViewStatus.Size = new System.Drawing.Size(315, 52);
@@ -568,15 +545,49 @@
             this.btnProfile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProfile.UseVisualStyleBackColor = false;
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.panel4.Controls.Add(this.lblTime);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Location = new System.Drawing.Point(336, 4);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1030, 59);
+            this.panel4.TabIndex = 15;
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.lblTime.Location = new System.Drawing.Point(927, 11);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(95, 36);
+            this.lblTime.TabIndex = 105;
+            this.lblTime.Text = "lblTime";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Patrick Hand", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label1.Location = new System.Drawing.Point(16, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(206, 39);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Application Status";
+            // 
             // frmApplicationStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
             this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.grpHistory);
-            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblCurrentStatus);
             this.Controls.Add(this.lblStep1);
             this.Controls.Add(this.lblStep1Text);
@@ -589,7 +600,6 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.button1);
             this.Name = "frmApplicationStatus";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Application Status";
@@ -612,14 +622,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblCurrentStatus;
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Label lblRemarks;
@@ -635,7 +645,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox grpHistory;
         private System.Windows.Forms.DataGridView dgvHistory;
         private System.Windows.Forms.Panel panel1;
@@ -658,5 +667,8 @@
         private System.Windows.Forms.Button btnJobVacancies;
         private System.Windows.Forms.Button btnViewStatus;
         private System.Windows.Forms.Button btnProfile;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -188,7 +188,14 @@ namespace HRApplicantSystem.Forms.Applicant
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
         private void checkBox1_CheckedChanged(object sender, EventArgs e) { }
 
-        private void button1_Click(object sender, EventArgs e)
+     
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
         {
             this.Close();
         }
