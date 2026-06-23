@@ -15,12 +15,9 @@
 
         private void InitializeComponent()
         {
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.dgvAuditTrail = new System.Windows.Forms.DataGridView();
             this.btnViewStatus = new System.Windows.Forms.Button();
             this.btnJobVacancies = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
-            this.btnChangePass = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblStatus = new System.Windows.Forms.Label();
@@ -36,7 +33,6 @@
             this.btnMyApplication = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -49,8 +45,8 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAuditTrail)).BeginInit();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblTime = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -62,39 +58,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.dgvAuditTrail);
-            this.groupBox5.Font = new System.Drawing.Font("Verdana", 10F);
-            this.groupBox5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.groupBox5.Location = new System.Drawing.Point(479, 346);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox5.Size = new System.Drawing.Size(1123, 199);
-            this.groupBox5.TabIndex = 12;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "My Activity Trail";
-            // 
-            // dgvAuditTrail
-            // 
-            this.dgvAuditTrail.AllowUserToAddRows = false;
-            this.dgvAuditTrail.AllowUserToDeleteRows = false;
-            this.dgvAuditTrail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAuditTrail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAuditTrail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvAuditTrail.Location = new System.Drawing.Point(2, 19);
-            this.dgvAuditTrail.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvAuditTrail.Name = "dgvAuditTrail";
-            this.dgvAuditTrail.ReadOnly = true;
-            this.dgvAuditTrail.RowHeadersVisible = false;
-            this.dgvAuditTrail.RowTemplate.Height = 24;
-            this.dgvAuditTrail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAuditTrail.Size = new System.Drawing.Size(1119, 178);
-            this.dgvAuditTrail.TabIndex = 0;
-            this.dgvAuditTrail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAuditTrail_CellContentClick);
             // 
             // btnViewStatus
             // 
@@ -148,46 +113,32 @@
             this.btnProfile.UseVisualStyleBackColor = false;
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
-            // btnChangePass
-            // 
-            this.btnChangePass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.btnChangePass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChangePass.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
-            this.btnChangePass.ForeColor = System.Drawing.Color.White;
-            this.btnChangePass.Location = new System.Drawing.Point(1087, 207);
-            this.btnChangePass.Margin = new System.Windows.Forms.Padding(2);
-            this.btnChangePass.Name = "btnChangePass";
-            this.btnChangePass.Size = new System.Drawing.Size(243, 36);
-            this.btnChangePass.TabIndex = 3;
-            this.btnChangePass.Text = "Change Password";
-            this.btnChangePass.UseVisualStyleBackColor = false;
-            this.btnChangePass.Click += new System.EventHandler(this.btnChangePass_Click);
-            // 
             // btnLogout
             // 
-            this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
+            this.btnLogout.BackColor = System.Drawing.Color.SaddleBrown;
+            this.btnLogout.BackgroundImage = global::HRApplicantSystem.Properties.Resources.projectlog;
+            this.btnLogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
             this.btnLogout.ForeColor = System.Drawing.Color.White;
-            this.btnLogout.Location = new System.Drawing.Point(1087, 251);
+            this.btnLogout.Location = new System.Drawing.Point(144, -3);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(243, 36);
+            this.btnLogout.Size = new System.Drawing.Size(67, 59);
             this.btnLogout.TabIndex = 4;
-            this.btnLogout.Text = "Log Out";
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lblStatus);
-            this.groupBox1.Font = new System.Drawing.Font("Verdana", 10F);
-            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.groupBox1.Location = new System.Drawing.Point(510, 123);
+            this.groupBox1.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.groupBox1.Location = new System.Drawing.Point(345, 84);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(219, 89);
+            this.groupBox1.Size = new System.Drawing.Size(219, 326);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Application Status";
@@ -196,11 +147,11 @@
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Verdana", 10F);
+            this.lblStatus.Font = new System.Drawing.Font("Patrick Hand", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.Location = new System.Drawing.Point(8, 24);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(80, 17);
+            this.lblStatus.Size = new System.Drawing.Size(53, 18);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "Status: --";
             this.lblStatus.Click += new System.EventHandler(this.lblStatus_Click);
@@ -208,13 +159,13 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lblMissingDocs);
-            this.groupBox2.Font = new System.Drawing.Font("Verdana", 10F);
-            this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.groupBox2.Location = new System.Drawing.Point(763, 123);
+            this.groupBox2.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.groupBox2.Location = new System.Drawing.Point(728, 84);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(219, 89);
+            this.groupBox2.Size = new System.Drawing.Size(219, 325);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Documents";
@@ -223,11 +174,11 @@
             // lblMissingDocs
             // 
             this.lblMissingDocs.AutoSize = true;
-            this.lblMissingDocs.Font = new System.Drawing.Font("Verdana", 10F);
+            this.lblMissingDocs.Font = new System.Drawing.Font("Patrick Hand", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMissingDocs.Location = new System.Drawing.Point(8, 24);
             this.lblMissingDocs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMissingDocs.Name = "lblMissingDocs";
-            this.lblMissingDocs.Size = new System.Drawing.Size(113, 17);
+            this.lblMissingDocs.Size = new System.Drawing.Size(74, 18);
             this.lblMissingDocs.TabIndex = 0;
             this.lblMissingDocs.Text = "Documents: --";
             this.lblMissingDocs.Click += new System.EventHandler(this.lblMissingDocs_Click);
@@ -236,13 +187,13 @@
             // 
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.lblSchedule);
-            this.groupBox3.Font = new System.Drawing.Font("Verdana", 10F);
-            this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.groupBox3.Location = new System.Drawing.Point(510, 227);
+            this.groupBox3.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.groupBox3.Location = new System.Drawing.Point(477, 346);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(219, 101);
+            this.groupBox3.Size = new System.Drawing.Size(219, 320);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Interview Schedule";
@@ -250,11 +201,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 10F);
+            this.label1.Font = new System.Drawing.Font("Patrick Hand", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(8, 24);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(166, 17);
+            this.label1.Size = new System.Drawing.Size(112, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Upcoming Interview: 0";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -262,11 +213,11 @@
             // lblSchedule
             // 
             this.lblSchedule.AutoSize = true;
-            this.lblSchedule.Font = new System.Drawing.Font("Verdana", 9F);
+            this.lblSchedule.Font = new System.Drawing.Font("Patrick Hand", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSchedule.Location = new System.Drawing.Point(8, 49);
             this.lblSchedule.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSchedule.Name = "lblSchedule";
-            this.lblSchedule.Size = new System.Drawing.Size(112, 14);
+            this.lblSchedule.Size = new System.Drawing.Size(81, 18);
             this.lblSchedule.TabIndex = 1;
             this.lblSchedule.Text = "No schedule yet.";
             this.lblSchedule.Click += new System.EventHandler(this.lblSchedule_Click);
@@ -274,13 +225,13 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.lblUpdates);
-            this.groupBox4.Font = new System.Drawing.Font("Verdana", 10F);
-            this.groupBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
-            this.groupBox4.Location = new System.Drawing.Point(763, 227);
+            this.groupBox4.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.groupBox4.Location = new System.Drawing.Point(871, 346);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(227, 101);
+            this.groupBox4.Size = new System.Drawing.Size(227, 320);
             this.groupBox4.TabIndex = 8;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Recent Updates";
@@ -288,23 +239,23 @@
             // 
             // lblUpdates
             // 
-            this.lblUpdates.Font = new System.Drawing.Font("Verdana", 9F);
-            this.lblUpdates.Location = new System.Drawing.Point(8, 32);
+            this.lblUpdates.Font = new System.Drawing.Font("Patrick Hand", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUpdates.Location = new System.Drawing.Point(8, 24);
             this.lblUpdates.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUpdates.Name = "lblUpdates";
-            this.lblUpdates.Size = new System.Drawing.Size(210, 69);
+            this.lblUpdates.Size = new System.Drawing.Size(210, 281);
             this.lblUpdates.TabIndex = 0;
             this.lblUpdates.Text = "RECENT UPDATES:";
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
-            this.lblTitle.Location = new System.Drawing.Point(463, 46);
+            this.lblTitle.Font = new System.Drawing.Font("Patrick Hand", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.lblTitle.Location = new System.Drawing.Point(16, 9);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(205, 29);
+            this.lblTitle.Size = new System.Drawing.Size(158, 39);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "My Dashboard";
             // 
@@ -353,7 +304,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.SaddleBrown;
-            this.panel3.Controls.Add(this.button3);
+            this.panel3.Controls.Add(this.btnLogout);
             this.panel3.Controls.Add(this.textBox6);
             this.panel3.Controls.Add(this.textBox1);
             this.panel3.Controls.Add(this.pictureBox4);
@@ -361,19 +312,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(317, 111);
             this.panel3.TabIndex = 17;
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImage = global::HRApplicantSystem.Properties.Resources.projectlog;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(146, -4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(76, 60);
-            this.button3.TabIndex = 3;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // textBox6
             // 
@@ -530,6 +468,28 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.panel4.Controls.Add(this.lblTime);
+            this.panel4.Controls.Add(this.lblTitle);
+            this.panel4.Location = new System.Drawing.Point(336, 4);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1030, 59);
+            this.panel4.TabIndex = 14;
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.lblTime.Location = new System.Drawing.Point(927, 11);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(95, 36);
+            this.lblTime.TabIndex = 105;
+            this.lblTime.Text = "lblTime";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // frmApplicantDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -539,15 +499,12 @@
             this.BackColor = System.Drawing.Color.Ivory;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1370, 749);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.btnChangePass);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frmApplicantDashboard";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
@@ -555,8 +512,6 @@
             this.Text = "Applicant Dashboard";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmApplicantDashboard_Load_1);
-            this.groupBox5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAuditTrail)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -573,8 +528,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -585,7 +541,6 @@
         private System.Windows.Forms.Button btnViewStatus;
         private System.Windows.Forms.Button btnJobVacancies;
         private System.Windows.Forms.Button btnProfile;
-        private System.Windows.Forms.Button btnChangePass;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -597,8 +552,6 @@
         private System.Windows.Forms.Label lblSchedule;
         private System.Windows.Forms.Label lblUpdates;
         private System.Windows.Forms.Button btnMyApplication;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.DataGridView dgvAuditTrail;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -613,6 +566,7 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblTime;
     }
 }

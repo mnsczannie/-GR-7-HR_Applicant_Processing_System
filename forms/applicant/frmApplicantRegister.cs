@@ -135,5 +135,10 @@ namespace HRApplicantSystem.Forms.Applicant
         private void dtpBirthday_ValueChanged(object sender, EventArgs e)
         {
         }
+
+        private void lblTime_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
