@@ -33,18 +33,19 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnMyApplication = new System.Windows.Forms.Button();
             this.btnViewStatus = new System.Windows.Forms.Button();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btnMyApplication = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnJobVacancies = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
+            this.dgvAuditTrail = new System.Windows.Forms.DataGridView();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -53,12 +54,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAuditTrail)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDepartments
             // 
             this.btnDepartments.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDepartments.Location = new System.Drawing.Point(737, 150);
+            this.btnDepartments.Location = new System.Drawing.Point(394, 134);
             this.btnDepartments.Margin = new System.Windows.Forms.Padding(2);
             this.btnDepartments.Name = "btnDepartments";
             this.btnDepartments.Size = new System.Drawing.Size(249, 51);
@@ -70,7 +72,7 @@
             // btnPositions
             // 
             this.btnPositions.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPositions.Location = new System.Drawing.Point(737, 207);
+            this.btnPositions.Location = new System.Drawing.Point(394, 191);
             this.btnPositions.Margin = new System.Windows.Forms.Padding(2);
             this.btnPositions.Name = "btnPositions";
             this.btnPositions.Size = new System.Drawing.Size(249, 51);
@@ -82,7 +84,7 @@
             // btnEmploymentTypes
             // 
             this.btnEmploymentTypes.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEmploymentTypes.Location = new System.Drawing.Point(737, 266);
+            this.btnEmploymentTypes.Location = new System.Drawing.Point(394, 250);
             this.btnEmploymentTypes.Margin = new System.Windows.Forms.Padding(2);
             this.btnEmploymentTypes.Name = "btnEmploymentTypes";
             this.btnEmploymentTypes.Size = new System.Drawing.Size(249, 51);
@@ -94,7 +96,7 @@
             // btnRequirementTypes
             // 
             this.btnRequirementTypes.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRequirementTypes.Location = new System.Drawing.Point(737, 322);
+            this.btnRequirementTypes.Location = new System.Drawing.Point(394, 306);
             this.btnRequirementTypes.Margin = new System.Windows.Forms.Padding(2);
             this.btnRequirementTypes.Name = "btnRequirementTypes";
             this.btnRequirementTypes.Size = new System.Drawing.Size(249, 51);
@@ -106,7 +108,7 @@
             // btnInterviewTypes
             // 
             this.btnInterviewTypes.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInterviewTypes.Location = new System.Drawing.Point(737, 383);
+            this.btnInterviewTypes.Location = new System.Drawing.Point(394, 367);
             this.btnInterviewTypes.Margin = new System.Windows.Forms.Padding(2);
             this.btnInterviewTypes.Name = "btnInterviewTypes";
             this.btnInterviewTypes.Size = new System.Drawing.Size(249, 51);
@@ -118,7 +120,7 @@
             // btnAssessmentTypes
             // 
             this.btnAssessmentTypes.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAssessmentTypes.Location = new System.Drawing.Point(737, 443);
+            this.btnAssessmentTypes.Location = new System.Drawing.Point(394, 427);
             this.btnAssessmentTypes.Margin = new System.Windows.Forms.Padding(2);
             this.btnAssessmentTypes.Name = "btnAssessmentTypes";
             this.btnAssessmentTypes.Size = new System.Drawing.Size(249, 51);
@@ -130,7 +132,7 @@
             // btnUserManagement
             // 
             this.btnUserManagement.Font = new System.Drawing.Font("Patrick Hand", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUserManagement.Location = new System.Drawing.Point(737, 502);
+            this.btnUserManagement.Location = new System.Drawing.Point(394, 486);
             this.btnUserManagement.Margin = new System.Windows.Forms.Padding(2);
             this.btnUserManagement.Name = "btnUserManagement";
             this.btnUserManagement.Size = new System.Drawing.Size(249, 51);
@@ -172,6 +174,7 @@
             this.label5.Size = new System.Drawing.Size(231, 39);
             this.label5.TabIndex = 0;
             this.label5.Text = "System Maintenance";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // panel1
             // 
@@ -267,6 +270,21 @@
             this.panel2.Size = new System.Drawing.Size(314, 724);
             this.panel2.TabIndex = 14;
             // 
+            // btnMyApplication
+            // 
+            this.btnMyApplication.BackColor = System.Drawing.Color.SaddleBrown;
+            this.btnMyApplication.FlatAppearance.BorderSize = 0;
+            this.btnMyApplication.Font = new System.Drawing.Font("Patrick Hand", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMyApplication.ForeColor = System.Drawing.Color.White;
+            this.btnMyApplication.Location = new System.Drawing.Point(-1, 473);
+            this.btnMyApplication.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMyApplication.Name = "btnMyApplication";
+            this.btnMyApplication.Size = new System.Drawing.Size(313, 52);
+            this.btnMyApplication.TabIndex = 11;
+            this.btnMyApplication.Text = "     Maintenance";
+            this.btnMyApplication.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMyApplication.UseVisualStyleBackColor = false;
+            // 
             // btnViewStatus
             // 
             this.btnViewStatus.BackColor = System.Drawing.Color.LightGoldenrodYellow;
@@ -343,21 +361,6 @@
             this.pictureBox2.TabIndex = 15;
             this.pictureBox2.TabStop = false;
             // 
-            // btnMyApplication
-            // 
-            this.btnMyApplication.BackColor = System.Drawing.Color.SaddleBrown;
-            this.btnMyApplication.FlatAppearance.BorderSize = 0;
-            this.btnMyApplication.Font = new System.Drawing.Font("Patrick Hand", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMyApplication.ForeColor = System.Drawing.Color.White;
-            this.btnMyApplication.Location = new System.Drawing.Point(-1, 473);
-            this.btnMyApplication.Margin = new System.Windows.Forms.Padding(2);
-            this.btnMyApplication.Name = "btnMyApplication";
-            this.btnMyApplication.Size = new System.Drawing.Size(313, 52);
-            this.btnMyApplication.TabIndex = 11;
-            this.btnMyApplication.Text = "     Maintenance";
-            this.btnMyApplication.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMyApplication.UseVisualStyleBackColor = false;
-            // 
             // textBox3
             // 
             this.textBox3.BackColor = System.Drawing.Color.LightGoldenrodYellow;
@@ -425,12 +428,29 @@
             this.btnProfile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnProfile.UseVisualStyleBackColor = false;
             // 
+            // dgvAuditTrail
+            // 
+            this.dgvAuditTrail.AllowUserToAddRows = false;
+            this.dgvAuditTrail.AllowUserToDeleteRows = false;
+            this.dgvAuditTrail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAuditTrail.Font = new System.Drawing.Font("Patrick Hand", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvAuditTrail.Location = new System.Drawing.Point(704, 104);
+            this.dgvAuditTrail.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvAuditTrail.Name = "dgvAuditTrail";
+            this.dgvAuditTrail.ReadOnly = true;
+            this.dgvAuditTrail.RowHeadersWidth = 25;
+            this.dgvAuditTrail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAuditTrail.Size = new System.Drawing.Size(541, 479);
+            this.dgvAuditTrail.TabIndex = 23;
+            this.dgvAuditTrail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAuditTrail_CellContentClick);
+            // 
             // frmMaintenance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
             this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.dgvAuditTrail);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnUserManagement);
@@ -458,6 +478,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAuditTrail)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -491,5 +512,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnJobVacancies;
         private System.Windows.Forms.Button btnProfile;
+        private System.Windows.Forms.DataGridView dgvAuditTrail;
     }
 }

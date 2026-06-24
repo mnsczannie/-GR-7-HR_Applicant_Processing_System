@@ -1,4 +1,5 @@
-﻿using HRApplicantSystem.Helpers;
+﻿using HRApplicantSystem.Forms.HR;
+using HRApplicantSystem.Helpers;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Data;
@@ -197,7 +198,8 @@ namespace HRApplicantSystem.Forms.Applicant
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.Close();
+            new frmApplicantDashboard(userEmail).Show();
+            this.Hide();
         }
     }
 }
