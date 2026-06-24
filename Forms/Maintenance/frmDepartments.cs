@@ -131,5 +131,11 @@ namespace HRApplicantSystem.Forms.Maintenance
             txtDepartmentName.Text = "";
             dgvDepartments.ClearSelection();
         }
+
+        private void btnMyApplication_Click(object sender, EventArgs e)
+        {
+            new frmMaintenance().Show();
+            this.Hide();
+        }
     }
 }

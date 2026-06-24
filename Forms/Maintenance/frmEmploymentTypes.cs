@@ -125,5 +125,11 @@ namespace HRApplicantSystem.Forms.Maintenance
         {
 
         }
+
+        private void btnMyApplication_Click(object sender, EventArgs e)
+        {
+            new frmMaintenance().Show();
+            this.Hide();
+        }
     }
 }

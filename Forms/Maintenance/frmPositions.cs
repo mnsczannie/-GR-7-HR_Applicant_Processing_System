@@ -178,5 +178,11 @@ namespace HRApplicantSystem.Forms.Maintenance
             public int Value { get; set; }
             public override string ToString() => Text;
         }
+
+        private void btnMyApplication_Click(object sender, EventArgs e)
+        {
+            new frmMaintenance().Show();
+            this.Hide();
+        }
     }
 }

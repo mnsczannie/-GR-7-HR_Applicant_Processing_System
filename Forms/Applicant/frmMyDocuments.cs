@@ -346,6 +346,11 @@ namespace HRApplicantSystem.Forms.Applicant
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

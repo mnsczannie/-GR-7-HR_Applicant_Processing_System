@@ -45,13 +45,13 @@ namespace HRApplicantSystem.Forms.Applicant
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnMyApplication = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.btnMyApplication = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -61,6 +61,7 @@ namespace HRApplicantSystem.Forms.Applicant
             this.panel4 = new System.Windows.Forms.Panel();
             this.lblTime = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -294,6 +295,21 @@ namespace HRApplicantSystem.Forms.Applicant
             this.panel2.Size = new System.Drawing.Size(314, 724);
             this.panel2.TabIndex = 14;
             // 
+            // btnMyApplication
+            // 
+            this.btnMyApplication.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.btnMyApplication.FlatAppearance.BorderSize = 0;
+            this.btnMyApplication.Font = new System.Drawing.Font("Patrick Hand", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMyApplication.ForeColor = System.Drawing.Color.Black;
+            this.btnMyApplication.Location = new System.Drawing.Point(0, 471);
+            this.btnMyApplication.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMyApplication.Name = "btnMyApplication";
+            this.btnMyApplication.Size = new System.Drawing.Size(314, 52);
+            this.btnMyApplication.TabIndex = 11;
+            this.btnMyApplication.Text = "     My Application";
+            this.btnMyApplication.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMyApplication.UseVisualStyleBackColor = false;
+            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Goldenrod;
@@ -370,21 +386,6 @@ namespace HRApplicantSystem.Forms.Applicant
             this.pictureBox2.Size = new System.Drawing.Size(49, 61);
             this.pictureBox2.TabIndex = 15;
             this.pictureBox2.TabStop = false;
-            // 
-            // btnMyApplication
-            // 
-            this.btnMyApplication.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.btnMyApplication.FlatAppearance.BorderSize = 0;
-            this.btnMyApplication.Font = new System.Drawing.Font("Patrick Hand", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMyApplication.ForeColor = System.Drawing.Color.Black;
-            this.btnMyApplication.Location = new System.Drawing.Point(0, 471);
-            this.btnMyApplication.Margin = new System.Windows.Forms.Padding(2);
-            this.btnMyApplication.Name = "btnMyApplication";
-            this.btnMyApplication.Size = new System.Drawing.Size(314, 52);
-            this.btnMyApplication.TabIndex = 11;
-            this.btnMyApplication.Text = "     My Application";
-            this.btnMyApplication.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMyApplication.UseVisualStyleBackColor = false;
             // 
             // textBox3
             // 
@@ -504,12 +505,28 @@ namespace HRApplicantSystem.Forms.Applicant
             this.label1.TabIndex = 0;
             this.label1.Text = "My Application";
             // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(92)))), ((int)(((byte)(153)))));
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Patrick Hand", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(1083, 471);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(135, 37);
+            this.button4.TabIndex = 104;
+            this.button4.Text = "Back";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // frmMyApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
             this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.listViewApps);
@@ -578,5 +595,6 @@ namespace HRApplicantSystem.Forms.Applicant
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button4;
     }
 }

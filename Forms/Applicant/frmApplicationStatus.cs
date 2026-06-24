@@ -201,5 +201,15 @@ namespace HRApplicantSystem.Forms.Applicant
             new frmApplicantDashboard(userEmail).Show();
             this.Hide();
         }
+
+        private void btnViewStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

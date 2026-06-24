@@ -134,5 +134,11 @@ namespace HRApplicantSystem.Forms.Maintenance
         private void dgvUsers_CellContentClick(object sender,
             DataGridViewCellEventArgs e)
         { }
+
+        private void btnMyApplication_Click(object sender, EventArgs e)
+        {
+            new frmMaintenance().Show();
+            this.Hide();
+        }
     }
 }

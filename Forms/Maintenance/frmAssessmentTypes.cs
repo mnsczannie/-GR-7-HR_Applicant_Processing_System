@@ -1,4 +1,5 @@
-﻿using HRApplicantSystem.Helpers;
+﻿using HRApplicantSystem.Forms.Applicant;
+using HRApplicantSystem.Helpers;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Data;
@@ -118,6 +119,12 @@ namespace HRApplicantSystem.Forms.Maintenance
         {
             txtLabel.Text = "";
             dgvData.ClearSelection();
+        }
+
+        private void btnMyApplication_Click(object sender, EventArgs e)
+        {
+            new frmMaintenance().Show();
+            this.Hide();
         }
     }
 }

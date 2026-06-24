@@ -97,5 +97,11 @@ namespace HRApplicantSystem.Forms.HR
             dashboard.Show();
             this.Close();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new frmApplicantReview().Show();
+            this.Close();
+        }
     }
 }

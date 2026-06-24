@@ -252,6 +252,7 @@
             this.btnMyApplication.Text = "     Maintenance";
             this.btnMyApplication.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMyApplication.UseVisualStyleBackColor = false;
+            this.btnMyApplication.Click += new System.EventHandler(this.btnMyApplication_Click);
             // 
             // btnViewStatus
             // 

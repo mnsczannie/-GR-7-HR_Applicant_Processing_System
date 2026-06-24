@@ -311,6 +311,7 @@
             this.button3.Size = new System.Drawing.Size(76, 60);
             this.button3.TabIndex = 3;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // textBox6
             // 
@@ -383,6 +384,7 @@
             this.btnViewStatus.Text = "     Application Status";
             this.btnViewStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnViewStatus.UseVisualStyleBackColor = false;
+            this.btnViewStatus.Click += new System.EventHandler(this.btnViewStatus_Click);
             // 
             // button2
             // 

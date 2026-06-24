@@ -118,6 +118,7 @@
             this.btnLogout.BackColor = System.Drawing.Color.SaddleBrown;
             this.btnLogout.BackgroundImage = global::HRApplicantSystem.Properties.Resources.projectlog;
             this.btnLogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnLogout.FlatAppearance.BorderSize = 0;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
             this.btnLogout.ForeColor = System.Drawing.Color.White;
@@ -258,6 +259,7 @@
             this.lblTitle.Size = new System.Drawing.Size(158, 39);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "My Dashboard";
+            this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
             // textBox1
             // 

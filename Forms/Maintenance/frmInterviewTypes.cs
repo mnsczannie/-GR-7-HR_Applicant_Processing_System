@@ -120,5 +120,11 @@ namespace HRApplicantSystem.Forms.Maintenance
             txtLabel.Text = "";
             dgvData.ClearSelection();
         }
+
+        private void btnMyApplication_Click(object sender, EventArgs e)
+        {
+            new frmMaintenance().Show();
+            this.Hide();
+        }
     }
 }

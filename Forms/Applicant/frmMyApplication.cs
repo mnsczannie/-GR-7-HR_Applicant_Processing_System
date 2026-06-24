@@ -774,5 +774,10 @@ namespace HRApplicantSystem.Forms.Applicant
             HideEditPanel();
             RefreshSubmitButton(); // re-check docs every time they click a row
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

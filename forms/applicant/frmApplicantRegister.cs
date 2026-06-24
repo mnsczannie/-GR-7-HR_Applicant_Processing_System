@@ -122,8 +122,8 @@ namespace HRApplicantSystem.Forms.Applicant
                 }
 
                 MessageBox.Show("Registration Successful! Please complete your profile.");
-                frmApplicantDashboard dashboard = new frmApplicantDashboard(txtEmail.Text.Trim());
-                dashboard.Show();
+                frmMyProfile profile = new frmMyProfile(txtEmail.Text.Trim());
+                profile.Show();
                 this.Close();
             }
             catch (Exception ex)
