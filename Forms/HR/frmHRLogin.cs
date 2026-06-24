@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using HRApplicantSystem.Helpers;
 using HRApplicantSystem.Models;
+using HRApplicantSystem.Forms.Applicant;
 
 namespace HRApplicantSystem.Forms.HR
 {
@@ -97,5 +98,18 @@ namespace HRApplicantSystem.Forms.HR
         private void lblEmail_Click(object sender, EventArgs e) { }
         private void lblPassword_Click(object sender, EventArgs e) { }
         private void txtPassword_TextChanged(object sender, EventArgs e) { }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            new frmApplicantLogin().Show();
+            this.Hide();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtEmail.Clear();
+            txtPassword.Clear();
+            txtEmail.Focus();
+        }
     }
 }

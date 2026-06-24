@@ -406,7 +406,7 @@
             this.btnViewStatus.Name = "btnViewStatus";
             this.btnViewStatus.Size = new System.Drawing.Size(315, 52);
             this.btnViewStatus.TabIndex = 1;
-            this.btnViewStatus.Text = "     Applicant List";
+            this.btnViewStatus.Text = "     Applicant Review";
             this.btnViewStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnViewStatus.UseVisualStyleBackColor = false;
             // 

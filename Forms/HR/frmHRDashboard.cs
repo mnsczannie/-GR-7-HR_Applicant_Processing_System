@@ -62,39 +62,74 @@ namespace HRApplicantSystem.Forms.HR
         private void ApplyRoleVisibility()
         {
             string role = SessionManager.CurrentUser?.Role ?? string.Empty;
-            btnMaintenance.Visible = (role == "admin");
+            btnMyApplication.Visible = (role == "admin");
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            LoadSummaryCards();
-            MessageBox.Show("Dashboard refreshed.", "Refreshed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
         }
 
         private void btnApplicantReview_Click(object sender, EventArgs e)
         {
-            new frmApplicantReview().Show();
-            this.Hide();
+            
         }
 
         private void btnReports_Click(object sender, EventArgs e)
         {
-            new frmReports().Show();
-            this.Hide();
+            
         }
 
         private void btnVacancyManagement_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnMaintenance_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void lblWelcome_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnJobVacancies_Click(object sender, EventArgs e)
         {
             new HRApplicantSystem.Forms.Maintenance.frmJobVacancyManagement().Show();
             this.Hide();
         }
 
-        private void btnMaintenance_Click(object sender, EventArgs e)
+        private void btnMyApplication_Click(object sender, EventArgs e)
         {
             new HRApplicantSystem.Forms.Maintenance.frmMaintenance().ShowDialog();
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
+        {
+            LoadSummaryCards();
+            MessageBox.Show("Dashboard refreshed.", "Refreshed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+            new frmReports().Show();
+            this.Hide();
+        }
+
+        private void btnViewStatus_Click(object sender, EventArgs e)
+        {
+            new frmApplicantReview().Show();
+            this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to logout?", "Logout",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

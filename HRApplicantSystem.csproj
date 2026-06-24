@@ -371,6 +371,45 @@
     <EmbeddedResource Include="Forms\HR\frmHiringDecision.resx">
       <DependentUpon>frmHiringDecision.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HR\frmHRApplicantProfile.resx">
+      <DependentUpon>frmHRApplicantProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HR\frmHRDashboard.resx">
+      <DependentUpon>frmHRDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HR\frmHRRegister.resx">
+      <DependentUpon>frmHRRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HR\frmHRViewDocuments.resx">
+      <DependentUpon>frmHRViewDocuments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HR\frmInterviewEvaluation.resx">
+      <DependentUpon>frmInterviewEvaluation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HR\frmInterviewSchedule.resx">
+      <DependentUpon>frmInterviewSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HR\frmReports.resx">
+      <DependentUpon>frmReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HR\frmScreening.resx">
+      <DependentUpon>frmScreening.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Maintenance\frmAssessmentTypes.resx">
+      <DependentUpon>frmAssessmentTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Maintenance\frmDepartments.resx">
+      <DependentUpon>frmDepartments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Maintenance\frmEmploymentTypes.resx">
+      <DependentUpon>frmEmploymentTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Maintenance\frmInterviewTypes.resx">
+      <DependentUpon>frmInterviewTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Maintenance\frmJobVacancyManagement.resx">
+      <DependentUpon>frmJobVacancyManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Maintenance\frmMaintenance.resx">
       <DependentUpon>frmMaintenance.cs</DependentUpon>
     </EmbeddedResource>
@@ -394,6 +433,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Applicant\frmMyProfile.resx">
       <DependentUpon>frmMyProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Maintenance\frmPositions.resx">
+      <DependentUpon>frmPositions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Maintenance\frmRequirementTypes.resx">
+      <DependentUpon>frmRequirementTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Maintenance\frmUserManagement.resx">
+      <DependentUpon>frmUserManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

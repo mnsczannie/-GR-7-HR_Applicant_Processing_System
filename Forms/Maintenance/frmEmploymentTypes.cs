@@ -120,5 +120,10 @@ namespace HRApplicantSystem.Forms.Maintenance
             txtTypeName.Text = "";
             dgvEmploymentTypes.ClearSelection();
         }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
